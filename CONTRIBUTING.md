@@ -43,6 +43,10 @@ npm run preview    # 生成单文件浏览器预览（不用登录开发者工�
 - PR 请一个组件一个 PR，说明「Web 版怎么做的」和「小程序为什么这么改」。
 - 不接受的改动：给仓库加运行时依赖、把设计 token 换成写死色值、跳过 `ext-class` 支持。
 
+## 发布
+
+维护者流程见 [docs/publishing.md](docs/publishing.md)：推 `v*` 标签触发 GitHub Actions，走 npm Trusted Publishing（OIDC），不需要任何 npm token。
+
 ## License
 
 提交即表示同意以 [MIT](LICENSE) 协议发布。上游 animal-island-ui 与 naive-icons 均为 MIT，署名与授权细节见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)。

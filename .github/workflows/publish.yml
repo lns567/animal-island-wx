@@ -1,0 +1,116 @@
+name: Publish
+
+# 通过 npm Trusted Publishing (OIDC) 发布，不需要任何长期 token。
+# 前置条件（在 npmjs.com 上一次性配置，见 docs/publishing.md）：
+#   Publisher = GitHub Actions
+#   Organization or user = lns567
+#   Repository           = animal-island-wx
+#   Workflow filename    = publish.yml
+#   并勾选 Allow npm publish（默认只允许 stage publish，那样仍需人工批准）
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "只跑构建与校验，不真正发布"
+        type: boolean
+        default: true
+
+permissions:
+  id-token: write # OIDC 换取短期发布令牌的唯一必需权限
+  contents: read
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Build & Publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 准备 Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          # 发布构建刻意不开缓存，避免陈旧依赖进包
+
+      # OIDC 可信发布要求 npm >= 11.5.1，显式兜一层，失败时报错更直白
+      - name: 校验 npm 版本
+        run: |
+          HAVE=$(npm --version)
+          echo "自带 npm: $HAVE"
+          if [ "$(printf '%s\n' "11.5.1" "$HAVE" | sort -V | head -1)" != "11.5.1" ]; then
+            echo "npm $HAVE 低于 11.5.1，升级到 npm@11"
+            npm install -g npm@11 --no-fund --no-audit
+            echo "升级后: $(npm --version)"
+          fi
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 构建组件库
+        run: npm run build
+
+      - name: 平台安全静态检查
+        run: npm run check
+
+      - name: 生成浏览器预览页
+        run: node scripts/build-preview.mjs
+
+      - name: 校验产物
+        run: |
+          test -f miniprogram_dist/index.js
+          test -f miniprogram_dist/button/index.wxml
+          echo "组件数：$(ls -d miniprogram_dist/*/ | grep -vc '/common/$')"
+          echo "产物体积：$(du -sh miniprogram_dist | cut -f1)"
+
+      # 标签与 package.json 版本不一致是最容易发错版本的地方，硬拦
+      - name: 版本一致性检查
+        run: |
+          PKG=$(node -p "require('./package.json').version")
+          NAME=$(node -p "require('./package.json').name")
+          echo "package: $NAME@$PKG"
+
+          if [ "${{ github.event_name }}" = "push" ]; then
+            TAG="${GITHUB_REF_NAME#v}"
+            echo "标签版本: $TAG"
+            if [ "$PKG" != "$TAG" ]; then
+              echo "::error::标签 v$TAG 与 package.json 的 $PKG 不一致，中止发布"
+              exit 1
+            fi
+          fi
+
+          if npm view "${NAME}@${PKG}" version --registry=https://registry.npmjs.org >/dev/null 2>&1; then
+            if [ "${{ github.event_name }}" = "push" ]; then
+              echo "::error::${NAME}@${PKG} 已存在于 npm，请先改版本号"
+              exit 1
+            fi
+            # dry_run 时版本已存在是正常情况（本来就不发），只提示
+            echo "::warning::${NAME}@${PKG} 已存在于 npm；dry_run 模式继续跑其余校验"
+          else
+            echo "✅ ${NAME}@${PKG} 尚未发布过"
+          fi
+
+      - name: 打包预演
+        run: npm pack --dry-run 2>&1 | tail -20
+
+      - name: 发布到 npm（OIDC 换取短期令牌，自动附带 provenance）
+        if: github.event_name == 'push' || inputs.dry_run == false
+        run: npm publish --access public
+
+      - name: 输出结果
+        if: success() && (github.event_name == 'push' || inputs.dry_run == false)
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          PKG=$(node -p "require('./package.json').version")
+          echo "✅ 已发布 ${NAME}@${PKG}"
+          echo "https://www.npmjs.com/package/${NAME}/v/${PKG}"
