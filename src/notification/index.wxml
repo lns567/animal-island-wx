@@ -1,0 +1,25 @@
+<view class="ai-notification-root extClass">
+    <view
+        wx:for="{{groups}}"
+        wx:for-item="group"
+        wx:key="position"
+        class="ai-notification-group ai-notification-group--{{group.position}}"
+    >
+        <view
+            wx:for="{{group.items}}"
+            wx:for-item="notice"
+            wx:key="key"
+            class="ai-notification ai-notification--{{notice.type}} ai-notification--{{notice.position}}{{notice.closing ? ' ai-notification--closing' : ''}}"
+            data-key="{{notice.key}}"
+            bindtap="handleTap"
+            aria-role="alert"
+        >
+            <view class="ai-notification__icon">{{notice.icon}}</view>
+            <view class="ai-notification__body">
+                <text class="ai-notification__title">{{notice.message}}</text>
+                <text wx:if="{{notice.description}}" class="ai-notification__desc">{{notice.description}}</text>
+            </view>
+            <view class="ai-notification__close" catchtap="handleClose" data-key="{{notice.key}}">×</view>
+        </view>
+    </view>
+</view>

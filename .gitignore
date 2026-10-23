@@ -1,0 +1,19 @@
+# 依赖与构建产物
+node_modules/
+miniprogram_dist/
+examples/demo/miniprogram_npm/
+*.tsbuildinfo
+
+# 预览产物（index.html 是构建出来的单文件，体积大且可复现）
+preview/index.html
+preview/detail-*.png
+
+# 无头 Chrome 的临时用户目录（含登录态，绝对不能提交）
+.preview-profile*/
+
+# 系统与编辑器杂项
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

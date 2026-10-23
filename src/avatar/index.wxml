@@ -1,0 +1,20 @@
+<view
+    class="{{cls}} extClass"
+    style="{{sizeStyle}}{{extStyle ? ';' + extStyle : ''}}"
+    aria-role="{{hasImage || content ? 'img' : 'img'}}"
+    aria-label="{{label}}"
+>
+    <image
+        wx:if="{{hasImage}}"
+        class="ai-avatar__img"
+        src="{{src}}"
+        mode="aspectFill"
+        binderror="handleImgError"
+    />
+    <view wx:elif="{{showIcon}}" class="ai-avatar__string">
+        <ai-icon name="{{iconName}}" size="{{iconPx}}" />
+    </view>
+    <view wx:else class="ai-avatar__string" style="{{textStyle}}">
+        <text>{{content}}</text>
+    </view>
+</view>

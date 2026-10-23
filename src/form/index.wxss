@@ -1,0 +1,34 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-form —— 对应 Web 版 Form
+ * 只负责纵向排布与全局配置；字段外观在 ai-form-item
+ * ============================================ */
+
+:host {
+    display: block;
+}
+
+.ai-form {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    color: var(--animal-text-color, #794f27);
+    font-family: var(--animal-font-family, sans-serif);
+}
+
+.ai-form--small {
+    font-size: 12px;
+}
+
+.ai-form--middle {
+    font-size: 14px;
+}
+
+.ai-form--large {
+    font-size: 16px;
+}
+
+.ai-form--disabled {
+    opacity: 0.6;
+}

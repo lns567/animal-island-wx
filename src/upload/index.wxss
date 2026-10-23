@@ -1,0 +1,314 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-upload —— 对应 Web 版 Upload
+ * 胶囊触发按钮 + 三种列表形态（text / picture / picture-card）
+ * ============================================ */
+
+:host {
+    display: block;
+}
+
+.ai-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: var(--animal-font-family, sans-serif);
+}
+
+/* ---------- 触发按钮 ---------- */
+.ai-upload__trigger {
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 18px;
+    border-radius: 50px;
+    background: #f8f8f0;
+    box-shadow: 0 4px 0 0 #bdaea0;
+    color: #794f27;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.ai-upload__trigger--hover {
+    transform: translateY(1px);
+    box-shadow: 0 3px 0 0 #bdaea0;
+}
+
+.ai-upload__trigger-text {
+    line-height: 1;
+}
+
+/* 上传图标：向上箭头（纯 CSS） */
+.ai-upload__arrow {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    border-left: 2px solid #794f27;
+    border-bottom: 2px solid #794f27;
+    transform: rotate(135deg);
+    border-radius: 1px;
+}
+
+.ai-upload__arrow::before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 8px;
+    width: 2px;
+    height: 14px;
+    background: #794f27;
+    transform: rotate(-135deg);
+    transform-origin: 50% 0;
+    border-radius: 1px;
+}
+
+.ai-upload--disabled .ai-upload__trigger {
+    opacity: 0.5;
+}
+
+/* ---------- 文本列表 ---------- */
+.ai-upload__list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.ai-upload__row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+    padding: 7px 12px;
+    border: 1.5px solid #e8dcc8;
+    border-radius: 12px;
+    background: #f5efe2;
+    font-size: 13px;
+}
+
+.ai-upload__row--error {
+    border-color: #e05a5a;
+    background: #fdeeee;
+}
+
+.ai-upload__thumb {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+    border-radius: 8px;
+}
+
+.ai-upload__meta {
+    flex: 1;
+    min-width: 0;
+}
+
+.ai-upload__name {
+    display: block;
+    overflow: hidden;
+    color: var(--animal-text-color, #794f27);
+    font-size: 13px;
+    line-height: 1.5;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ai-upload__size {
+    display: block;
+    color: var(--animal-text-color-secondary, #9f927d);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.ai-upload__err {
+    display: block;
+    color: var(--animal-error-color, #e05a5a);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.ai-upload__bar {
+    height: 6px;
+    margin-top: 4px;
+    border-radius: 3px;
+    background: #e8dcc8;
+    overflow: hidden;
+}
+
+.ai-upload__bar-inner {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #19c8b9, #82d5bb);
+    transition: width 0.2s ease;
+}
+
+.ai-upload__remove {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    margin-left: 4px;
+    border-radius: 50%;
+    color: var(--animal-text-color-secondary, #9f927d);
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+}
+
+/* ---------- 卡片列表 ---------- */
+.ai-upload__cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ai-upload__card {
+    position: relative;
+    width: 84px;
+    height: 84px;
+    margin: 0 10px 10px 0;
+    border: 1.5px solid #e8dcc8;
+    border-radius: 16px;
+    background: #f5efe2;
+    overflow: hidden;
+}
+
+.ai-upload__card--error {
+    border-color: #e05a5a;
+}
+
+.ai-upload__card-img {
+    width: 100%;
+    height: 100%;
+}
+
+.ai-upload__card-file {
+    padding: 8px;
+    color: var(--animal-text-color, #794f27);
+    font-size: 11px;
+    word-break: break-all;
+}
+
+.ai-upload__card-mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 12, 8, 0.55);
+}
+
+.ai-upload__ring {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: animal-upload-spin 0.9s linear infinite;
+}
+
+.ai-upload__ring-text {
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    animation: animal-upload-counter-spin 0.9s linear infinite;
+}
+
+.ai-upload__card-remove {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+}
+
+.ai-upload__add {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 84px;
+    height: 84px;
+    margin-bottom: 10px;
+    border: 2px dashed #bdaea0;
+    border-radius: 16px;
+}
+
+.ai-upload__add--hover {
+    border-color: #19c8b9;
+    background: #e6f9f6;
+}
+
+.ai-upload__plus {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    margin-bottom: 4px;
+}
+
+.ai-upload__plus::before,
+.ai-upload__plus::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: var(--animal-text-color-secondary, #9f927d);
+    border-radius: 1px;
+}
+
+.ai-upload__plus::before {
+    width: 14px;
+    height: 2px;
+    margin: -1px 0 0 -7px;
+}
+
+.ai-upload__plus::after {
+    width: 2px;
+    height: 14px;
+    margin: -7px 0 0 -1px;
+}
+
+.ai-upload__add-text {
+    color: var(--animal-text-color-secondary, #9f927d);
+    font-size: 11px;
+}
+
+/* ---------- 提示 ---------- */
+.ai-upload__tip {
+    margin-top: 6px;
+    color: var(--animal-text-color-secondary, #9f927d);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+@keyframes animal-upload-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animal-upload-counter-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
+}

@@ -1,0 +1,16 @@
+# 统一换行符，避免 Windows 提交把整个仓库变成 CRLF
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+
+# 生成产物在 diff 里折叠
+package-lock.json linguist-generated=true
+preview/runtime.js linguist-generated=true
+src/common/icons.wxss linguist-generated=true
+src/common/icons.ts linguist-generated=true

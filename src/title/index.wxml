@@ -1,0 +1,34 @@
+<view class="ai-title extClass" style="{{extStyle}}">
+    <!-- Ribbon 飘带 -->
+    <view
+        wx:if="{{shape === 'ribbon'}}"
+        class="ai-title__ribbon {{colorClass}}"
+        style="font-size:{{fontSize}}px"
+    >
+        <view class="ai-title__back ai-title__back--left" aria-hidden="true"></view>
+        <view class="ai-title__back ai-title__back--right" aria-hidden="true"></view>
+        <view class="ai-title__fold ai-title__fold--left" aria-hidden="true"></view>
+        <view class="ai-title__fold ai-title__fold--right" aria-hidden="true"></view>
+        <view class="ai-title__front" aria-hidden="true"></view>
+        <view class="ai-title__ribbon-text">
+            <text wx:if="{{content}}">{{content}}</text>
+            <slot></slot>
+        </view>
+    </view>
+
+    <!-- Layer 双层纸 -->
+    <view wx:elif="{{shape === 'layer'}}" class="ai-title__layer {{colorClass}}" style="font-size:{{fontSize}}px">
+        <view class="ai-title__layer-front">
+            <text wx:if="{{content}}">{{content}}</text>
+            <slot></slot>
+        </view>
+    </view>
+
+    <!-- Tab 折角便签 -->
+    <view wx:else class="ai-title__tab {{colorClass}}" style="font-size:{{fontSize}}px">
+        <view class="ai-title__tab-text">
+            <text wx:if="{{content}}">{{content}}</text>
+            <slot></slot>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,29 @@
+<view
+    wx:if="{{failed}}"
+    class="ai-image ai-image--{{color}} ai-image--error extClass"
+    style="{{frameStyle}}{{extStyle}}"
+    aria-role="img"
+    aria-label="{{alt || '图片加载失败'}}"
+>
+    <ai-icon name="image" size="32" />
+    <text class="ai-image__err-text">图片加载失败</text>
+</view>
+
+<view
+    wx:else
+    class="ai-image ai-image--{{variant}}{{variant === 'bordered' && color !== 'white' ? ' ai-image--' + color : ''}}{{loaded ? ' ai-image--loaded' : ''}}{{preview ? ' ai-image--preview' : ''}} extClass"
+    style="{{frameStyle}}{{extStyle}}"
+    bindtap="handleTap"
+    aria-role="{{preview ? 'button' : 'img'}}"
+    aria-label="{{alt}}"
+>
+    <image
+        class="ai-image__img"
+        src="{{src}}"
+        mode="{{mode}}"
+        lazy-load="{{lazy}}"
+        bindload="handleLoad"
+        binderror="handleError"
+    />
+    <text wx:if="{{variant === 'stamp' && stampYear}}" class="ai-image__stamp-year">{{stampYear}}</text>
+</view>

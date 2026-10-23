@@ -1,0 +1,299 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-title —— 对应 Web 版 Title（飘带 / 双层纸 / 折角便签）
+ * font-size 由 size 映射后注入行内样式，内部全部用 em 跟随缩放
+ * ============================================ */
+
+:host {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ai-title {
+    display: inline-block;
+    font-family: var(
+        --animal-font-family,
+        -apple-system,
+        BlinkMacSystemFont,
+        'PingFang SC',
+        'Microsoft YaHei',
+        sans-serif
+    );
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* ============================================
+ * 1. Ribbon 飘带
+ * ============================================ */
+.ai-title__ribbon {
+    --rf: #27d039;
+    --rb: #20992a;
+    --rk: #115017;
+    --rt: #fff;
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2em;
+    padding: 0 1.6em;
+    color: var(--rt);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    filter: drop-shadow(0 0.08em 0.12em rgba(0, 0, 0, 0.05));
+}
+
+.ai-title__ribbon-text {
+    position: relative;
+    z-index: 4;
+    font-size: inherit;
+    display: inline-flex;
+    align-items: center;
+    height: 2em;
+    padding-top: 0.11em;
+    color: var(--rt);
+    text-shadow: 0 0.04em 0.08em rgba(0, 0, 0, 0.05);
+}
+
+/* 左右燕尾 */
+.ai-title__back {
+    position: absolute;
+    font-size: inherit;
+    bottom: -0.4em;
+    width: 1.7em;
+    height: 1.7em;
+    background-color: var(--rb);
+    z-index: 1;
+}
+
+.ai-title__back--left {
+    left: -0.6em;
+    border-radius: 0.08em 0 0 0.08em;
+    -webkit-clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 30% 50%, 0% 0%);
+    clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 30% 50%, 0% 0%);
+}
+
+.ai-title__back--right {
+    right: -0.6em;
+    border-radius: 0 0.08em 0.08em 0;
+    -webkit-clip-path: polygon(0% 0%, 100% 0%, 70% 50%, 100% 100%, 0% 100%);
+    clip-path: polygon(0% 0%, 100% 0%, 70% 50%, 100% 100%, 0% 100%);
+}
+
+/* 折角阴影三角 */
+.ai-title__fold {
+    position: absolute;
+    font-size: inherit;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    z-index: 2;
+}
+
+.ai-title__fold--left {
+    left: 0.15em;
+    top: calc(100% - 0.05em);
+    border-width: 0 0.95em 0.45em 0;
+    border-color: transparent var(--rk) transparent transparent;
+}
+
+.ai-title__fold--right {
+    right: 0.16em;
+    top: calc(100% - 0.05em);
+    border-width: 0 0 0.45em 0.95em;
+    border-color: transparent transparent transparent var(--rk);
+}
+
+/* 正面主体 */
+.ai-title__front {
+    position: absolute;
+    font-size: inherit;
+    top: 0;
+    right: 0.1em;
+    bottom: 0;
+    left: 0.1em;
+    background-color: var(--rf);
+    border-radius: 0.2em;
+    z-index: 3;
+    transform: perspective(11.5em) rotateX(3deg);
+    box-shadow: inset 0 -0.06em 0 rgba(0, 0, 0, 0.05);
+    pointer-events: none;
+}
+
+/* ============================================
+ * 2. Layer 双层纸
+ * ============================================ */
+.ai-title__layer {
+    --rf: #27d039;
+    --rb: #20992a;
+    --rk: #115017;
+    --rt: #fff;
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 2.1em;
+}
+
+.ai-title__layer::before {
+    content: '';
+    position: absolute;
+    left: -0.26em;
+    top: -0.3em;
+    right: 0.65em;
+    bottom: 0;
+    background-color: var(--rb);
+    border-radius: 0.35em;
+    z-index: 0;
+}
+
+.ai-title__layer-front {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.1em;
+    padding: 0 1.55em;
+    border-radius: 0.35em;
+    color: var(--rt);
+    background-color: var(--rf);
+    box-shadow: 0 0.1em 0.16em rgba(0, 0, 0, 0.08);
+    letter-spacing: 0.04em;
+    font-weight: 900;
+    white-space: nowrap;
+    text-shadow: 0 0.05em 0.1em rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================
+ * 3. Tab 折角便签
+ * ============================================ */
+.ai-title__tab {
+    --rf: #27d039;
+    --rb: #20992a;
+    --rk: #115017;
+    --rt: #fff;
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2em;
+    padding: 0 1.5em;
+    border-radius: 0.32em;
+    color: var(--rt);
+    background-image: linear-gradient(135deg, transparent 0.9em, var(--rf) 0.9em);
+    filter: drop-shadow(0 0.1em 0.16em rgba(0, 0, 0, 0.08));
+}
+
+.ai-title__tab::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 0.9em 0.9em;
+    border-color: transparent transparent var(--rk) transparent;
+}
+
+.ai-title__tab-text {
+    position: relative;
+    z-index: 2;
+    margin-left: 0.4em;
+    letter-spacing: 0.04em;
+    font-weight: 900;
+    white-space: nowrap;
+    text-shadow: 0 0.05em 0.1em rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================
+ * Color variants —— 与 Card / Tag 同名色板
+ * ============================================ */
+.ai-title__c-app-pink {
+    --rf: #f8a6b2;
+    --rb: #e06880;
+    --rk: #a03060;
+    --rt: #fff;
+}
+
+.ai-title__c-purple {
+    --rf: #b77dee;
+    --rb: #9050d0;
+    --rk: #5a1a9a;
+    --rt: #fff;
+}
+
+.ai-title__c-app-blue {
+    --rf: #889df0;
+    --rb: #5068d8;
+    --rk: #2030a0;
+    --rt: #fff;
+}
+
+.ai-title__c-app-yellow {
+    --rf: #f7cd67;
+    --rb: #d4a030;
+    --rk: #8a6010;
+    --rt: #725d42;
+}
+
+.ai-title__c-app-orange {
+    --rf: #e59266;
+    --rb: #c06a30;
+    --rk: #7a3a10;
+    --rt: #fff;
+}
+
+.ai-title__c-app-teal {
+    --rf: #82d5bb;
+    --rb: #40a880;
+    --rk: #186048;
+    --rt: #fff;
+}
+
+.ai-title__c-app-green {
+    --rf: #8ac68a;
+    --rb: #509050;
+    --rk: #205020;
+    --rt: #fff;
+}
+
+.ai-title__c-app-red {
+    --rf: #fc736d;
+    --rb: #d43030;
+    --rk: #900010;
+    --rt: #fff;
+}
+
+.ai-title__c-lime-green {
+    --rf: #d1da49;
+    --rb: #90a010;
+    --rk: #485800;
+    --rt: #3d5a1a;
+}
+
+.ai-title__c-yellow-green {
+    --rf: #ecdf52;
+    --rb: #c0b010;
+    --rk: #706800;
+    --rt: #725d42;
+}
+
+.ai-title__c-brown {
+    --rf: #9a835a;
+    --rb: #705830;
+    --rk: #3a2810;
+    --rt: #fff;
+}
+
+.ai-title__c-warm-peach-pink {
+    --rf: #e18c6f;
+    --rb: #b85a30;
+    --rk: #6a2a10;
+    --rt: #fff;
+}

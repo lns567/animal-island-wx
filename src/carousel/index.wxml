@@ -1,0 +1,44 @@
+<view class="ai-carousel extClass" style="{{extStyle}}">
+    <view class="ai-carousel__viewport" style="{{viewportStyle}}">
+        <swiper
+            class="ai-carousel__swiper"
+            current="{{current}}"
+            autoplay="{{autoplay && !paused}}"
+            interval="{{interval}}"
+            circular="{{loop}}"
+            duration="{{300}}"
+            bindchange="handleSwiperChange"
+        >
+            <swiper-item wx:for="{{items}}" wx:key="index" class="ai-carousel__item">
+                <view class="ai-carousel__card">
+                    <image wx:if="{{item.src}}" class="ai-carousel__img" src="{{item.src}}" mode="aspectFill" />
+                    <view wx:if="{{item.title || item.desc}}" class="ai-carousel__caption">
+                        <text wx:if="{{item.title}}" class="ai-carousel__title">{{item.title}}</text>
+                        <text wx:if="{{item.desc}}" class="ai-carousel__desc">{{item.desc}}</text>
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
+
+        <block wx:if="{{items.length > 1 && showArrows}}">
+            <view class="ai-carousel__arrow ai-carousel__arrow--prev" bindtap="handlePrev" aria-role="button" aria-label="上一张"></view>
+            <view class="ai-carousel__arrow ai-carousel__arrow--next" bindtap="handleNext" aria-role="button" aria-label="下一张"></view>
+        </block>
+
+        <view wx:if="{{items.length > 1 && autoplay}}" class="ai-carousel__rotation" bindtap="handleTogglePlay" aria-role="button">
+            {{paused ? '播放' : '暂停'}}
+        </view>
+
+        <view wx:if="{{items.length > 1 && showDots}}" class="ai-carousel__dots">
+            <view
+                wx:for="{{dots}}"
+                wx:key="index"
+                class="ai-carousel__dot{{item.active ? ' ai-carousel__dot--active' : ''}}"
+                data-index="{{item.index}}"
+                bindtap="handleDotTap"
+                aria-role="button"
+                aria-label="转到第 {{item.index + 1}} 张"
+            ></view>
+        </view>
+    </view>
+</view>

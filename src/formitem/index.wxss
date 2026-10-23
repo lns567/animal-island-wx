@@ -1,0 +1,80 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-form-item —— 对应 Web 版 Form.Item
+ * label + control + 说明/错误三层结构
+ * ============================================ */
+
+:host {
+    display: block;
+}
+
+.ai-form-item {
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+/* ---------- 横向 ---------- */
+.ai-form-item--horizontal {
+    display: flex;
+    align-items: flex-start;
+}
+
+.ai-form-item--horizontal .ai-form-item__label {
+    flex: none;
+    padding-top: 10px;
+    text-align: right;
+}
+
+.ai-form-item--horizontal .ai-form-item__control {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ---------- 纵向 ---------- */
+.ai-form-item--vertical .ai-form-item__label {
+    display: block;
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+.ai-form-item--vertical .ai-form-item__control {
+    display: block;
+}
+
+/* ---------- label ---------- */
+.ai-form-item__label {
+    box-sizing: border-box;
+    padding-right: 12px;
+    color: var(--animal-text-color, #794f27);
+    line-height: 1.6;
+    white-space: nowrap;
+}
+
+.ai-form-item__star {
+    margin-right: 4px;
+    color: var(--animal-error-color, #e05a5a);
+}
+
+.ai-form-item__label-text {
+    font-weight: 600;
+}
+
+.ai-form-item__colon {
+    margin: 0 4px 0 2px;
+    color: rgba(121, 79, 39, 0.5);
+}
+
+/* ---------- 说明 / 错误 ---------- */
+.ai-form-item__explain {
+    margin-top: 4px;
+    min-height: 20px;
+    color: var(--animal-text-color-secondary, #9f927d);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.ai-form-item__explain--error {
+    color: var(--animal-error-color, #e05a5a);
+}

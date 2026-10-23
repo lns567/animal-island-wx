@@ -1,0 +1,1 @@
+<text class="ai-typewriter extClass" style="{{extStyle}}" aria-role="text">{{shown}}<text wx:if="{{cursorVisible}}" class="ai-typewriter__cursor">{{cursorText}}</text></text>

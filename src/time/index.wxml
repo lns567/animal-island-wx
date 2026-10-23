@@ -1,0 +1,17 @@
+<view
+    class="ai-time extClass"
+    style="{{extStyle}}"
+    aria-role="timer"
+    aria-label="{{hours}}:{{minutes}} {{weekday}} {{monthDay}}"
+>
+    <view class="ai-time__clock">
+        <text>{{hours}}</text>
+        <text class="ai-time__colon">:</text>
+        <text>{{minutes}}</text>
+    </view>
+    <view class="ai-time__date">
+        <text class="ai-time__weekday">{{weekday}}</text>
+        <text class="ai-time__dot" aria-hidden="true">·</text>
+        <text class="ai-time__month-day">{{monthDay}}</text>
+    </view>
+</view>

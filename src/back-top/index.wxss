@@ -1,0 +1,49 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-backtop —— 对应 Web 版 BackTop
+ * 右下角悬浮火箭，无底板；点击平滑滚回页面顶部
+ * ============================================ */
+
+:host {
+    display: contents;
+}
+
+.ai-backtop {
+    position: fixed;
+    right: 24px;
+    bottom: 32px;
+    z-index: 1000;
+    display: block;
+    width: 64px;
+    height: 64px;
+    line-height: 1;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-backtop--visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.ai-backtop__img {
+    display: block;
+    width: 64px;
+    height: 64px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 64px 64px;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDggNDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkEyQTJBIiBzdHJva2Utd2lkdGg9IjMuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMjQgNiBDIDE2IDYgMTQgMTggMTQgMjYgTDE0IDM4IEwzNCAzOCBMMzQgMjYgQyAzNCAxOCAzMiA2IDI0IDYgWiIgZmlsbD0iI0ZBRURDRCIvPjxjaXJjbGUgY3g9IjI0IiBjeT0iMjIiIHI9IjUiIGZpbGw9IiMyQTlEOEYiLz48cGF0aCBkPSJNMTQgMzAgTDggMzYgTDggNDIgTDE0IDM4IiBmaWxsPSIjRTc2RjUxIi8+PHBhdGggZD0iTTM0IDMwIEw0MCAzNiBMNDAgNDIgTDM0IDM4IiBmaWxsPSIjRTc2RjUxIi8+PHBhdGggZD0iTTE4IDQyIEwyNCA0NiBMMzAgNDIiIGZpbGw9IiNFNzZGNTEiLz48L3N2Zz4=');
+    filter: drop-shadow(0 4px 10px rgba(91, 78, 30, 0.22));
+    transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-backtop--hover .ai-backtop__img {
+    filter: drop-shadow(0 4px 14px rgba(91, 78, 30, 0.32));
+}

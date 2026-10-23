@@ -1,0 +1,39 @@
+<view class="{{cls}} extClass" style="{{extStyle}}">
+    <slot name="prefix"></slot>
+    <view wx:if="{{prefix}}" class="ai-input__affix">
+        <ai-icon name="{{prefix}}" size="{{size === 'large' ? 18 : 16}}" />
+    </view>
+
+    <input
+        class="ai-input__inner"
+        value="{{current}}"
+        placeholder="{{placeholder}}"
+        placeholder-class="ai-input__placeholder"
+        placeholder-style="{{placeholderStyle}}"
+        type="{{type}}"
+        password="{{password}}"
+        maxlength="{{maxlength}}"
+        focus="{{focus}}"
+        disabled="{{disabled}}"
+        confirm-type="{{confirmType}}"
+        aria-label="{{ariaLabel}}"
+        bindinput="handleInput"
+        bindfocus="handleFocus"
+        bindblur="handleBlur"
+        bindconfirm="handleConfirm"
+    />
+
+    <view
+        wx:if="{{allowClear && current && !disabled}}"
+        class="ai-input__clear"
+        hover-class="ai-input__clear--hover"
+        catchtap="handleClear"
+        aria-role="button"
+        aria-label="清除"
+    >×</view>
+
+    <view wx:if="{{suffix}}" class="ai-input__affix ai-input__affix--suffix">
+        <ai-icon name="{{suffix}}" size="{{size === 'large' ? 18 : 16}}" />
+    </view>
+    <slot name="suffix"></slot>
+</view>

@@ -1,0 +1,608 @@
+<view class="page">
+    <!-- ================= Hero ================= -->
+    <view class="hero">
+        <ai-title class="hero__title" content="Animal Island" variant="ribbon" size="large" color="app-teal" />
+        <text class="hero__sub">温暖治愈的动物岛风格 · 微信小程序原生组件库</text>
+        <view class="hero__tags">
+            <ai-tag content="WXML" size="small" variant="solid" color="app-teal" />
+            <ai-tag content="WXSS" size="small" variant="solid" color="app-yellow" />
+            <ai-tag content="TypeScript" size="small" variant="solid" color="app-blue" />
+            <ai-tag content="41 个组件" size="small" variant="solid" color="app-pink" />
+        </view>
+    </view>
+
+    <!-- ================= Button ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Button 按钮" variant="tab" size="small" color="app-orange" />
+        <view class="stack">
+            <view class="row">
+                <ai-button type="primary" content="开始冒险" bind:click="onButtonClick" />
+                <ai-button type="default" content="默认按钮" />
+                <ai-button type="dashed" content="虚线按钮" />
+                <ai-button type="text" content="文字按钮" />
+                <ai-button type="link" content="链接按钮" />
+            </view>
+            <view class="row">
+                <ai-button type="primary" size="small" content="小号" />
+                <ai-button type="primary" size="middle" content="中号" />
+                <ai-button type="primary" size="large" content="大号" />
+            </view>
+            <view class="row">
+                <ai-button type="primary" danger="{{true}}" content="危险" />
+                <ai-button type="primary" ghost="{{true}}" content="幽灵" />
+                <ai-button type="primary" icon="star" content="带图标" />
+                <ai-button type="primary" disabled="{{true}}" content="禁用" />
+                <ai-button type="primary" loading="{{true}}" content="加载中" />
+            </view>
+            <ai-button type="primary" block="{{true}}" content="块级按钮" />
+        </view>
+    </view>
+
+    <ai-divider type="dashed-brown" />
+
+    <!-- ================= Title ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Title 标题" variant="tab" size="small" color="app-pink" />
+        <view class="stack">
+            <view class="row row--titles">
+                <ai-title class="title-item" content="Ribbon 飘带" variant="ribbon" size="large" color="app-green" />
+                <ai-title class="title-item" content="Ribbon" variant="ribbon" size="middle" color="app-pink" />
+            </view>
+            <view class="row row--titles">
+                <ai-title class="title-item" content="Layer 双层纸" variant="layer" size="middle" color="app-blue" />
+                <ai-title class="title-item" content="Layer" variant="layer" size="small" color="app-yellow" />
+            </view>
+            <view class="row row--titles">
+                <ai-title class="title-item" content="Tab 折角便签" variant="tab" size="middle" color="purple" />
+                <ai-title class="title-item" content="Tab" variant="tab" size="small" color="app-red" />
+            </view>
+        </view>
+    </view>
+
+    <ai-divider type="wave-yellow" />
+
+    <!-- ================= Card ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Card 卡片" variant="tab" size="small" color="app-blue" />
+        <view class="grid">
+            <ai-card color="{{item}}" class="grid__item" wx:for="{{colors}}" wx:key="*this">
+                <text class="grid__label">{{item}}</text>
+            </ai-card>
+        </view>
+        <view class="grid">
+            <ai-card pattern="app-teal" class="grid__item" hoverable="{{true}}">
+                <text class="grid__label">pattern</text>
+                <text class="grid__label">app-teal</text>
+            </ai-card>
+            <ai-card pattern="app-pink" class="grid__item">
+                <text class="grid__label">pattern</text>
+                <text class="grid__label">app-pink</text>
+            </ai-card>
+            <ai-card type="dashed" class="grid__item">
+                <text class="grid__label">dashed</text>
+            </ai-card>
+            <ai-card type="dashed" hoverable="{{true}}" class="grid__item">
+                <text class="grid__label">dashed + hover</text>
+            </ai-card>
+        </view>
+    </view>
+
+    <ai-divider type="squiggle" />
+
+    <!-- ================= Tag ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Tag 标签" variant="tab" size="small" color="app-teal" />
+        <view class="stack">
+            <view class="row row--titles">
+                <ai-tag content="solid" variant="solid" />
+                <ai-tag content="outlined" variant="outlined" />
+                <ai-tag content="dashed" variant="dashed" />
+                <ai-tag content="soft" variant="soft" />
+            </view>
+            <view class="row row--titles">
+                <ai-tag content="app-pink" variant="solid" color="app-pink" />
+                <ai-tag content="purple" variant="solid" color="purple" />
+                <ai-tag content="app-blue" variant="solid" color="app-blue" />
+                <ai-tag content="app-yellow" variant="solid" color="app-yellow" />
+                <ai-tag content="app-orange" variant="solid" color="app-orange" />
+                <ai-tag content="app-teal" variant="solid" color="app-teal" />
+                <ai-tag content="app-green" variant="solid" color="app-green" />
+                <ai-tag content="app-red" variant="solid" color="app-red" />
+            </view>
+            <view class="row row--titles">
+                <ai-tag content="soft 绿" variant="soft" color="app-green" />
+                <ai-tag content="outlined 蓝" variant="outlined" color="app-blue" />
+                <ai-tag content="dashed 紫" variant="dashed" color="purple" />
+                <ai-tag content="小号" size="small" variant="soft" color="brown" />
+                <ai-tag content="大号" size="large" variant="soft" color="app-red" />
+            </view>
+            <view class="row row--titles">
+                <ai-tag
+                    wx:for="{{tags}}"
+                    wx:key="text"
+                    data-index="{{index}}"
+                    content="{{item.text}}"
+                    color="{{item.color}}"
+                    variant="soft"
+                    closable="{{true}}"
+                    bind:close="onCloseTag"
+                />
+            </view>
+            <view class="row row--titles">
+                <ai-tag content="可点击" color="app-orange" variant="soft" clickable="{{true}}" bind:click="onButtonClick" />
+                <ai-tag content="禁用" color="app-red" variant="solid" disabled="{{true}}" />
+            </view>
+        </view>
+    </view>
+
+    <ai-divider type="hairline" />
+
+    <!-- ================= Input ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Input 输入框" variant="tab" size="small" color="purple" />
+        <view class="stack">
+            <ai-input placeholder="默认尺寸" />
+            <ai-input size="small" placeholder="小号 small" />
+            <ai-input size="large" placeholder="大号 large" />
+            <ai-input
+                placeholder="带图标 + 可清空"
+                prefix="search"
+                allowClear="{{true}}"
+                shadow="{{true}}"
+                value="{{inputText}}"
+                bind:input="onInput"
+                bind:clear="onClear"
+            />
+            <ai-input placeholder="错误状态" status="error" shadow="{{true}}" />
+            <ai-input placeholder="警告状态" status="warning" shadow="{{true}}" />
+            <ai-input placeholder="禁用状态" disabled="{{true}}" value="不可编辑" />
+        </view>
+    </view>
+
+    <ai-divider type="dashed-brown" />
+
+    <!-- ================= Switch ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Switch 开关" variant="tab" size="small" color="app-red" />
+        <view class="stack">
+            <view class="row row--titles">
+                <ai-switch data-key="forest" checked="{{switchValues.forest}}" bind:change="onSwitchChange" />
+                <text class="note">森林模式 {{switchValues.forest ? '开' : '关'}}</text>
+            </view>
+            <view class="row row--titles">
+                <ai-switch
+                    data-key="music"
+                    checked="{{switchValues.music}}"
+                    checked-children="开"
+                    un-checked-children="关"
+                    bind:change="onSwitchChange"
+                />
+                <text class="note">背景音乐</text>
+            </view>
+            <view class="row row--titles">
+                <ai-switch size="small" checked="{{true}}" />
+                <ai-switch size="small" />
+                <ai-switch loading="{{true}}" checked="{{true}}" />
+                <ai-switch disabled="{{true}}" />
+                <ai-switch disabled="{{true}}" checked="{{true}}" />
+            </view>
+        </view>
+    </view>
+
+    <ai-divider type="squiggle" />
+
+    <!-- ================= Avatar ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Avatar 头像" variant="tab" size="small" color="app-yellow" />
+        <view class="stack">
+            <view class="row row--titles">
+                <ai-avatar size="small" />
+                <ai-avatar size="middle" />
+                <ai-avatar size="large" />
+                <ai-avatar size="{{56}}" />
+                <ai-avatar shape="square" size="large" />
+            </view>
+            <view class="row row--titles">
+                <ai-avatar src="/assets/avatar.png" size="large" label="图片头像" />
+                <ai-avatar content="鱼" size="large" />
+                <ai-avatar icon="bell" size="large" />
+                <ai-avatar content="狐狸" size="middle" />
+            </view>
+            <view class="row row--titles">
+                <ai-avatar-group
+                    items="{{avatarItems}}"
+                    size="middle"
+                    gap="{{10}}"
+                    bind:more="onMoreAvatar"
+                />
+                <ai-avatar-group items="{{avatarItems}}" max-count="{{3}}" size="middle" gap="{{10}}" bind:more="onMoreAvatar" />
+            </view>
+        </view>
+    </view>
+
+    <ai-divider type="thin" />
+
+    <!-- ================= Divider ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Divider 分隔线" variant="tab" size="small" color="brown" />
+        <view class="stack">
+            <ai-divider type="dashed-brown" />
+            <ai-divider type="thin" />
+            <ai-divider type="hairline" />
+            <ai-divider type="wave-yellow" />
+            <ai-divider type="squiggle" />
+            <ai-divider icon="fish" icon-size="{{22}}" icon-gap="{{10}}" />
+        </view>
+    </view>
+
+    <!-- ================= Checkbox / Radio ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Checkbox / Radio 选择" variant="tab" size="small" color="purple" />
+        <view class="stack">
+            <ai-checkbox options="{{checkboxOptions}}" value="{{checkboxValue}}" size="middle" bind:change="onCheckboxChange" />
+            <ai-checkbox options="{{checkboxOptions}}" value="{{checkboxSelected}}" size="small" direction="vertical" />
+            <ai-checkbox options="{{checkboxOptions}}" value="{{checkboxSelected}}" size="large" disabled="{{true}}" />
+            <ai-radio options="{{radioOptions}}" value="{{radioValue}}" size="large" bind:change="onRadioChange" />
+        </view>
+    </view>
+
+    <!-- ================= Collapse ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Collapse 折叠面板" variant="tab" size="small" color="app-pink" />
+        <ai-collapse
+            question="动物岛的营业时间是几点？"
+            answer="每天早上 8:00 开门，晚上 22:00 打烊。周末会延长到 23:00，节假日以公告为准。"
+            default-expanded="{{true}}"
+        />
+        <ai-collapse id="collapse2"
+            question="怎么兑换狸克商店的积分？"
+            answer="在服务台出示你的居民卡，每 100 积分可以换一张家具券，兑换后 24 小时内有效。"
+        />
+        <ai-collapse
+            question="这条为什么点不动？"
+            answer="因为设置了 disabled，用来展示禁用态的样子。"
+            disabled="{{true}}"
+        />
+    </view>
+
+    <!-- ================= Tabs ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Tabs 标签页" variant="tab" size="small" color="app-yellow" />
+        <ai-tabs id="tabsDemo" items="{{tabItems}}" active-key="{{tabKey}}" bind:change="onTabChange">
+            <view wx:if="{{tabKey === 'fish'}}" class="tab-panel">鱼：在河边用钓竿就能钓到，雨天出没率更高。</view>
+            <view wx:elif="{{tabKey === 'bug'}}" class="tab-panel">虫：晚上举着手电筒去树林，萤火虫会自己飞过来。</view>
+            <view wx:else class="tab-panel">化石：去博物馆找猫头鹰先生鉴定，一天只能挖三块。</view>
+        </ai-tabs>
+    </view>
+
+    <!-- ================= Rate / Pagination / Countdown ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Rate 评分" variant="tab" size="small" color="app-orange" />
+        <view class="stack">
+            <ai-rate id="rateDemo" value="{{rateValue}}" size="large" bind:change="onRateChange" />
+            <ai-rate default-value="{{3}}" size="middle" bind:change="onRateChange" />
+            <ai-rate value="{{5}}" size="small" readonly="{{true}}" />
+        </view>
+    </view>
+
+    <view class="section">
+        <ai-title class="title-item" content="Pagination 分页" variant="tab" size="small" color="app-teal" />
+        <view class="stack">
+            <ai-pagination
+                id="pageDemo"
+                total="{{128}}"
+                current="{{page}}"
+                show-size-changer="{{true}}"
+                bind:change="onPageChange"
+                bind:showSizeChange="onSizeChange"
+            />
+            <ai-pagination total="{{256}}" current="{{page2}}" variant="teal" bind:change="onPage2Change" />
+        </view>
+    </view>
+
+    <view class="section">
+        <ai-title class="title-item" content="Countdown 倒计时" variant="tab" size="small" color="app-pink" />
+        <view class="stack">
+            <ai-countdown value="{{countdownValue}}" variant="island" prefix="距离大甩卖" bind:finish="onCountdownFinish" />
+            <ai-countdown value="{{countdownValue}}" size="small" format="DD 天 HH:mm:ss" bordered="{{true}}" />
+        </view>
+    </view>
+
+    <!-- ================= Overlay ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Overlay 弹层" variant="tab" size="small" color="app-blue" />
+        <view class="row">
+            <ai-button content="异形弹窗" type="primary" bind:click="onOpenModal" />
+            <ai-button content="常规弹窗" type="default" bind:click="onOpenDefaultModal" />
+            <ai-button content="右侧抽屉" type="dashed" bind:click="onOpenDrawer" />
+            <ai-button content="加载中" type="text" bind:click="onShowLoading" />
+        </view>
+        <ai-modal
+            open="{{modalOpen}}"
+            variant="{{modalVariant}}"
+            title="狸克的来信"
+            bind:close="onCloseModal"
+            bind:ok="onOkModal"
+        >
+            <view class="modal-text">今天的萝卜价格是 92 铃钱，比昨天高了 12 个点。要现在出手吗？</view>
+        </ai-modal>
+        <ai-drawer open="{{drawerOpen}}" title="居民档案" placement="right" bind:close="onCloseDrawer">
+            <view class="drawer-text">姓名：狸克</view>
+            <view class="drawer-text">职业：商店老板</view>
+            <view class="drawer-text">爱好：收集铃钱、写长长的信</view>
+        </ai-drawer>
+        <ai-loading active="{{loadingActive}}" tip="正在连接动物岛…" />
+    </view>
+
+    <!-- ================= Progress ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Progress 进度条" variant="tab" size="small" color="app-teal" />
+        <view class="stack">
+            <ai-progress percent="{{28}}" size="small" />
+            <ai-progress percent="{{64}}" />
+            <ai-progress percent="{{100}}" size="large" />
+            <ai-progress percent="{{45}}" info-text="4/9 关" />
+            <ai-progress percent="{{80}}" show-info="{{false}}" />
+        </view>
+    </view>
+
+    <!-- ================= Badge ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Badge 徽标" variant="tab" size="small" color="app-red" />
+        <view class="stack">
+            <view class="row row--baseline">
+                <ai-badge count="{{5}}" />
+                <ai-badge count="{{99}}" />
+                <ai-badge count="{{120}}" />
+                <ai-badge count="12" dot="{{true}}" />
+                <ai-badge count="new" color="app-teal" />
+                <ai-badge count="{{0}}" show-zero="{{true}}" color="app-blue" />
+            </view>
+            <view class="row row--baseline">
+                <ai-badge count="{{3}}">
+                    <ai-avatar size="small" icon="user" />
+                </ai-badge>
+                <ai-badge count="{{128}}">
+                    <ai-avatar size="middle" icon="bell" />
+                </ai-badge>
+                <ai-badge count="{{9}}" dot="{{true}}" color="app-teal">
+                    <ai-avatar size="middle" icon="star" />
+                </ai-badge>
+                <ai-badge count="{{6}}" color="app-pink">
+                    <ai-icon name="mail" size="{{32}}" />
+                </ai-badge>
+            </view>
+        </view>
+    </view>
+
+    <!-- ================= Skeleton ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Skeleton 骨架屏" variant="tab" size="small" color="brown" />
+        <view class="stack">
+            <ai-skeleton variant="text" width="60%" />
+            <view class="row row--baseline">
+                <ai-skeleton variant="circle" width-value="{{44}}" />
+                <ai-skeleton variant="rect" width-value="{{100}}" height-value="{{45}}" radius="50" />
+                <ai-skeleton variant="rect" width-value="{{72}}" height-value="{{72}}" />
+            </view>
+            <ai-skeleton variant="paragraph" rows="{{3}}" />
+            <ai-skeleton variant="paragraph" rows="{{2}}" row-widths="{{['100%', '55%']}}" />
+        </view>
+    </view>
+
+    <!-- ================= Icon ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Icon 图标" variant="tab" size="small" color="app-green" />
+        <view class="icons">
+            <view class="icons__item" wx:for="{{icons}}" wx:key="*this">
+                <ai-icon name="{{item}}" size="{{28}}" />
+                <text class="icons__label">{{item}}</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- ================= Image / Table / Footer ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Image 相框" variant="tab" size="small" color="app-green" />
+        <view class="row row--baseline">
+            <ai-image src="{{sampleSrc}}" width="{{150}}" height="{{100}}" variant="default" />
+            <ai-image src="{{sampleSrc}}" width="{{150}}" height="{{100}}" variant="bordered" color="app-teal" />
+            <ai-image src="{{sampleSrc}}" width="{{130}}" height="{{96}}" variant="stamp" stamp-year="2026" />
+        </view>
+    </view>
+
+    <view class="section">
+        <ai-title class="title-item" content="Table 表格" variant="tab" size="small" color="app-yellow" />
+        <ai-table columns="{{tableColumns}}" rows="{{tableData}}" />
+        <view class="stack section-gap">
+            <ai-table columns="{{tableColumns}}" rows="{{[]}}" empty-text="今天没有交易记录" />
+        </view>
+    </view>
+
+    <!-- ================= Carousel / Time / Background ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Carousel 轮播" variant="tab" size="small" color="app-blue" />
+        <ai-carousel
+            items="{{slides}}"
+            autoplay="{{true}}"
+            interval="{{4000}}"
+            height="{{200}}"
+            bind:change="onSlideChange"
+        />
+        <text class="hint">当前第 {{slideIndex + 1}} 张（自动播放，4 秒切换）</text>
+    </view>
+
+    <view class="section">
+        <ai-title class="title-item" content="Time 时钟" variant="tab" size="small" color="app-teal" />
+        <ai-time />
+    </view>
+
+    <view class="section">
+        <ai-title class="title-item" content="Background 背景" variant="tab" size="small" color="brown" />
+        <view class="bg-demo">
+            <ai-background type="default" height="{{110}}" ext-class="bg-demo__inner">
+                <text class="bg-demo__text">default 奶油波点</text>
+            </ai-background>
+            <ai-background type="dots-teal" height="{{110}}" ext-class="bg-demo__inner">
+                <text class="bg-demo__text">dots-teal</text>
+            </ai-background>
+        </view>
+        <view class="bg-demo section-gap">
+            <ai-background type="grid" height="{{110}}" ext-class="bg-demo__inner">
+                <text class="bg-demo__text">grid 网格</text>
+            </ai-background>
+            <ai-background type="sprinkles" height="{{110}}" ext-class="bg-demo__inner">
+                <text class="bg-demo__text">sprinkles 针糖</text>
+            </ai-background>
+        </view>
+    </view>
+
+    <!-- ================= CodeBlock / Typewriter / Cursor / Tooltip ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="CodeBlock 代码块" variant="tab" size="small" color="app-orange" />
+        <ai-codeblock class="t-code" code="{{codeSample}}" language="wx" show-line-numbers="{{true}}" bind:copy="onCodeCopy" />
+    </view>
+
+    <view class="section">
+        <ai-title class="title-item" content="Typewriter 打字机" variant="tab" size="small" color="app-pink" />
+        <view class="tw-box">
+            <ai-typewriter class="t-tw" text="{{typewriterText}}" speed="{{70}}" cursor="{{true}}" trigger="{{typewriterKey}}" bind:done="onTypewriterDone" />
+        </view>
+        <view class="row section-gap">
+            <ai-button type="default" size="small" content="重新播放" bind:click="onReplayTypewriter" />
+        </view>
+    </view>
+
+    <view class="section">
+        <ai-title class="title-item" content="Cursor 装饰光标" variant="tab" size="small" color="app-blue" />
+        <ai-cursor type="raindrop" ext-class="cursor-demo">
+            <view class="cursor-demo__inner">
+                <text class="cursor-demo__text">按住这里拖动 → 雨滴光标跟随</text>
+            </view>
+        </ai-cursor>
+        <text class="hint">小程序没有 CSS cursor，这里是降级实现（跟随手指的装饰层）</text>
+    </view>
+
+    <view class="section">
+        <ai-title class="title-item" content="Tooltip 文字提示" variant="tab" size="small" color="app-teal" />
+        <view class="row row--baseline">
+            <ai-tooltip class="t-tooltip" title="上方提示" placement="top">
+                <ai-button type="default" size="small" content="top" />
+            </ai-tooltip>
+            <ai-tooltip title="下方提示，支持两行" placement="bottom">
+                <ai-button type="default" size="small" content="bottom" />
+            </ai-tooltip>
+            <ai-tooltip title="海岛气泡" placement="top" variant="island">
+                <ai-button type="default" size="small" content="island" />
+            </ai-tooltip>
+        </view>
+        <text class="hint">点击触发，点空白处关闭</text>
+    </view>
+
+    <ai-divider type="dashed-brown" />
+
+    <!-- ================= Select / TimePicker / DatePicker ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Select 选择器" variant="tab" size="small" color="app-yellow" />
+        <view class="row row--baseline">
+            <ai-select class="t-select" options="{{selectOptions}}" value="{{selectValue}}" placeholder="请选择岛屿" bind:change="onSelectChange" />
+            <ai-select options="{{selectOptions}}" disabled="{{true}}" placeholder="禁用态" />
+        </view>
+        <text class="hint">当前选中：{{selectValue || '（空）'}}</text>
+    </view>
+
+    <view class="section">
+        <ai-title class="title-item" content="TimePicker 时间" variant="tab" size="small" color="app-orange" />
+        <view class="row row--baseline">
+            <ai-timepicker class="t-timepicker" value="{{timeValue}}" allow-clear="{{true}}" bind:change="onTimeChange" />
+            <ai-timepicker format="HH:mm" placeholder="只要时分" />
+        </view>
+        <text class="hint">当前时间：{{timeValue || '（空）'}}</text>
+    </view>
+
+    <view class="section">
+        <ai-title class="title-item" content="DatePicker 日期" variant="tab" size="small" color="app-green" />
+        <view class="stack">
+            <ai-datepicker class="t-datepicker" value="{{dateValue}}" allow-clear="{{true}}" bind:change="onDateChange" />
+            <ai-datepicker picker="month" placeholder="选月份" />
+        </view>
+        <text class="hint">当前日期：{{dateValue || '（空）'}}（范围选择留到二期）</text>
+    </view>
+
+    <ai-divider type="dashed-brown" />
+
+    <!-- ================= Form ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Form 表单" variant="tab" size="small" color="purple" />
+        <ai-form
+            id="demoForm"
+            layout="horizontal"
+            label-width="72px"
+            initial-values="{{formInitial}}"
+            bind:finish="onFormFinish"
+            bind:finishFailed="onFormFail"
+        >
+            <ai-form-item
+                name="nick"
+                label="昵称"
+                control="input"
+                required="{{true}}"
+                placeholder="2~8 个字符"
+                rules="{{nickRules}}"
+            />
+            <ai-form-item
+                name="email"
+                label="邮箱"
+                control="input"
+                placeholder="name@example.com"
+                help="用于接收通知"
+                rules="{{emailRules}}"
+            />
+            <ai-form-item name="notify" label="订阅" control="switch" />
+            <ai-form-item name="bio" label="简介" control="custom" help="slot 模式：控件由页面自己写">
+                <ai-input value="{{bioText}}" placeholder="说点什么" bind:input="onBioInput" />
+            </ai-form-item>
+        </ai-form>
+        <view class="row section-gap">
+            <ai-button class="t-form-submit" type="primary" size="small" content="提交校验" bind:click="onSubmitForm" />
+            <ai-button type="default" size="small" content="重置" bind:click="onResetForm" />
+        </view>
+    </view>
+
+    <!-- ================= Upload / Notification ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Upload 上传" variant="tab" size="small" color="app-teal" />
+        <ai-upload
+            class="t-upload"
+            list-type="picture-card"
+            accept="image"
+            max-count="{{3}}"
+            tip="最多 3 张（小程序不支持拖拽，点击选择）"
+            bind:change="onUploadChange"
+        />
+        <view class="section-gap">
+            <ai-upload list-type="text" accept="all" text="选择文件" tip="从聊天记录里选文件" />
+        </view>
+    </view>
+
+    <view class="section">
+        <ai-title class="title-item" content="Notification 通知" variant="tab" size="small" color="app-red" />
+        <view class="row">
+            <ai-button class="t-notify" type="primary" size="small" content="成功" bind:click="onNotifySuccess" />
+            <ai-button type="default" size="small" content="信息" bind:click="onNotifyInfo" />
+            <ai-button type="default" size="small" content="警告" bind:click="onNotifyWarning" />
+            <ai-button type="primary" danger="{{true}}" size="small" content="错误" bind:click="onNotifyError" />
+        </view>
+        <text class="hint">命令式调用：this.selectComponent('#notice').success({...})</text>
+    </view>
+
+    <view class="footer">
+        <ai-divider type="wave-yellow" />
+        <text class="footer__text">animal-island-wx · 41 组件</text>
+        <ai-footer text="animal-island-wx · MIT License" />
+    </view>
+
+    <ai-notification id="notice" />
+    <ai-backtop visible="{{showBackTop}}" bind:click="onBackTop" />
+
+</view>

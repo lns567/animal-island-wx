@@ -1,0 +1,23 @@
+<view
+    class="ai-collapse{{expanded ? ' ai-collapse--expanded' : ''}}{{disabled ? ' ai-collapse--disabled' : ''}} extClass"
+    style="{{extStyle}}"
+>
+    <view
+        class="ai-collapse__header"
+        bindtap="handleToggle"
+        aria-role="button"
+        aria-expanded="{{expanded}}"
+        aria-disabled="{{disabled}}"
+    >
+        <view class="ai-collapse__icon">{{expanded ? '−' : '+'}}</view>
+        <text class="ai-collapse__text">{{question}}</text>
+        <view class="ai-collapse__leaf">
+            <ai-icon name="fish" size="{{20}}" />
+        </view>
+    </view>
+    <view class="ai-collapse__panel" style="max-height:{{panelHeight}}px">
+        <view class="ai-collapse__content">
+            <text class="ai-collapse__answer">{{answer}}</text>
+        </view>
+    </view>
+</view>

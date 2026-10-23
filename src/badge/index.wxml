@@ -1,0 +1,14 @@
+<view
+    class="ai-badge{{standalone || autoStandalone ? ' ai-badge--standalone' : ''}} extClass"
+    style="{{extStyle}}"
+>
+    <view class="ai-badge__content">
+        <slot />
+    </view>
+    <view
+        wx:if="{{!hidden}}"
+        class="ai-badge__indicator ai-badge__indicator--{{size}}{{circle ? ' ai-badge__indicator--circle' : ''}}{{dot ? ' ai-badge__indicator--dot' : ''}} ai-badge__indicator--{{color}}"
+        aria-role="status"
+        aria-label="{{ariaLabel}}"
+    >{{dot ? '' : display}}</view>
+</view>

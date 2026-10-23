@@ -1,0 +1,23 @@
+<view class="ai-tooltip extClass" style="{{extStyle}}">
+    <view
+        class="ai-tooltip__trigger"
+        bindtap="handleTrigger"
+        bindlongpress="handleLongPress"
+        aria-role="button"
+        aria-label="{{title}}"
+    >
+        <slot />
+    </view>
+
+    <view
+        wx:if="{{visible}}"
+        class="ai-tooltip__panel {{placementClass}}{{variant === 'island' ? ' ai-tooltip__panel--island' : ''}}{{bordered ? ' ai-tooltip__panel--bordered' : ' ai-tooltip__panel--borderless'}}"
+        catchtap="noop"
+        aria-role="tooltip"
+    >
+        <text class="ai-tooltip__content">{{title}}</text>
+        <view wx:if="{{variant === 'island'}}" class="ai-tooltip__tail"></view>
+    </view>
+
+    <view wx:if="{{visible}}" class="ai-tooltip__catcher" bindtap="close" catchtouchmove="noop"></view>
+</view>

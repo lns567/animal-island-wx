@@ -1,0 +1,21 @@
+<view class="ai-tabs extClass" style="{{extStyle}}">
+    <view class="ai-tabs__list" aria-role="tablist" aria-label="{{ariaLabel}}" aria-orientation="horizontal">
+        <view
+            wx:for="{{tabs}}"
+            wx:key="key"
+            class="ai-tabs__item{{item.active ? ' ai-tabs__item--active' : ''}}{{item.active && shadow ? ' ai-tabs__item--shadow' : ''}}"
+            data-key="{{item.key}}"
+            bindtap="handleTabTap"
+            aria-role="tab"
+            aria-selected="{{item.active}}"
+        >
+            <text class="ai-tabs__icon">{{item.active ? '●' : '○'}}</text>
+            <text class="ai-tabs__label">{{item.label}}</text>
+        </view>
+    </view>
+    <view class="ai-tabs__content" aria-role="tabpanel">
+        <view class="ai-tabs__inner">
+            <slot />
+        </view>
+    </view>
+</view>

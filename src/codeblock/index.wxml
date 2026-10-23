@@ -1,0 +1,32 @@
+<view class="ai-codeblock extClass" style="{{extStyle}}">
+    <view wx:if="{{language || copyable}}" class="ai-codeblock__bar">
+        <text wx:if="{{language}}" class="ai-codeblock__lang">{{language}}</text>
+        <view
+            wx:if="{{copyable}}"
+            class="ai-codeblock__copy ai-codeblock__copy--{{copyStatus}}"
+            bindtap="handleCopy"
+            hover-class="ai-codeblock__copy--hover"
+            aria-role="button"
+            aria-label="{{copyStatus === 'copied' ? '代码已复制' : '复制代码'}}"
+        >{{statusText}}</view>
+    </view>
+
+    <scroll-view class="ai-codeblock__scroll" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+        <view class="ai-codeblock__body">
+            <view
+                wx:for="{{lines}}"
+                wx:key="key"
+                class="ai-codeblock__line"
+            >
+                <text wx:if="{{showLineNumbers}}" class="ai-codeblock__no">{{item.no}}</text>
+                <text class="ai-codeblock__code" space="nbsp"><text
+                    wx:for="{{item.tokens}}"
+                    wx:for-item="tk"
+                    wx:key="key"
+                    space="nbsp"
+                    class="ai-codeblock__t ai-codeblock__t--{{tk.type}}"
+                >{{tk.text}}</text></text>
+            </view>
+        </view>
+    </scroll-view>
+</view>

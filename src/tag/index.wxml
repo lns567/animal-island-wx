@@ -1,0 +1,21 @@
+<view
+    class="{{cls}} extClass"
+    style="{{extStyle}}"
+    hover-class="{{interactive ? 'ai-tag--hover' : 'none'}}"
+    hover-start-time="10"
+    hover-stay-time="60"
+    bindtap="handleTap"
+    aria-role="{{interactive ? 'button' : 'text'}}"
+    aria-disabled="{{disabled}}"
+>
+    <text wx:if="{{content}}" class="ai-tag__text">{{content}}</text>
+    <slot></slot>
+    <view
+        wx:if="{{closable}}"
+        class="ai-tag__close"
+        hover-class="ai-tag__close--hover"
+        catchtap="handleClose"
+        aria-role="button"
+        aria-label="关闭"
+    >×</view>
+</view>

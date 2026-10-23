@@ -1,0 +1,6 @@
+<view
+    class="ai-icon ai-icon--{{name}}"
+    style="{{sizeStyle}}"
+    aria-role="{{label ? 'img' : 'presentation'}}"
+    aria-label="{{label}}"
+></view>

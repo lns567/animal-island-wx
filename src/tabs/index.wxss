@@ -1,0 +1,83 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-tabs —— 对应 Web 版 Tabs
+ * 奶油卡片 + 薄荷激活块
+ * ============================================ */
+
+:host {
+    display: block;
+}
+
+.ai-tabs {
+    background: var(--animal-bg-color, #f8f8f0);
+    border: 2px solid var(--animal-border-color-light, #e8e2d6);
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.ai-tabs__list {
+    display: flex;
+    gap: 4px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.6);
+    border-bottom: 2px solid var(--animal-border-color-light, #e8e2d6);
+}
+
+.ai-tabs__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--animal-text-color, #794f27);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-tabs__item--active {
+    background: #0cc0b5;
+    color: #fff9e3;
+    font-weight: 600;
+    box-shadow: 0 3px 0 0 var(--animal-shadow-color-light, rgba(61, 52, 40, 0.08));
+}
+
+.ai-tabs__icon {
+    font-size: 10px;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-tabs__item--active .ai-tabs__icon {
+    transform: scale(1.2);
+}
+
+.ai-tabs__label {
+    color: inherit;
+}
+
+.ai-tabs__content {
+    min-height: 60px;
+    padding: 24px;
+    animation: animal-tabs-fade-in 0.25s ease;
+}
+
+.ai-tabs__inner {
+    min-height: 40px;
+    color: var(--animal-text-color-secondary, #9f927d);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+@keyframes animal-tabs-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

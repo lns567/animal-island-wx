@@ -1,0 +1,24 @@
+<view
+    class="ai-rate ai-rate--{{size}}{{readonly ? ' ai-rate--readonly' : ''}} extClass"
+    style="{{extStyle}}"
+    aria-role="radiogroup"
+    aria-label="评分"
+    aria-readonly="{{readonly}}"
+>
+    <view
+        wx:for="{{stars}}"
+        wx:key="value"
+        class="ai-rate__item{{item.active ? ' ai-rate__item--active' : ''}}"
+        data-value="{{item.value}}"
+        bindtap="handleTap"
+        aria-role="radio"
+        aria-checked="{{item.active}}"
+        aria-label="{{item.value}} 星"
+        hover-class="{{readonly ? 'none' : 'ai-rate__item--hover'}}"
+        hover-stay-time="80"
+    >
+        <view class="ai-rate__star ai-rate__star--idle"></view>
+        <view class="ai-rate__star ai-rate__star--active {{item.pop}}" style="{{item.delay}}"></view>
+        <view wx:if="{{item.splash}}" class="ai-rate__splash"></view>
+    </view>
+</view>

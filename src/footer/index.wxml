@@ -1,0 +1,1 @@
+<view class="ai-footer extClass" style="{{extStyle}}" aria-role="contentinfo">© {{displayYear}} {{text}}</view>

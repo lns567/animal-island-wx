@@ -1,0 +1,95 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-loading —— 对应 Web 版 Loading
+ * 全屏夜空 + 50 片旋转飘落的雪花
+ * ============================================ */
+
+:host {
+    display: contents;
+}
+
+.ai-loading {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    background: #0b101a;
+    opacity: 1;
+    /* 进入：短淡入；退出时长由内联 transition-duration 覆盖 */
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: animal-loading-fade-in 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-loading--exiting {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes animal-loading-fade-in {
+    from {
+        opacity: 0;
+    }
+}
+
+/* ---------- 雪花层 ---------- */
+.ai-loading__snow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.ai-loading__flake {
+    position: absolute;
+    top: -30px;
+    background: #fff;
+    border-radius: 50%;
+    animation-name: animal-loading-snow;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 10s;
+}
+
+@keyframes animal-loading-snow {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(calc(100vh + 60px)) rotate(360deg);
+    }
+}
+
+/* ---------- 暗角 ---------- */
+.ai-loading__vignette {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(5, 10, 20, 0.6) 100%);
+}
+
+/* ---------- 中央提示 ---------- */
+.ai-loading__tip {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    color: #f8f8f0;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}

@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "target": "ES2017",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "lib": ["ES2017"],
+        "types": ["miniprogram-api-typings"],
+        "strict": true,
+        "noImplicitOverride": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "removeComments": false,
+        "newLine": "lf",
+        "skipLibCheck": true,
+        "rootDir": "src",
+        "outDir": "miniprogram_dist"
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules", "miniprogram_dist", "examples", "preview"]
+}

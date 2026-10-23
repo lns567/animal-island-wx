@@ -1,0 +1,37 @@
+<view class="ai-table-wrap extClass" style="{{extStyle}}">
+    <view wx:if="{{showHeader}}" class="ai-table__row ai-table__row--header">
+        <view
+            wx:for="{{columnsView}}"
+            wx:key="key"
+            class="ai-table__cell ai-table__cell--header"
+            style="{{item.style}}text-align:{{item.align}}"
+        >{{item.title}}</view>
+    </view>
+
+    <view wx:if="{{isEmpty}}" class="ai-table__empty">
+        <ai-icon name="file" size="48" />
+        <text class="ai-table__empty-text">{{emptyText}}</text>
+    </view>
+
+    <block wx:else>
+        <view
+            wx:for="{{rowsView}}"
+            wx:key="key"
+            class="ai-table__row{{item.striped ? ' ai-table__row--striped' : ''}}"
+            hover-class="ai-table__row--hover"
+            hover-stay-time="90"
+        >
+            <view
+                wx:for="{{item.cells}}"
+                wx:for-item="cell"
+                wx:key="key"
+                class="ai-table__cell"
+                style="{{cell.style}}text-align:{{cell.align}}"
+            >{{cell.text}}</view>
+        </view>
+    </block>
+
+    <view wx:if="{{loading}}" class="ai-table__loading">
+        <view class="ai-table__spinner"></view>
+    </view>
+</view>

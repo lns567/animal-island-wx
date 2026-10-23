@@ -1,0 +1,24 @@
+<view wx:if="{{icon}}" class="ai-divider-block ai-divider-icon extClass" style="{{extStyle}}">
+    <view
+        wx:for="{{cycleList}}"
+        wx:key="key"
+        class="ai-divider-icon__cycle"
+        aria-hidden="{{index > 0}}"
+    >
+        <ai-icon name="{{icon}}" size="{{iconSize}}" />
+        <view
+            wx:if="{{item.hasGap}}"
+            class="ai-divider-icon__gap"
+            style="width:{{iconGap}}px"
+        >
+            <view class="ai-divider-icon__line"></view>
+        </view>
+    </view>
+</view>
+
+<view
+    wx:else
+    class="ai-divider ai-divider--{{type}} extClass"
+    style="{{extStyle}}"
+    aria-hidden="true"
+></view>

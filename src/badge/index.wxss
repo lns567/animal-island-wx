@@ -1,0 +1,174 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-badge —— 对应 Web 版 Badge
+ * 数字角标：右上角圆形标、封顶数字、小红点
+ * ============================================ */
+
+:host {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+}
+
+.ai-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    line-height: 1;
+    font-family: inherit;
+}
+
+.ai-badge__content {
+    display: inline-flex;
+    align-items: center;
+}
+
+.ai-badge__indicator {
+    /* 定位位移抽成变量，让出场动画在「独立使用」下也能复用同一组 keyframes */
+    --badge-shift-x: 50%;
+    --badge-shift-y: -50%;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(var(--badge-shift-x), var(--badge-shift-y));
+    transform-origin: 100% 0;
+    background: #fc736d;
+    color: #fff;
+    font-family: inherit;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    border-radius: 999px;
+    /* 奶油色描边：把角标从被覆盖的元素上分离出来 */
+    border: 2px solid var(--animal-bg-color, #f8f8f0);
+    box-shadow: var(--animal-shadow-sm, 0 2px 4px 0 rgba(61, 52, 40, 0.06));
+    animation: animal-badge-zoom-in 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- 独立使用：取消位移与奶油色描边，落回文档流 ---------- */
+.ai-badge--standalone .ai-badge__indicator {
+    position: static;
+    --badge-shift-x: 0;
+    --badge-shift-y: 0;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+/* ---------- Size ---------- */
+.ai-badge__indicator--medium {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    font-size: 10px;
+}
+
+.ai-badge__indicator--small {
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    font-size: 9px;
+}
+
+/* ---------- Circle（1~2 位内容锁成正圆） ---------- */
+.ai-badge__indicator--medium.ai-badge__indicator--circle {
+    width: 20px;
+    min-width: 0;
+    padding: 0;
+}
+
+.ai-badge__indicator--small.ai-badge__indicator--circle {
+    width: 16px;
+    min-width: 0;
+    padding: 0;
+}
+
+/* ---------- Dot：双类选择器，确保压过尺寸类的 min-width ---------- */
+.ai-badge__indicator--medium.ai-badge__indicator--dot,
+.ai-badge__indicator--small.ai-badge__indicator--dot {
+    width: 10px;
+    min-width: 0;
+    height: 10px;
+    padding: 0;
+}
+
+/* ---------- Color ---------- */
+.ai-badge__indicator--app-red {
+    background: #fc736d;
+    color: #fff;
+}
+
+.ai-badge__indicator--app-pink {
+    background: #f8a6b2;
+    color: #fff;
+}
+
+.ai-badge__indicator--app-orange {
+    background: #e59266;
+    color: #fff;
+}
+
+.ai-badge__indicator--app-yellow {
+    background: #f7cd67;
+    color: #725d42;
+}
+
+.ai-badge__indicator--app-teal {
+    background: #82d5bb;
+    color: #fff;
+}
+
+.ai-badge__indicator--app-green {
+    background: #8ac68a;
+    color: #fff;
+}
+
+.ai-badge__indicator--app-blue {
+    background: #889df0;
+    color: #fff;
+}
+
+.ai-badge__indicator--purple {
+    background: #b77dee;
+    color: #fff;
+}
+
+.ai-badge__indicator--lime-green {
+    background: #d1da49;
+    color: #3d5a1a;
+}
+
+.ai-badge__indicator--yellow-green {
+    background: #ecdf52;
+    color: #725d42;
+}
+
+.ai-badge__indicator--brown {
+    background: #9a835a;
+    color: #fff;
+}
+
+.ai-badge__indicator--warm-peach-pink {
+    background: #e18c6f;
+    color: #fff;
+}
+
+/* ---------- Motion ---------- */
+@keyframes animal-badge-zoom-in {
+    from {
+        opacity: 0;
+        transform: translate(var(--badge-shift-x), var(--badge-shift-y)) scale(0.6);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(var(--badge-shift-x), var(--badge-shift-y)) scale(1);
+    }
+}

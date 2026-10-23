@@ -1,0 +1,230 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-button —— 对应 Web 版 Button
+ * 差异：Web 版的 :hover / :active 合并为小程序 hover-class（触摸按下态）
+ * ============================================ */
+
+:host {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ai-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--animal-spacing-sm, 8px);
+    /* 原生 button 自带 width: 184px（基础库注入，优先级高于 base.wxss 里的 button 重置），
+     * 这里用类选择器压回去，让宽度回到内容宽度；块级按钮由 .ai-btn--block 覆盖。 */
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100%;
+    font-family: var(
+        --animal-font-family,
+        -apple-system,
+        BlinkMacSystemFont,
+        'PingFang SC',
+        'Microsoft YaHei',
+        sans-serif
+    );
+    font-weight: 600;
+    white-space: nowrap;
+    border: var(--animal-border-width, 2px) solid transparent;
+    border-radius: 50px;
+    transition: all var(--animal-motion-duration-base, 0.25s) var(--animal-motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+    line-height: 1;
+    letter-spacing: 0.02em;
+    box-shadow: var(--animal-shadow-sm, 0 2px 4px 0 rgba(61, 52, 40, 0.06));
+    margin: 0;
+    overflow: visible;
+}
+
+/* ---------- Size ---------- */
+.ai-btn--small {
+    height: var(--animal-height-sm, 32px);
+    padding: 0 var(--animal-spacing-lg, 16px);
+    font-size: var(--animal-font-size-sm, 12px);
+    border-radius: var(--animal-border-radius-sm, 16px);
+}
+
+.ai-btn--middle {
+    height: 45px;
+    padding: 0 20px;
+    font-size: var(--animal-font-size-base, 14px);
+}
+
+.ai-btn--large {
+    height: var(--animal-height-lg, 48px);
+    padding: 0 32px;
+    font-size: var(--animal-font-size-lg, 16px);
+    border-radius: var(--animal-border-radius-lg, 24px);
+}
+
+/* ---------- Type: default ---------- */
+.ai-btn--default {
+    color: var(--animal-text-color, #794f27);
+    background-color: var(--animal-bg-color, #f8f8f0);
+    border-color: var(--animal-border-color, #dcd8d1);
+}
+
+.ai-btn--active-default {
+    color: var(--animal-primary-color-active, #50b9ab);
+    border-color: var(--animal-primary-color-active, #50b9ab);
+    transform: translateY(0);
+    box-shadow: var(--animal-shadow-sm, 0 2px 4px 0 rgba(61, 52, 40, 0.06));
+}
+
+/* ---------- Type: primary ---------- */
+.ai-btn--primary {
+    color: #794f27;
+    background-color: #f8f8f0;
+    border-color: #f8f8f0;
+    box-shadow: 0 5px 0 0 #bdaea0;
+}
+
+.ai-btn--active-primary {
+    background-color: #f8f8f0;
+    border-color: #f8f8f0;
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 0 #bdaea0;
+}
+
+/* ---------- Type: dashed ---------- */
+.ai-btn--dashed {
+    color: var(--animal-text-color, #794f27);
+    background-color: var(--animal-bg-color, #f8f8f0);
+    border-color: var(--animal-border-color, #dcd8d1);
+    border-style: dashed;
+}
+
+.ai-btn--active-dashed {
+    color: var(--animal-primary-color-active, #50b9ab);
+    border-color: var(--animal-primary-color-active, #50b9ab);
+    transform: translateY(0);
+}
+
+/* ---------- Type: text ---------- */
+.ai-btn--text {
+    color: var(--animal-text-color, #794f27);
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.ai-btn--active-text {
+    background-color: #e4dccd;
+}
+
+/* ---------- Type: link ---------- */
+.ai-btn--link {
+    color: var(--animal-primary-color, #19c8b9);
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.ai-btn--active-link {
+    color: var(--animal-primary-color-active, #50b9ab);
+}
+
+/* ---------- Danger ---------- */
+.ai-btn--danger.ai-btn--primary {
+    color: #fff;
+    background-color: var(--animal-error-color, #e05a5a);
+    border-color: var(--animal-error-color, #e05a5a);
+    box-shadow: 0 5px 0 0 var(--animal-error-color-active, #c94444);
+}
+
+.ai-btn--active-danger-primary {
+    background-color: var(--animal-error-color-active, #c94444);
+    border-color: var(--animal-error-color-active, #c94444);
+    box-shadow: 0 1px 0 0 var(--animal-error-color-active, #c94444);
+    transform: translateY(2px);
+}
+
+.ai-btn--danger.ai-btn--default,
+.ai-btn--danger.ai-btn--dashed {
+    color: #e05a5a;
+    border-color: var(--animal-error-color, #e05a5a);
+}
+
+.ai-btn--active-danger-outline {
+    color: #e05a5a;
+    border-color: var(--animal-error-color-active, #c94444);
+}
+
+.ai-btn--danger.ai-btn--text,
+.ai-btn--danger.ai-btn--link {
+    color: #fff;
+}
+
+.ai-btn--active-danger-text {
+    color: #fff;
+    opacity: 0.85;
+}
+
+/* ---------- Ghost ---------- */
+.ai-btn--ghost {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.ai-btn--ghost.ai-btn--primary {
+    color: var(--animal-primary-color, #19c8b9);
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.ai-btn--active-ghost-primary {
+    color: var(--animal-primary-color-hover, #3dd4c6);
+    border-color: var(--animal-primary-color-hover, #3dd4c6);
+    background-color: rgba(25, 200, 185, 0.08);
+}
+
+/* ---------- Block ---------- */
+.ai-btn--block {
+    display: flex;
+    width: 100% !important;
+}
+
+/* ---------- Disabled ---------- */
+.ai-btn--disabled {
+    opacity: 0.5;
+    box-shadow: none;
+}
+
+/* ---------- Loading ---------- */
+.ai-btn--loading {
+    box-shadow: none;
+    background-color: #0ec4b6;
+    border: 4px solid #4de2da;
+    color: #fff;
+}
+
+/* ---------- Inner ---------- */
+.ai-btn__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ai-btn__icon--spin {
+    animation: animal-btn-spin 2.5s linear infinite;
+}
+
+.ai-btn__text {
+    display: inline;
+    line-height: 1;
+}
+
+/* 逆时针旋转动画（与 Web 版一致） */
+@keyframes animal-btn-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}

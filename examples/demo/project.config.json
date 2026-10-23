@@ -1,0 +1,18 @@
+{
+    "description": "animal-island-wx 演示小程序",
+    "miniprogramRoot": "./",
+    "compileType": "miniprogram",
+    "appid": "touristappid",
+    "projectname": "animal-island-wx-demo",
+    "libVersion": "3.5.5",
+    "setting": {
+        "urlCheck": false,
+        "es6": true,
+        "enhance": true,
+        "postcss": true,
+        "minified": false,
+        "coverView": true,
+        "packNpmManually": false,
+        "packNpmRelationList": []
+    }
+}

@@ -1,0 +1,16 @@
+<view
+    class="ai-switch ai-switch--{{size}}{{isChecked ? ' ai-switch--checked' : ''}}{{disabled ? ' ai-switch--disabled' : ''}}{{loading ? ' ai-switch--loading' : ''}} extClass"
+    hover-class="{{disabled || loading ? 'none' : 'ai-switch--hover'}}"
+    hover-start-time="10"
+    hover-stay-time="80"
+    bindtap="handleTap"
+    aria-role="switch"
+    aria-checked="{{isChecked}}"
+    aria-label="{{ariaLabel}}"
+    aria-disabled="{{disabled || loading}}"
+>
+    <view class="ai-switch__handle">
+        <view wx:if="{{loading}}" class="ai-switch__spinner"></view>
+    </view>
+    <view class="ai-switch__inner">{{isChecked ? checkedChildren : unCheckedChildren}}</view>
+</view>

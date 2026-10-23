@@ -1,0 +1,175 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-select —— 对应 Web 版 Select
+ * 奶油白触发器 + 鹅黄面板 + 选中项荧光笔
+ * ============================================ */
+
+:host {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ai-select {
+    position: relative;
+    display: inline-block;
+    min-width: 140px;
+    font-family: var(--animal-font-family, sans-serif);
+}
+
+/* ---------- 触发器 ---------- */
+.ai-select__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 13px;
+    background: #fff;
+    border: 2px solid #e8dcc8;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.ai-select__trigger--hover {
+    border-color: #d4c4a8;
+    background: #fffdf7;
+}
+
+.ai-select__trigger--open {
+    background: #fff;
+}
+
+.ai-select__text {
+    flex: 1;
+    font-size: 14px;
+    color: #a09080;
+    line-height: 1.4;
+}
+
+.ai-select__text--value {
+    color: #725d42;
+    font-weight: 600;
+}
+
+.ai-select__arrow {
+    flex: none;
+    width: 8px;
+    height: 8px;
+    margin-left: 8px;
+    margin-top: -4px;
+    border-right: 2px solid #a09080;
+    border-bottom: 2px solid #a09080;
+    border-radius: 1px;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.ai-select__trigger--open .ai-select__arrow {
+    margin-top: 2px;
+    border-color: #19c8b9;
+    transform: rotate(-135deg);
+}
+
+.ai-select--disabled .ai-select__trigger {
+    opacity: 0.5;
+    background: #f5f5f0;
+}
+
+/* ---------- 关闭用遮罩 ---------- */
+.ai-select__catcher {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    background: transparent;
+}
+
+/* ---------- 面板 ---------- */
+.ai-select__panel {
+    position: absolute;
+    z-index: 101;
+    min-width: 140px;
+    padding: 12px 0;
+    background: #ffeea0;
+    border-radius: 28px;
+    box-shadow: 0 6px 20px rgba(121, 79, 39, 0.14);
+    animation: animal-select-in 0.2s ease;
+}
+
+.ai-select__panel--right {
+    left: 100%;
+    margin-left: 6px;
+}
+
+.ai-select__panel--left {
+    right: 100%;
+    margin-right: 6px;
+}
+
+.ai-select__panel--center {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.ai-select__panel--top {
+    top: 0;
+}
+
+.ai-select__panel--bottom {
+    bottom: 0;
+}
+
+/* ---------- 选项 ---------- */
+.ai-select__option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 30px 10px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #725d42;
+    white-space: nowrap;
+}
+
+.ai-select__option--hover {
+    font-weight: 700;
+}
+
+.ai-select__option--active {
+    z-index: 1;
+    font-weight: 700;
+}
+
+.ai-select__dot {
+    width: 16px;
+    font-size: 12px;
+}
+
+.ai-select__label {
+    line-height: 1.4;
+}
+
+/* 选中项的高亮条（Web 版 pillBar，用 z-index:-1 压到文字下方） */
+.ai-select__pill {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 56%;
+    height: 14px;
+    margin-top: -7px;
+    background: #ffcc00;
+    border-radius: 7px;
+    opacity: 0.3;
+}
+
+@keyframes animal-select-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

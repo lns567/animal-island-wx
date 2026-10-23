@@ -1,0 +1,216 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-tag —— 对应 Web 版 Tag
+ * 每个色板只声明 4 个变量，variant 类负责消费
+ * ============================================ */
+
+:host {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ai-tag {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    line-height: 1;
+    font-family: var(
+        --animal-font-family,
+        -apple-system,
+        BlinkMacSystemFont,
+        'PingFang SC',
+        'Microsoft YaHei',
+        sans-serif
+    );
+    font-weight: 600;
+    border-radius: 999px;
+    border: 1.5px solid transparent;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+/* ---------- Size ---------- */
+.ai-tag--small {
+    height: 24px;
+    padding: 0 10px;
+    font-size: 12px;
+}
+
+.ai-tag--medium {
+    height: 32px;
+    padding: 0 12px;
+    font-size: 14px;
+}
+
+.ai-tag--large {
+    height: 40px;
+    padding: 0 16px;
+    font-size: 16px;
+}
+
+/* ---------- Variant ---------- */
+.ai-tag--solid {
+    background-color: var(--ai-tag-solid, rgb(247, 243, 223));
+    border-color: var(--ai-tag-solid, #d4c4a8);
+    color: var(--ai-tag-solid-text, #8f734f);
+}
+
+.ai-tag--outlined {
+    background-color: transparent;
+    color: var(--ai-tag-strong, #8f734f);
+    border-color: var(--ai-tag-strong, #c4b89e);
+}
+
+.ai-tag--dashed {
+    background-color: transparent;
+    color: var(--ai-tag-strong, #8f734f);
+    border-style: dashed;
+    border-color: var(--ai-tag-strong, #c4b89e);
+}
+
+.ai-tag--soft {
+    background-color: var(--ai-tag-soft-bg, #f5f0e6);
+    color: var(--ai-tag-soft-text, #8f734f);
+    border-color: transparent;
+}
+
+/* ---------- 交互态 / 禁用 ---------- */
+.ai-tag--clickable {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ai-tag--hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(61, 52, 40, 0.12);
+}
+
+.ai-tag--disabled {
+    opacity: 0.5;
+}
+
+/* ---------- 文本 / 关闭按钮 ---------- */
+.ai-tag__text {
+    color: inherit;
+}
+
+.ai-tag__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 2px;
+    margin-right: -4px;
+    width: 16px;
+    height: 16px;
+    background-color: rgba(149, 143, 143, 0.08);
+    color: inherit;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 50%;
+    transition: background 0.15s ease;
+    flex-shrink: 0;
+}
+
+.ai-tag__close--hover {
+    background-color: rgba(0, 0, 0, 0.18);
+}
+
+/* ============================================
+ * Color palette —— 与 Card / Title 同名
+ * ============================================ */
+.ai-tag--c-app-pink {
+    --ai-tag-solid: #f8a6b2;
+    --ai-tag-solid-text: #fff;
+    --ai-tag-soft-bg: #fce4ec;
+    --ai-tag-soft-text: #c2185b;
+    --ai-tag-strong: #f8a6b2;
+}
+
+.ai-tag--c-purple {
+    --ai-tag-solid: #b77dee;
+    --ai-tag-solid-text: #fff;
+    --ai-tag-soft-bg: #f3e5f5;
+    --ai-tag-soft-text: #7b1fa2;
+    --ai-tag-strong: #b77dee;
+}
+
+.ai-tag--c-app-blue {
+    --ai-tag-solid: #889df0;
+    --ai-tag-solid-text: #fff;
+    --ai-tag-soft-bg: #e6f0ff;
+    --ai-tag-soft-text: #1565c0;
+    --ai-tag-strong: #889df0;
+}
+
+.ai-tag--c-app-yellow {
+    --ai-tag-solid: #f7cd67;
+    --ai-tag-solid-text: #fff;
+    --ai-tag-soft-bg: #fff8e1;
+    --ai-tag-soft-text: #f9a825;
+    --ai-tag-strong: #f7cd67;
+}
+
+.ai-tag--c-app-orange {
+    --ai-tag-solid: #e59266;
+    --ai-tag-solid-text: #fff;
+    --ai-tag-soft-bg: #fff3e0;
+    --ai-tag-soft-text: #e65100;
+    --ai-tag-strong: #e59266;
+}
+
+.ai-tag--c-app-teal {
+    --ai-tag-solid: #82d5bb;
+    --ai-tag-solid-text: #fff;
+    --ai-tag-soft-bg: #e0f2f1;
+    --ai-tag-soft-text: #00695c;
+    --ai-tag-strong: #82d5bb;
+}
+
+.ai-tag--c-app-green {
+    --ai-tag-solid: #8ac68a;
+    --ai-tag-solid-text: #fff;
+    --ai-tag-soft-bg: #e8f5e9;
+    --ai-tag-soft-text: #2e7d32;
+    --ai-tag-strong: #8ac68a;
+}
+
+.ai-tag--c-app-red {
+    --ai-tag-solid: #fc736d;
+    --ai-tag-solid-text: #fff;
+    --ai-tag-soft-bg: #ffebee;
+    --ai-tag-soft-text: #c62828;
+    --ai-tag-strong: #fc736d;
+}
+
+.ai-tag--c-lime-green {
+    --ai-tag-solid: #d1da49;
+    --ai-tag-solid-text: #fff;
+    --ai-tag-soft-bg: #f1f8e9;
+    --ai-tag-soft-text: #558b2f;
+    --ai-tag-strong: #d1da49;
+}
+
+.ai-tag--c-yellow-green {
+    --ai-tag-solid: #ecdf52;
+    --ai-tag-solid-text: #fff;
+    --ai-tag-soft-bg: #f9fbe7;
+    --ai-tag-soft-text: #827717;
+    --ai-tag-strong: #ecdf52;
+}
+
+.ai-tag--c-brown {
+    --ai-tag-solid: #9a835a;
+    --ai-tag-solid-text: #fff;
+    --ai-tag-soft-bg: #efebe9;
+    --ai-tag-soft-text: #4e342e;
+    --ai-tag-strong: #9a835a;
+}
+
+.ai-tag--c-warm-peach-pink {
+    --ai-tag-solid: #e18c6f;
+    --ai-tag-solid-text: #fff;
+    --ai-tag-soft-bg: #fbe9e7;
+    --ai-tag-soft-text: #bf360c;
+    --ai-tag-strong: #e18c6f;
+}

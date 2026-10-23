@@ -1,0 +1,24 @@
+<view class="ai-avatar-group extClass" style="{{hostStyle}}">
+    <view
+        wx:for="{{shown}}"
+        wx:key="index"
+        class="ai-avatar-group__item"
+        style="margin-left:{{item.offset}}px"
+    >
+        <ai-avatar
+            src="{{item.src}}"
+            content="{{item.content}}"
+            icon="{{item.icon}}"
+            size="{{item.size}}"
+            shape="{{item.shape}}"
+            label="{{item.label}}"
+            ext-style="{{item.extStyle}}"
+        />
+    </view>
+    <view
+        wx:if="{{restCount > 0}}"
+        class="ai-avatar-group__more"
+        style="{{moreStyle}}"
+        bindtap="handleMoreTap"
+    >+{{restCount}}</view>
+</view>

@@ -1,0 +1,84 @@
+/* ============================================
+ * animal-island-wx · 设计令牌（Design Tokens）
+ * 与 animal-island-ui（Web 版）的 themes/default.less 一一对应
+ * 用法：在 app.wxss 中 @import "miniprogram_npm/animal-island-wx/common/style/tokens.wxss";
+ *       或局部作用域：<view class="ai-theme">…</view>
+ * ============================================ */
+
+page,
+.ai-theme {
+    /* ---------- Color ---------- */
+    --animal-primary-color: #19c8b9;
+    --animal-primary-color-hover: #3dd4c6;
+    --animal-primary-color-active: #50b9ab;
+    --animal-primary-color-bg: #e6f9f6;
+
+    --animal-success-color: #6fba2c;
+    --animal-success-color-hover: #85cc45;
+    --animal-success-color-active: #5a9e1e;
+
+    --animal-warning-color: #f5c31c;
+    --animal-warning-color-hover: #f7d04a;
+    --animal-warning-color-active: #dba90e;
+
+    --animal-error-color: #e05a5a;
+    --animal-error-color-hover: #e87878;
+    --animal-error-color-active: #c94444;
+
+    /* ---------- Neutral ---------- */
+    --animal-text-color: #794f27;
+    --animal-text-color-secondary: #9f927d;
+    --animal-text-color-disabled: #c4b89e;
+    --animal-focus-yellow: #f5c31c;
+
+    --animal-border-color: #dcd8d1;
+    --animal-border-color-hover: #827157;
+    --animal-border-color-light: #e8e2d6;
+
+    --animal-bg-color: #f8f8f0;
+    --animal-bg-color-secondary: #f0e8d8;
+    --animal-bg-color-disabled: #f0ece2;
+
+    /* ---------- Overlay ---------- */
+    --animal-mask-bg: rgba(0, 0, 0, 0.35);
+
+    /* ---------- Typography ----------
+     * 小程序不支持 woff2 本地字体（包体积 / 路径限制），默认走系统字体栈。
+     * 需要 Nunito / Noto Sans SC 时，用 wx.loadFontFace() 加载 CDN 字体后再覆盖此变量。
+     */
+    --animal-font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+        'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --animal-font-size-sm: 12px;
+    --animal-font-size-base: 14px;
+    --animal-font-size-lg: 16px;
+    --animal-line-height-base: 1.5715;
+
+    /* ---------- Spacing ---------- */
+    --animal-spacing-xs: 4px;
+    --animal-spacing-sm: 8px;
+    --animal-spacing-md: 12px;
+    --animal-spacing-lg: 16px;
+    --animal-spacing-xl: 24px;
+
+    /* ---------- Border ---------- */
+    --animal-border-radius-sm: 16px;
+    --animal-border-radius-base: 18px;
+    --animal-border-radius-lg: 24px;
+    --animal-border-width: 2px;
+
+    /* ---------- Shadow ---------- */
+    --animal-shadow-sm: 0 2px 4px 0 rgba(61, 52, 40, 0.06);
+    --animal-shadow-base: 0 3px 10px 0 rgba(61, 52, 40, 0.1);
+    --animal-shadow-lg: 0 8px 24px 0 rgba(61, 52, 40, 0.14);
+
+    /* ---------- Motion ---------- */
+    --animal-motion-duration-fast: 0.15s;
+    --animal-motion-duration-base: 0.25s;
+    --animal-motion-duration-slow: 0.35s;
+    --animal-motion-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* ---------- Size ---------- */
+    --animal-height-sm: 32px;
+    --animal-height-base: 40px;
+    --animal-height-lg: 48px;
+}

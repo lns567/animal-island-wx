@@ -1,0 +1,24 @@
+<button
+    class="ai-btn ai-btn--{{type}} ai-btn--{{size}}{{danger ? ' ai-btn--danger' : ''}}{{ghost ? ' ai-btn--ghost' : ''}}{{block ? ' ai-btn--block' : ''}}{{loading ? ' ai-btn--loading' : ''}}{{disabled ? ' ai-btn--disabled' : ''}} extClass"
+    style="{{extStyle}}"
+    hover-class="{{hoverClass}}"
+    hover-start-time="10"
+    hover-stay-time="80"
+    form-type="{{disabled || loading ? '' : formType}}"
+    open-type="{{openType}}"
+    lang="{{lang}}"
+    bindtap="handleTap"
+    aria-role="button"
+    aria-label="{{ariaLabel}}"
+    aria-disabled="{{disabled || loading}}"
+>
+    <view wx:if="{{loading}}" class="ai-btn__icon ai-btn__icon--spin">
+        <ai-icon name="donut-light" size="28" />
+    </view>
+    <view wx:elif="{{icon}}" class="ai-btn__icon">
+        <ai-icon name="{{icon}}" size="{{iconSize}}" />
+    </view>
+    <slot name="icon"></slot>
+    <text wx:if="{{content}}" class="ai-btn__text">{{content}}</text>
+    <slot></slot>
+</button>

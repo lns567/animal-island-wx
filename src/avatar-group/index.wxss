@@ -1,0 +1,37 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-avatar-group —— 对应 Web 版 Avatar.Group
+ * ============================================ */
+
+:host {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ai-avatar-group {
+    display: inline-flex;
+    align-items: center;
+}
+
+.ai-avatar-group__item {
+    display: inline-block;
+    line-height: 0;
+}
+
+/* 折叠 "+N" 头像：与普通头像同款占位样式 */
+.ai-avatar-group__more {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 2px solid var(--animal-bg-color, #f8f8f0);
+    background-color: var(--animal-primary-color-bg, #e6f9f6);
+    color: var(--animal-primary-color, #19c8b9);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+}

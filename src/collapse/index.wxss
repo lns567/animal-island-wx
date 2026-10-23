@@ -1,0 +1,102 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-collapse —— 对应 Web 版 Collapse
+ * FAQ 卡片：圆形 +/- 图标 + 叶子装饰 + 高度过渡
+ * ============================================ */
+
+:host {
+    display: block;
+}
+
+.ai-collapse {
+    position: relative;
+    margin-bottom: 12px;
+    background: var(--animal-bg-color, #f8f8f0);
+    border: 2px solid var(--animal-border-color-light, #e8e0d0);
+    border-radius: var(--animal-border-radius-base, 18px);
+    overflow: hidden;
+    transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-collapse--disabled {
+    opacity: 0.6;
+}
+
+/* ---------- Header ---------- */
+.ai-collapse__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px 24px;
+}
+
+.ai-collapse__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: var(--animal-primary-color, #19c8b9);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 0 2px 4px rgba(25, 200, 185, 0.3);
+    transition:
+        background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-collapse--expanded .ai-collapse__icon {
+    background: var(--animal-primary-color-active, #50b9ab);
+    transform: rotate(180deg);
+}
+
+.ai-collapse__text {
+    flex: 1;
+    font-size: var(--animal-font-size-lg, 16px);
+    font-weight: 600;
+    color: var(--animal-text-color, #2a2a2a);
+    line-height: 1.4;
+}
+
+.ai-collapse__leaf {
+    display: flex;
+    align-items: center;
+    transition:
+        opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-collapse--expanded .ai-collapse__leaf {
+    transform: rotate(45deg);
+}
+
+/* ---------- Panel ---------- */
+.ai-collapse__panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-collapse__content {
+    overflow: hidden;
+    padding: 0 24px;
+    transition: padding 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-collapse--expanded .ai-collapse__content {
+    padding-bottom: 24px;
+}
+
+.ai-collapse__answer {
+    display: block;
+    color: var(--animal-text-color-secondary, #7a6a52);
+    font-size: var(--animal-font-size-base, 14px);
+    line-height: 1.7;
+}

@@ -1,0 +1,8 @@
+/* 设计令牌（也可以只把这一段复制进你自己的 app.wxss） */
+@import './miniprogram_npm/animal-island-wx/common/style/tokens.wxss';
+
+page {
+    background-color: #f8f8f0;
+    color: #794f27;
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}

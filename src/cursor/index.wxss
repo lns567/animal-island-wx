@@ -1,0 +1,55 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-cursor —— Web 版 Cursor 的小程序降级版
+ * 小程序不支持 CSS cursor，这里改成「跟随手指的装饰指针」
+ * ============================================ */
+
+:host {
+    display: block;
+}
+
+.ai-cursor {
+    position: relative;
+}
+
+/* 用与宿主等宽等高的覆盖层接收触摸，避免改变原有布局 */
+.ai-cursor__pointer {
+    position: fixed;
+    z-index: 9999;
+    width: 28px;
+    height: 28px;
+    margin: -4px 0 0 -6px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    pointer-events: none;
+    transform-origin: 6px 4px;
+    animation: animal-cursor-pop 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 内联 SVG 箭头（28×28，热点 6 4），与 Web 版一致 */
+.ai-cursor__pointer--default {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCIgdmlld0JveD0iMCAwIDI4IDI4Ij48cGF0aCBkPSJNNiA0IEw2IDIxIEwxMC41IDE2LjUgTDEzLjUgMjMgTDE2LjggMjEuNSBMMTMuOCAxNS4yIEwyMC41IDE1LjIgWiIgZmlsbD0iI2ZmZjdlNiIgc3Ryb2tlPSIjNzk0ZjI3IiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==');
+}
+
+/* 内联 SVG 雨滴（32×32，热点 16 6） */
+.ai-cursor__pointer--raindrop {
+    width: 32px;
+    height: 32px;
+    margin: -6px 0 0 -16px;
+    transform-origin: 16px 6px;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBkPSJNMTYgNnMtOSAxMi05IDE2YTkgOSAwIDAgMCAxOCAwYzAtNC05LTE2LTktMTZ6IiBmaWxsPSIjNzRjY2ZmIiBzdHJva2U9IiMyZTg2YWIiIHN0cm9rZS13aWR0aD0iMS41Ii8+PGVsbGlwc2UgY3g9IjEyLjUiIGN5PSIxOSIgcng9IjIiIHJ5PSIzLjIiIGZpbGw9IiNkZmY0ZmYiIHRyYW5zZm9ybT0icm90YXRlKC0xOCAxMi41IDE5KSIvPjwvc3ZnPg==');
+}
+
+@keyframes animal-cursor-pop {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

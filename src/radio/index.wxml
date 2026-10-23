@@ -1,0 +1,22 @@
+<view
+    class="ai-radio ai-radio--{{direction}} extClass"
+    style="{{extStyle}}"
+    aria-role="radiogroup"
+>
+    <view
+        wx:for="{{items}}"
+        wx:key="index"
+        class="ai-radio__item ai-radio__item--{{size}}{{item.checked ? ' ai-radio__item--checked' : ''}}{{item.isDisabled ? ' ai-radio__item--disabled' : ''}}"
+        data-index="{{index}}"
+        bindtap="handleTap"
+        aria-role="radio"
+        aria-checked="{{item.checked}}"
+        aria-disabled="{{item.isDisabled}}"
+    >
+        <view class="ai-radio__box">
+            <view class="ai-radio__splash"></view>
+            <view wx:if="{{item.checked}}" class="ai-radio__tick"></view>
+        </view>
+        <text class="ai-radio__label">{{item.label}}</text>
+    </view>
+</view>

@@ -1,0 +1,145 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-background —— 对应 Web 版 Background
+ * 16 种波点 / 网格 / 针糖壁纸，纯 CSS 渐变 + 内联 SVG，无外部图片
+ * 场景图（sweet-corner / coffee-break）依赖包内图片，改由 image 属性传入
+ * ============================================ */
+
+:host {
+    display: block;
+}
+
+.ai-background {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100%;
+}
+
+.ai-background--image {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #fdf3e3;
+}
+
+.ai-background--grid {
+    background-color: rgb(247, 243, 223);
+    background-image:
+    linear-gradient(#c4b89e 1px, transparent 1px), linear-gradient(90deg, #c4b89e 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+.ai-background--default {
+    background:
+    radial-gradient(circle, rgba(196, 184, 158, 0.15) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(196, 184, 158, 0.1) 1px, transparent 1px) 7px 7px / 14px 14px,
+    rgb(247, 243, 223);
+}
+
+.ai-background--dots-dark-green {
+    background:
+    radial-gradient(circle, rgba(90, 160, 90, 0.22) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(140, 200, 140, 0.15) 1px, transparent 1px) 7px 7px / 14px 14px,
+    #bfe3bf;
+}
+
+.ai-background--dots-pink {
+    background:
+    radial-gradient(circle, rgba(248, 166, 178, 0.18) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(255, 200, 210, 0.12) 1px, transparent 1px) 7px 7px / 14px 14px,
+    #fde4e8;
+}
+
+.ai-background--dots-purple {
+    background:
+    radial-gradient(circle, rgba(183, 125, 238, 0.18) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(220, 180, 255, 0.12) 1px, transparent 1px) 7px 7px / 14px 14px,
+    #f0e8ff;
+}
+
+.ai-background--dots-blue {
+    background:
+    radial-gradient(circle, rgba(136, 157, 240, 0.18) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(180, 195, 255, 0.12) 1px, transparent 1px) 7px 7px / 14px 14px,
+    #e8edff;
+}
+
+.ai-background--dots-yellow {
+    background:
+    radial-gradient(circle, rgba(247, 205, 103, 0.18) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(255, 230, 160, 0.12) 1px, transparent 1px) 7px 7px / 14px 14px,
+    #fff8e0;
+}
+
+.ai-background--dots-orange {
+    background:
+    radial-gradient(circle, rgba(229, 146, 102, 0.18) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(255, 190, 150, 0.12) 1px, transparent 1px) 7px 7px / 14px 14px,
+    #fff0e8;
+}
+
+.ai-background--dots-teal {
+    background:
+    radial-gradient(circle, rgba(130, 213, 187, 0.18) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(170, 235, 210, 0.12) 1px, transparent 1px) 7px 7px / 14px 14px,
+    #e8faf5;
+}
+
+.ai-background--dots-green {
+    background:
+    radial-gradient(circle, rgba(138, 198, 138, 0.18) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(180, 220, 180, 0.12) 1px, transparent 1px) 7px 7px / 14px 14px,
+    #e8f5e8;
+}
+
+.ai-background--dots-red {
+    background:
+    radial-gradient(circle, rgba(252, 115, 109, 0.18) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(255, 160, 155, 0.12) 1px, transparent 1px) 7px 7px / 14px 14px,
+    #ffe8e8;
+}
+
+.ai-background--dots-lime-green {
+    background:
+    radial-gradient(circle, rgba(209, 218, 73, 0.18) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(230, 240, 130, 0.12) 1px, transparent 1px) 7px 7px / 14px 14px,
+    #f5f8e0;
+}
+
+.ai-background--dots-yellow-green {
+    background:
+    radial-gradient(circle, rgba(236, 223, 82, 0.18) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(255, 245, 140, 0.12) 1px, transparent 1px) 7px 7px / 14px 14px,
+    #fffde8;
+}
+
+.ai-background--dots-brown {
+    background:
+    radial-gradient(circle, rgba(154, 131, 90, 0.18) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(190, 165, 120, 0.12) 1px, transparent 1px) 7px 7px / 14px 14px,
+    #f5f0e0;
+}
+
+.ai-background--dots-warm-peach-pink {
+    background:
+    radial-gradient(circle, rgba(225, 140, 111, 0.18) 1.5px, transparent 1.5px) 0 0 / 28px 28px,
+    radial-gradient(circle, rgba(255, 185, 160, 0.12) 1px, transparent 1px) 7px 7px / 14px 14px,
+    #fff0e8;
+}
+
+.ai-background--sprinkles {
+    /* 圆柱形糖针：每根糖针是两个共用 transform 的圆角矩形 —— 底色 + 竖向高光
+    渐变叠加（id=s），模拟圆柱受光；三层互质 tile（190×170 / 230×195 / 255×215，
+    各 6 根糖针、固定伪随机位置与角度），最小公倍重复周期约 220000×280000px，
+    远超任何屏幕，视觉上等同随机散落；SVG 编码进 CSS，无外部图片文件 */
+    background:
+    url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxOTAnIGhlaWdodD0nMTcwJz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J3MnIHgxPScwJyB5MT0nMCcgeDI9JzAnIHkyPScxJz48c3RvcCBvZmZzZXQ9JzAnIHN0b3AtY29sb3I9JyNmZmYnIHN0b3Atb3BhY2l0eT0nLjU1Jy8+PHN0b3Agb2Zmc2V0PScuNDUnIHN0b3AtY29sb3I9JyNmZmYnIHN0b3Atb3BhY2l0eT0nMCcvPjxzdG9wIG9mZnNldD0nMScgc3RvcC1jb2xvcj0nIzAwMCcgc3RvcC1vcGFjaXR5PScuMjUnLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgxOCAyNikgcm90YXRlKDI0KSc+PHJlY3Qgd2lkdGg9JzE3JyBoZWlnaHQ9JzQuNicgcng9JzIuMycgZmlsbD0nI2Y4YTZiMicvPjxyZWN0IHdpZHRoPScxNycgaGVpZ2h0PSc0LjYnIHJ4PScyLjMnIGZpbGw9J3VybCgjcyknLz48L2c+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMTIwIDMyKSByb3RhdGUoLTM4KSc+PHJlY3Qgd2lkdGg9JzE1JyBoZWlnaHQ9JzQuNCcgcng9JzIuMicgZmlsbD0nI2Y1ZDA0YScvPjxyZWN0IHdpZHRoPScxNScgaGVpZ2h0PSc0LjQnIHJ4PScyLjInIGZpbGw9J3VybCgjcyknLz48L2c+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoNzIgNzYpIHJvdGF0ZSg3NiknPjxyZWN0IHdpZHRoPScxNCcgaGVpZ2h0PSc0LjInIHJ4PScyLjEnIGZpbGw9JyM4ZWNhZTYnLz48cmVjdCB3aWR0aD0nMTQnIGhlaWdodD0nNC4yJyByeD0nMi4xJyBmaWxsPSd1cmwoI3MpJy8+PC9nPjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDE0OCAxMDgpIHJvdGF0ZSgxMiknPjxyZWN0IHdpZHRoPScxOCcgaGVpZ2h0PSc0LjgnIHJ4PScyLjQnIGZpbGw9JyM5NWQ1YjInLz48cmVjdCB3aWR0aD0nMTgnIGhlaWdodD0nNC44JyByeD0nMi40JyBmaWxsPSd1cmwoI3MpJy8+PC9nPjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDMwIDEyOCkgcm90YXRlKC01NSknPjxyZWN0IHdpZHRoPScxNScgaGVpZ2h0PSc0LjQnIHJ4PScyLjInIGZpbGw9JyNmNGEyNjEnLz48cmVjdCB3aWR0aD0nMTUnIGhlaWdodD0nNC40JyByeD0nMi4yJyBmaWxsPSd1cmwoI3MpJy8+PC9nPjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDEwNCAxNDgpIHJvdGF0ZSgxMDApJz48cmVjdCB3aWR0aD0nMTMnIGhlaWdodD0nNC4yJyByeD0nMi4xJyBmaWxsPScjYzlhN2Y1Jy8+PHJlY3Qgd2lkdGg9JzEzJyBoZWlnaHQ9JzQuMicgcng9JzIuMScgZmlsbD0ndXJsKCNzKScvPjwvZz48L3N2Zz4=")
+    0 0 / 190px 170px,
+    url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyMzAnIGhlaWdodD0nMTk1Jz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J3MnIHgxPScwJyB5MT0nMCcgeDI9JzAnIHkyPScxJz48c3RvcCBvZmZzZXQ9JzAnIHN0b3AtY29sb3I9JyNmZmYnIHN0b3Atb3BhY2l0eT0nLjU1Jy8+PHN0b3Agb2Zmc2V0PScuNDUnIHN0b3AtY29sb3I9JyNmZmYnIHN0b3Atb3BhY2l0eT0nMCcvPjxzdG9wIG9mZnNldD0nMScgc3RvcC1jb2xvcj0nIzAwMCcgc3RvcC1vcGFjaXR5PScuMjUnLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgyNiAzMCkgcm90YXRlKC0xNSknPjxyZWN0IHdpZHRoPScxNicgaGVpZ2h0PSc0LjYnIHJ4PScyLjMnIGZpbGw9JyM5NWQ1YjInLz48cmVjdCB3aWR0aD0nMTYnIGhlaWdodD0nNC42JyByeD0nMi4zJyBmaWxsPSd1cmwoI3MpJy8+PC9nPjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDE0MiAyMikgcm90YXRlKDUyKSc+PHJlY3Qgd2lkdGg9JzE0JyBoZWlnaHQ9JzQuMicgcng9JzIuMScgZmlsbD0nI2Y4YTZiMicvPjxyZWN0IHdpZHRoPScxNCcgaGVpZ2h0PSc0LjInIHJ4PScyLjEnIGZpbGw9J3VybCgjcyknLz48L2c+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMTk4IDY4KSByb3RhdGUoLTcwKSc+PHJlY3Qgd2lkdGg9JzE1JyBoZWlnaHQ9JzQuNCcgcng9JzIuMicgZmlsbD0nI2Y1ZDA0YScvPjxyZWN0IHdpZHRoPScxNScgaGVpZ2h0PSc0LjQnIHJ4PScyLjInIGZpbGw9J3VybCgjcyknLz48L2c+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoNjAgOTgpIHJvdGF0ZSgzMyknPjxyZWN0IHdpZHRoPScxNycgaGVpZ2h0PSc0LjYnIHJ4PScyLjMnIGZpbGw9JyNjOWE3ZjUnLz48cmVjdCB3aWR0aD0nMTcnIGhlaWdodD0nNC42JyByeD0nMi4zJyBmaWxsPSd1cmwoI3MpJy8+PC9nPjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDE2OCAxMjgpIHJvdGF0ZSgtOCknPjxyZWN0IHdpZHRoPScxNicgaGVpZ2h0PSc0LjYnIHJ4PScyLjMnIGZpbGw9JyM4ZWNhZTYnLz48cmVjdCB3aWR0aD0nMTYnIGhlaWdodD0nNC42JyByeD0nMi4zJyBmaWxsPSd1cmwoI3MpJy8+PC9nPjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDk2IDE2Mikgcm90YXRlKDExOCknPjxyZWN0IHdpZHRoPScxNCcgaGVpZ2h0PSc0LjInIHJ4PScyLjEnIGZpbGw9JyNmNGEyNjEnLz48cmVjdCB3aWR0aD0nMTQnIGhlaWdodD0nNC4yJyByeD0nMi4xJyBmaWxsPSd1cmwoI3MpJy8+PC9nPjwvc3ZnPg==")
+    45px 30px / 230px 195px,
+    url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNTUnIGhlaWdodD0nMjE1Jz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J3MnIHgxPScwJyB5MT0nMCcgeDI9JzAnIHkyPScxJz48c3RvcCBvZmZzZXQ9JzAnIHN0b3AtY29sb3I9JyNmZmYnIHN0b3Atb3BhY2l0eT0nLjU1Jy8+PHN0b3Agb2Zmc2V0PScuNDUnIHN0b3AtY29sb3I9JyNmZmYnIHN0b3Atb3BhY2l0eT0nMCcvPjxzdG9wIG9mZnNldD0nMScgc3RvcC1jb2xvcj0nIzAwMCcgc3RvcC1vcGFjaXR5PScuMjUnLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgzMCAyNikgcm90YXRlKDY1KSc+PHJlY3Qgd2lkdGg9JzE2JyBoZWlnaHQ9JzQuNicgcng9JzIuMycgZmlsbD0nI2Y0YTI2MScvPjxyZWN0IHdpZHRoPScxNicgaGVpZ2h0PSc0LjYnIHJ4PScyLjMnIGZpbGw9J3VybCgjcyknLz48L2c+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMTUyIDM4KSByb3RhdGUoLTMwKSc+PHJlY3Qgd2lkdGg9JzE1JyBoZWlnaHQ9JzQuNCcgcng9JzIuMicgZmlsbD0nI2M5YTdmNScvPjxyZWN0IHdpZHRoPScxNScgaGVpZ2h0PSc0LjQnIHJ4PScyLjInIGZpbGw9J3VybCgjcyknLz48L2c+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjIyIDg4KSByb3RhdGUoMTUpJz48cmVjdCB3aWR0aD0nMTcnIGhlaWdodD0nNC44JyByeD0nMi40JyBmaWxsPScjZjhhNmIyJy8+PHJlY3Qgd2lkdGg9JzE3JyBoZWlnaHQ9JzQuOCcgcng9JzIuNCcgZmlsbD0ndXJsKCNzKScvPjwvZz48ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSg4MiAxMTgpIHJvdGF0ZSgtOTUpJz48cmVjdCB3aWR0aD0nMTQnIGhlaWdodD0nNC4yJyByeD0nMi4xJyBmaWxsPScjZjVkMDRhJy8+PHJlY3Qgd2lkdGg9JzE0JyBoZWlnaHQ9JzQuMicgcng9JzIuMScgZmlsbD0ndXJsKCNzKScvPjwvZz48ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSgxODYgMTU4KSByb3RhdGUoNDgpJz48cmVjdCB3aWR0aD0nMTUnIGhlaWdodD0nNC40JyByeD0nMi4yJyBmaWxsPScjOTVkNWIyJy8+PHJlY3Qgd2lkdGg9JzE1JyBoZWlnaHQ9JzQuNCcgcng9JzIuMicgZmlsbD0ndXJsKCNzKScvPjwvZz48ZyB0cmFuc2Zvcm09J3RyYW5zbGF0ZSg0MiAxODQpIHJvdGF0ZSgxMCknPjxyZWN0IHdpZHRoPScxNicgaGVpZ2h0PSc0LjYnIHJ4PScyLjMnIGZpbGw9JyM4ZWNhZTYnLz48cmVjdCB3aWR0aD0nMTYnIGhlaWdodD0nNC42JyByeD0nMi4zJyBmaWxsPSd1cmwoI3MpJy8+PC9nPjwvc3ZnPg==")
+    90px 60px / 255px 215px,
+    #fdf3e3;
+}

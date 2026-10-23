@@ -1,0 +1,30 @@
+<view class="ai-form-item ai-form-item--{{ctxLayout}}{{error ? ' ai-form-item--error' : ''}} extClass" style="{{extStyle}}">
+    <view wx:if="{{label}}" class="ai-form-item__label" style="{{ctxLayout === 'horizontal' ? 'width:' + ctxLabelWidth : ''}}">
+        <text wx:if="{{required}}" class="ai-form-item__star">*</text>
+        <text class="ai-form-item__label-text">{{label}}</text>
+        <text wx:if="{{ctxColon}}" class="ai-form-item__colon">:</text>
+    </view>
+
+    <view class="ai-form-item__control">
+        <ai-input
+            wx:if="{{control === 'input'}}"
+            value="{{innerValue}}"
+            placeholder="{{placeholder}}"
+            disabled="{{ctxDisabled}}"
+            status="{{error ? 'error' : ''}}"
+            size="{{ctxSize}}"
+            bind:input="handleInput"
+            bind:blur="handleBlur"
+        />
+        <ai-switch
+            wx:elif="{{control === 'switch'}}"
+            checked="{{innerValue}}"
+            disabled="{{ctxDisabled}}"
+            bind:change="handleSwitchChange"
+        />
+        <slot wx:else />
+
+        <view wx:if="{{error}}" class="ai-form-item__explain ai-form-item__explain--error">{{error}}</view>
+        <view wx:elif="{{help}}" class="ai-form-item__explain">{{help}}</view>
+    </view>
+</view>

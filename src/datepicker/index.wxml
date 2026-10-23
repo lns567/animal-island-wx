@@ -1,0 +1,71 @@
+<view class="ai-datepicker extClass{{disabled ? ' ai-datepicker--disabled' : ''}}" style="{{extStyle}}">
+    <view
+        class="ai-datepicker__trigger ai-datepicker__trigger--{{size}}{{status ? ' ai-datepicker__trigger--' + status : ''}}{{open ? ' ai-datepicker__trigger--open' : ''}}"
+        bindtap="toggle"
+        hover-class="{{disabled ? 'none' : 'ai-datepicker__trigger--hover'}}"
+        aria-role="combobox"
+        aria-label="{{ariaLabel || placeholder}}"
+        aria-expanded="{{open}}"
+    >
+        <text class="ai-datepicker__text{{display ? ' ai-datepicker__text--value' : ''}}">{{display || placeholder}}</text>
+        <view wx:if="{{allowClear && display && !disabled}}" class="ai-datepicker__clear" catchtap="handleClear">×</view>
+        <view class="ai-datepicker__calendar"></view>
+    </view>
+
+    <view wx:if="{{open}}" class="ai-datepicker__catcher" bindtap="close" catchtouchmove="noop"></view>
+
+    <view
+        wx:if="{{open && placed}}"
+        class="ai-datepicker__panel{{dropUp ? ' ai-datepicker__panel--up' : ''}}"
+        style="left:{{offsetX}}px;"
+        catchtap="noop"
+        aria-role="dialog"
+        aria-label="选择日期"
+    >
+        <view class="ai-datepicker__header">
+            <view class="ai-datepicker__nav-group">
+                <view class="ai-datepicker__nav" bindtap="prevYear" hover-class="ai-datepicker__nav--hover">«</view>
+                <view wx:if="{{mode === 'date'}}" class="ai-datepicker__nav" bindtap="prevMonth" hover-class="ai-datepicker__nav--hover">‹</view>
+            </view>
+            <view class="ai-datepicker__label" bindtap="switchMode" hover-class="ai-datepicker__label--hover">
+                <text class="ai-datepicker__label-text">{{headerLabel}}</text>
+            </view>
+            <view class="ai-datepicker__nav-group">
+                <view wx:if="{{mode === 'date'}}" class="ai-datepicker__nav" bindtap="nextMonth" hover-class="ai-datepicker__nav--hover">›</view>
+                <view class="ai-datepicker__nav" bindtap="nextYear" hover-class="ai-datepicker__nav--hover">»</view>
+            </view>
+        </view>
+
+        <block wx:if="{{mode === 'date'}}">
+            <view class="ai-datepicker__week-row">
+                <view wx:for="{{weekdays}}" wx:key="*this" class="ai-datepicker__week-cell">{{item}}</view>
+            </view>
+            <view class="ai-datepicker__grid">
+                <view
+                    wx:for="{{cells}}"
+                    wx:key="key"
+                    class="ai-datepicker__day{{item.inMonth ? '' : ' ai-datepicker__day--outside'}}{{item.selected ? ' ai-datepicker__day--selected' : ''}}{{item.today ? ' ai-datepicker__day--today' : ''}}{{item.disabled ? ' ai-datepicker__day--disabled' : ''}}"
+                    data-stamp="{{item.stamp}}"
+                    data-disabled="{{item.disabled}}"
+                    bindtap="handleDayTap"
+                >{{item.day}}</view>
+            </view>
+        </block>
+
+        <view wx:else class="ai-datepicker__month-grid">
+            <view
+                wx:for="{{monthCells}}"
+                wx:key="key"
+                class="ai-datepicker__month{{item.selected ? ' ai-datepicker__month--selected' : ''}}"
+                data-value="{{item.value}}"
+                bindtap="handleMonthTap"
+            >{{item.label}}</view>
+        </view>
+
+        <view class="ai-datepicker__footer">
+            <view wx:if="{{showToday}}" class="ai-datepicker__btn" bindtap="handleToday" hover-class="ai-datepicker__btn--hover">今天</view>
+            <view wx:else class="ai-datepicker__spacer"></view>
+            <view class="ai-datepicker__btn" bindtap="close" hover-class="ai-datepicker__btn--hover">关闭</view>
+        </view>
+    </view>
+</view>

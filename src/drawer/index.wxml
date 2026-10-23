@@ -1,0 +1,27 @@
+<view
+    class="ai-drawer{{open ? ' ai-drawer--open' : ''}} extClass"
+    style="{{extStyle}}"
+    catchtap="handleMaskTap"
+    catchtouchmove="noop"
+    aria-hidden="{{!open}}"
+>
+    <view
+        class="ai-drawer__panel ai-drawer__panel--{{placement}}"
+        style="{{panelStyle}}"
+        catchtap="noop"
+        aria-role="dialog"
+        aria-modal="true"
+        aria-label="{{ariaLabel}}"
+    >
+        <view class="ai-drawer__header">
+            <text class="ai-drawer__title">{{title}}</text>
+            <view class="ai-drawer__close" bindtap="handleClose" aria-role="button" aria-label="关闭">×</view>
+        </view>
+        <view class="ai-drawer__body">
+            <slot />
+        </view>
+        <view wx:if="{{footer === 'slot'}}" class="ai-drawer__footer">
+            <slot name="footer" />
+        </view>
+    </view>
+</view>

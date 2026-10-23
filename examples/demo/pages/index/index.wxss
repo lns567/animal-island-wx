@@ -1,0 +1,203 @@
+page {
+    background-color: #f0e8d8;
+}
+
+.page {
+    padding: 24rpx 32rpx 64rpx;
+    box-sizing: border-box;
+    min-height: 100vh;
+    background-color: #f0e8d8;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16rpx;
+    padding: 16rpx 0 8rpx;
+}
+
+.hero__sub {
+    font-size: 26rpx;
+    color: #9f927d;
+    line-height: 1.5;
+}
+
+.hero__title {
+    margin-bottom: 14px;
+}
+
+.hero__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12rpx;
+}
+
+/* ---------- Section ---------- */
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 20rpx;
+    margin: 8rpx 0;
+}
+
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20rpx;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16rpx;
+}
+
+.row--titles {
+    gap: 20rpx;
+    align-items: flex-start;
+}
+
+.row--baseline {
+    align-items: flex-end;
+}
+
+/* 飘带 / 双层纸的下缘会伸出布局盒，留出下边距避免压到下一行 */
+.title-item {
+    margin-bottom: 10px;
+}
+
+/* ---------- Card grid ---------- */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16rpx;
+}
+
+.grid__item {
+    flex: 0 0 calc(50% - 8rpx);
+    min-width: 0;
+}
+
+.grid__label {
+    display: block;
+    font-size: 24rpx;
+    line-height: 1.5;
+}
+
+/* ---------- Misc ---------- */
+.note {
+    font-size: 26rpx;
+    color: #9f927d;
+}
+
+.icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24rpx;
+}
+
+.icons__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8rpx;
+    width: 110rpx;
+}
+
+.icons__label {
+    font-size: 20rpx;
+    color: #9f927d;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16rpx;
+    margin-top: 32rpx;
+}
+
+.footer__text {
+    font-size: 22rpx;
+    color: #c4b89e;
+}
+
+
+.tab-panel {
+    color: #7a6a52;
+    font-size: 28rpx;
+    line-height: 1.7;
+}
+.modal-text {
+    font-size: 34rpx;
+    line-height: 1.7;
+    color: #8a7b66;
+}
+
+.drawer-text {
+    font-size: 34rpx;
+    line-height: 1.8;
+    color: #8a7b66;
+}
+.section-gap {
+    margin-top: 16px;
+}
+.bg-demo {
+    display: flex;
+    gap: 12px;
+}
+
+.bg-demo__inner {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 110px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.bg-demo__text {
+    color: #794f27;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.hint {
+    display: block;
+    margin-top: 8px;
+    color: #9f927d;
+    font-size: 12px;
+}
+
+/* ---------- 第 12~15 批新增 ---------- */
+.tw-box {
+    padding: 14px 16px;
+    background: #fffdf7;
+    border: 1.5px solid #e8dcc8;
+    border-radius: 16px;
+    color: #725d42;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.cursor-demo__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 96px;
+    border: 2px dashed #c4b89e;
+    border-radius: 16px;
+    background: #fffdf7;
+}
+
+.cursor-demo__text {
+    color: #9f927d;
+    font-size: 12px;
+}

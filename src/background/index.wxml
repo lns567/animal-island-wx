@@ -1,0 +1,6 @@
+<view
+    class="ai-background ai-background--{{image ? 'image' : type}} extClass"
+    style="{{rootStyle}}{{extStyle}}"
+>
+    <slot></slot>
+</view>

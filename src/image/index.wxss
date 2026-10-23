@@ -1,0 +1,170 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-image —— 对应 Web 版 Image
+ * 三种相框：default 卡片大阴影 / bordered 白衬板 / stamp 邮票齿孔
+ * ============================================ */
+
+:host {
+    display: inline-block;
+    max-width: 100%;
+}
+
+.ai-image {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    overflow: hidden;
+    flex-shrink: 0;
+    vertical-align: middle;
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-image__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.ai-image--loaded .ai-image__img {
+    opacity: 1;
+}
+
+/* ---------- variant: default ---------- */
+.ai-image--default {
+    padding: 0;
+    background: transparent;
+    border-radius: 12px;
+    box-shadow:
+        0 13px 27px -5px rgba(50, 50, 93, 0.25),
+        0 8px 16px -8px rgba(0, 0, 0, 0.3),
+        0 -6px 16px -6px rgba(0, 0, 0, 0.03);
+}
+
+/* ---------- variant: stamp ---------- */
+.ai-image--stamp {
+    padding: 14px;
+    background: #fbfaf5;
+    border-radius: 0;
+    box-shadow: none;
+    /* 四条贴边条带各挖半圆缺口求交 = 四边齿孔；老 WebView 不支持时会退化成实心边框 */
+    -webkit-mask-image: radial-gradient(circle 5px at 50% 0, transparent 96%, #000),
+        radial-gradient(circle 5px at 50% 100%, transparent 96%, #000),
+        radial-gradient(circle 5px at 0 50%, transparent 96%, #000),
+        radial-gradient(circle 5px at 100% 50%, transparent 96%, #000);
+    -webkit-mask-position: 50% 0, 50% 100%, 0 50%, 100% 50%;
+    -webkit-mask-size: 16px 100%, 16px 100%, 100% 16px, 100% 16px;
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-composite: source-in, source-in, source-in, source-in;
+    mask-image: radial-gradient(circle 5px at 50% 0, transparent 96%, #000),
+        radial-gradient(circle 5px at 50% 100%, transparent 96%, #000),
+        radial-gradient(circle 5px at 0 50%, transparent 96%, #000),
+        radial-gradient(circle 5px at 100% 50%, transparent 96%, #000);
+    mask-position: 50% 0, 50% 100%, 0 50%, 100% 50%;
+    mask-size: 16px 100%, 16px 100%, 100% 16px, 100% 16px;
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-composite: intersect, intersect, intersect, intersect;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35)) drop-shadow(0 16px 26px rgba(0, 0, 0, 0.45));
+}
+
+.ai-image--stamp .ai-image__img {
+    filter: saturate(0.93) contrast(1.03);
+}
+
+.ai-image__stamp-year {
+    position: absolute;
+    right: 19px;
+    top: 18px;
+    z-index: 2;
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.88);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- 错误占位 ---------- */
+.ai-image--error {
+    flex-direction: column;
+    gap: 8px;
+    color: #c4b89e;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.ai-image__err-text {
+    line-height: 1.5;
+}
+
+/* ---------- 底色（Card pattern 同款，bordered 才生效） ---------- */
+.ai-image--default-color {
+    background: rgb(247, 243, 223);
+    color: #725d42;
+}
+
+.ai-image--app-pink {
+    background: #fde4e8;
+    color: #a85565;
+}
+
+.ai-image--purple {
+    background: #f0e8ff;
+    color: #6a3a9a;
+}
+
+.ai-image--app-blue {
+    background: #e8edff;
+    color: #4a5a8a;
+}
+
+.ai-image--app-yellow {
+    background: #fff8e0;
+    color: #7a6528;
+}
+
+.ai-image--app-orange {
+    background: #fff0e8;
+    color: #8a4a2a;
+}
+
+.ai-image--app-teal {
+    background: #e8faf5;
+    color: #2a6b5a;
+}
+
+.ai-image--app-green {
+    background: #e8f5e8;
+    color: #3a6b3a;
+}
+
+.ai-image--app-red {
+    background: #ffe8e8;
+    color: #9a3a3a;
+}
+
+.ai-image--lime-green {
+    background: #f5f8e0;
+    color: #5a6b28;
+}
+
+.ai-image--yellow-green {
+    background: #fffde8;
+    color: #6a5a28;
+}
+
+.ai-image--brown {
+    background: #f5f0e0;
+    color: #5a4a2a;
+}
+
+.ai-image--warm-peach-pink {
+    background: #fff0e8;
+    color: #8a4a2a;
+}

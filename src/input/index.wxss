@@ -1,0 +1,137 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-input —— 对应 Web 版 Input
+ * ============================================ */
+
+:host {
+    display: block;
+    width: 100%;
+}
+
+.ai-input {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #fffdf7;
+    border-radius: 50px;
+    transition: all var(--animal-motion-duration-base, 0.25s) var(--animal-motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+    overflow: hidden;
+}
+
+/* ---------- Shadow（默认关闭，与 Web 版 shadow=false 对齐） ---------- */
+.ai-input--shadow {
+    box-shadow: 0 3px 0 0 #d4c9b4;
+}
+
+/* ---------- Size ---------- */
+.ai-input--small {
+    height: var(--animal-height-sm, 32px);
+    padding: 0 14px;
+    font-size: var(--animal-font-size-sm, 12px);
+    border-radius: 40px;
+}
+
+.ai-input--small.ai-input--shadow {
+    box-shadow: 0 2px 0 0 #d4c9b4;
+}
+
+.ai-input--middle {
+    height: var(--animal-height-base, 40px);
+    padding: 0 18px;
+    font-size: var(--animal-font-size-base, 14px);
+}
+
+.ai-input--large {
+    height: var(--animal-height-lg, 48px);
+    padding: 0 22px;
+    font-size: var(--animal-font-size-lg, 16px);
+    border-radius: 50px;
+}
+
+.ai-input--large.ai-input--shadow {
+    box-shadow: 0 4px 0 0 #d4c9b4;
+}
+
+/* ---------- Status ----------
+ * Web 版里尺寸类的 box-shadow 特异性更高，会盖掉错误色阴影；
+ * 这里提到同特异性并放在尺寸之后，保证 error / warning 一定可见。
+ */
+.ai-input.ai-input--error {
+    box-shadow: 0 3px 0 0 var(--animal-error-color-active, #c94444);
+}
+
+.ai-input.ai-input--warning {
+    box-shadow: 0 3px 0 0 var(--animal-warning-color-active, #dba90e);
+}
+
+/* ---------- Disabled ---------- */
+.ai-input--disabled {
+    background-color: #ece8dc;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.ai-input--disabled .ai-input__inner {
+    color: #c4b89e;
+}
+
+/* ---------- Inner ---------- */
+.ai-input__inner {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    color: #794f3f;
+    font-size: inherit;
+    font-family: var(
+        --animal-font-family,
+        -apple-system,
+        BlinkMacSystemFont,
+        'PingFang SC',
+        'Microsoft YaHei',
+        sans-serif
+    );
+    font-weight: 500;
+    line-height: var(--animal-line-height-base, 1.5715);
+    letter-spacing: 0.01em;
+}
+
+.ai-input__placeholder {
+    color: #c4b89e;
+    font-weight: 400;
+}
+
+.ai-input__affix {
+    display: flex;
+    align-items: center;
+    color: #a0936e;
+    flex-shrink: 0;
+    margin-right: 6px;
+}
+
+.ai-input__affix--suffix {
+    margin-right: 0;
+    margin-left: 6px;
+}
+
+.ai-input__clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-left: 4px;
+    color: #c4b89e;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: all var(--animal-motion-duration-fast, 0.15s);
+    flex-shrink: 0;
+}
+
+.ai-input__clear--hover {
+    color: #725d42;
+    background-color: rgba(114, 93, 66, 0.1);
+}

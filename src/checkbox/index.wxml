@@ -1,0 +1,22 @@
+<view
+    class="ai-checkbox ai-checkbox--{{direction}} extClass"
+    style="{{extStyle}}"
+    aria-role="group"
+>
+    <view
+        wx:for="{{items}}"
+        wx:key="index"
+        class="ai-checkbox__item ai-checkbox__item--{{size}}{{item.checked ? ' ai-checkbox__item--checked' : ''}}{{item.isDisabled ? ' ai-checkbox__item--disabled' : ''}}"
+        data-index="{{index}}"
+        bindtap="handleTap"
+        aria-role="checkbox"
+        aria-checked="{{item.checked}}"
+        aria-disabled="{{item.isDisabled}}"
+    >
+        <view class="ai-checkbox__box">
+            <view class="ai-checkbox__splash"></view>
+            <view wx:if="{{item.checked}}" class="ai-checkbox__tick"></view>
+        </view>
+        <text class="ai-checkbox__label">{{item.label}}</text>
+    </view>
+</view>

@@ -1,0 +1,87 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-time —— 对应 Web 版 Time
+ * 无边框软影面板 + 主色日期胶囊
+ * ============================================ */
+
+:host {
+    display: inline-block;
+}
+
+.ai-time {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+    padding: 20px 32px 15px;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(61, 52, 40, 0.06);
+    animation: animal-time-fade-in 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-time__clock {
+    display: flex;
+    align-items: baseline;
+    color: #794f27;
+    font-weight: 900;
+    font-size: 44px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 1px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+/* 冒号按秒闪烁；该字体下冒号视觉中心略低于数字，上移对齐 */
+.ai-time__colon {
+    display: inline-block;
+    margin: 0 2px;
+    transform: translateY(-0.11em);
+    animation: animal-time-blink 1s step-end infinite;
+}
+
+.ai-time__date {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 14px;
+    border-radius: 999px;
+    background: #e6f9f6;
+    font-size: 12px;
+    font-weight: 700;
+    color: #9f927d;
+    white-space: nowrap;
+}
+
+.ai-time__weekday {
+    color: #19c8b9;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ai-time__dot {
+    color: #c4b89e;
+}
+
+.ai-time__month-day {
+    font-variant-numeric: tabular-nums;
+}
+
+@keyframes animal-time-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes animal-time-blink {
+    50% {
+        opacity: 0;
+    }
+}

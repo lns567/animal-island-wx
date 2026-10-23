@@ -1,0 +1,72 @@
+<view
+    class="ai-pagination ai-pagination--{{variant}}{{disabled ? ' ai-pagination--disabled' : ''}} extClass"
+    style="{{extStyle}}"
+    aria-role="navigation"
+    aria-label="分页"
+>
+    <text wx:if="{{showTotal}}" class="ai-pagination__total">共 {{total}} 条</text>
+
+    <view
+        class="ai-pagination__item{{prevDisabled ? ' ai-pagination__item--disabled' : ''}}"
+        bindtap="handlePrev"
+        aria-role="button"
+        aria-label="上一页"
+        aria-disabled="{{prevDisabled}}"
+    >
+        <view class="ai-pagination__chev ai-pagination__chev--left"></view>
+    </view>
+
+    <block wx:for="{{items}}" wx:key="key">
+        <text
+            wx:if="{{item.kind === 'ellipsis'}}"
+            class="ai-pagination__ellipsis"
+            bindtap="handleEllipsisTap"
+            aria-role="button"
+            aria-label="更多页码"
+        >•••</text>
+        <view
+            wx:else
+            class="ai-pagination__item{{item.value === innerCurrent ? ' ai-pagination__item--active' : ''}}{{disabled ? ' ai-pagination__item--disabled' : ''}}"
+            data-page="{{item.value}}"
+            bindtap="handlePageTap"
+            aria-role="button"
+            aria-label="第 {{item.value}} 页"
+            aria-current="{{item.value === innerCurrent}}"
+            hover-class="{{item.value === innerCurrent || disabled ? 'none' : 'ai-pagination__item--hover'}}"
+        >{{item.value}}</view>
+    </block>
+
+    <view
+        class="ai-pagination__item{{nextDisabled ? ' ai-pagination__item--disabled' : ''}}"
+        bindtap="handleNext"
+        aria-role="button"
+        aria-label="下一页"
+        aria-disabled="{{nextDisabled}}"
+    >
+        <view class="ai-pagination__chev ai-pagination__chev--right"></view>
+    </view>
+
+    <view wx:if="{{showSizeChanger}}" class="ai-pagination__size">
+        <view
+            class="ai-pagination__size-trigger{{sizeOpen ? ' ai-pagination__size-trigger--open' : ''}}{{disabled ? ' ai-pagination__size-trigger--disabled' : ''}}"
+            bindtap="toggleSize"
+            aria-role="button"
+            aria-label="每页 {{innerPageSize}} 条"
+        >
+            <text>{{innerPageSize}} 条/页</text>
+            <view class="ai-pagination__caret"></view>
+        </view>
+
+        <view wx:if="{{sizeOpen}}" class="ai-pagination__size-catcher" bindtap="closeSize" catchtouchmove="noop"></view>
+
+        <view wx:if="{{sizeOpen}}" class="ai-pagination__size-list" catchtap="noop">
+            <view
+                wx:for="{{pageSizeOptions}}"
+                wx:key="*this"
+                class="ai-pagination__size-option{{item === innerPageSize ? ' ai-pagination__size-option--active' : ''}}"
+                data-size="{{item}}"
+                bindtap="handleSizeTap"
+            >{{item}} 条/页</view>
+        </view>
+    </view>
+</view>

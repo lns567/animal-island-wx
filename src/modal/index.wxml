@@ -1,0 +1,28 @@
+<view
+    class="ai-modal{{open ? ' ai-modal--open' : ''}}{{variant === 'game' ? ' ai-modal--game' : ''}} extClass"
+    style="{{extStyle}}"
+    catchtap="handleMaskTap"
+    catchtouchmove="noop"
+    aria-role="dialog"
+    aria-modal="true"
+    aria-label="{{ariaLabel}}"
+    aria-hidden="{{!open}}"
+>
+    <view class="ai-modal__dialog" style="{{dialogStyle}}" catchtap="noop">
+        <view class="ai-modal__inner">
+            <view wx:if="{{title}}" class="ai-modal__header">
+                <text class="ai-modal__title">{{title}}</text>
+            </view>
+            <view class="ai-modal__body">
+                <slot />
+            </view>
+            <view wx:if="{{footer === 'default'}}" class="ai-modal__footer">
+                <ai-button size="middle" type="primary" content="{{cancelText}}" bind:click="handleCancel" />
+                <ai-button size="middle" type="primary" content="{{okText}}" bind:click="handleOk" />
+            </view>
+            <view wx:elif="{{footer === 'slot'}}" class="ai-modal__footer">
+                <slot name="footer" />
+            </view>
+        </view>
+    </view>
+</view>

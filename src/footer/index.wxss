@@ -1,0 +1,9 @@
+@import '../common/style/base.wxss';
+
+/* ai-footer —— 版权栏 */
+.ai-footer {
+    color: #807d75;
+    font-size: 12px;
+    padding: 16px 0;
+    text-align: center;
+}

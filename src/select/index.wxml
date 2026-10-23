@@ -1,0 +1,37 @@
+<view class="ai-select extClass{{disabled ? ' ai-select--disabled' : ''}}" style="{{extStyle}}">
+    <view
+        class="ai-select__trigger{{open ? ' ai-select__trigger--open' : ''}}"
+        bindtap="toggle"
+        hover-class="{{disabled ? 'none' : 'ai-select__trigger--hover'}}"
+        aria-role="combobox"
+        aria-label="{{ariaLabel || placeholder}}"
+        aria-expanded="{{open}}"
+    >
+        <text class="ai-select__text{{currentLabel ? ' ai-select__text--value' : ''}}">{{currentLabel || placeholder}}</text>
+        <view class="ai-select__arrow"></view>
+    </view>
+
+    <view wx:if="{{open}}" class="ai-select__catcher" bindtap="close" catchtouchmove="noop"></view>
+
+    <view
+        wx:if="{{open && placed}}"
+        class="ai-select__panel ai-select__panel--{{dropSide}} ai-select__panel--{{dropAlign}}"
+        catchtap="noop"
+        aria-role="listbox"
+    >
+        <view
+            wx:for="{{options}}"
+            wx:key="key"
+            class="ai-select__option{{item.key === innerValue ? ' ai-select__option--active' : ''}}"
+            data-key="{{item.key}}"
+            bindtap="handleSelect"
+            hover-class="ai-select__option--hover"
+            aria-role="option"
+            aria-selected="{{item.key === innerValue}}"
+        >
+            <text class="ai-select__dot"></text>
+            <text class="ai-select__label">{{item.label}}</text>
+            <view wx:if="{{item.key === innerValue}}" class="ai-select__pill"></view>
+        </view>
+    </view>
+</view>

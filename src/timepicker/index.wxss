@@ -1,0 +1,265 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-timepicker —— 对应 Web 版 TimePicker
+ * 奶油胶囊触发器 + 时/分/秒三列滚动面板
+ * ============================================ */
+
+:host {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ai-timepicker {
+    position: relative;
+    display: inline-block;
+    font-family: var(--animal-font-family, sans-serif);
+}
+
+/* ---------- 触发器 ---------- */
+.ai-timepicker__trigger {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #fffbe7;
+    border-radius: 50px;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-timepicker__trigger--small {
+    height: 32px;
+    padding: 0 14px;
+    font-size: 12px;
+}
+
+.ai-timepicker__trigger--middle {
+    height: 40px;
+    padding: 0 18px;
+    font-size: 14px;
+}
+
+.ai-timepicker__trigger--large {
+    height: 48px;
+    padding: 0 22px;
+    font-size: 16px;
+}
+
+.ai-timepicker__trigger--hover {
+    box-shadow: 0 3px 0 0 #c4b89e;
+}
+
+.ai-timepicker__trigger--open {
+    box-shadow: 0 3px 0 0 #e0b800, 0 0 0 3px rgba(255, 204, 0, 0.15);
+}
+
+.ai-timepicker__trigger--error {
+    box-shadow: 0 3px 0 0 #c94444;
+}
+
+.ai-timepicker__trigger--warning {
+    box-shadow: 0 3px 0 0 #dba90e;
+}
+
+.ai-timepicker__text {
+    flex: 1;
+    color: #c4b89e;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+.ai-timepicker__text--value {
+    color: #8a7b66;
+    font-weight: 500;
+}
+
+/* 时钟图标：纯 CSS 圆环 + 指针 */
+.ai-timepicker__clock {
+    position: relative;
+    flex: none;
+    width: 14px;
+    height: 14px;
+    margin-left: 8px;
+    border: 1.4px solid #a0936e;
+    border-radius: 50%;
+}
+
+.ai-timepicker__clock::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 2px;
+    width: 1.4px;
+    height: 5px;
+    margin-left: -0.7px;
+    background: #a0936e;
+    border-radius: 1px;
+}
+
+.ai-timepicker__clock::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 4px;
+    height: 1.4px;
+    margin-top: -0.7px;
+    background: #a0936e;
+    border-radius: 1px;
+    transform-origin: 0 50%;
+    transform: rotate(30deg);
+}
+
+.ai-timepicker__clear {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    margin-left: 4px;
+    border-radius: 50%;
+    color: #c4b89e;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+}
+
+.ai-timepicker--disabled .ai-timepicker__trigger {
+    opacity: 0.6;
+    background: #ece8dc;
+}
+
+.ai-timepicker--disabled .ai-timepicker__text {
+    color: #c4b89e;
+}
+
+/* ---------- 关闭用遮罩 ---------- */
+.ai-timepicker__catcher {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    background: transparent;
+}
+
+/* ---------- 面板 ---------- */
+.ai-timepicker__panel {
+    position: absolute;
+    z-index: 101;
+    box-sizing: border-box;
+    width: 248px;
+    padding: 14px;
+    background: #fffdf7;
+    border: 1.5px solid #e8dcc8;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(61, 52, 40, 0.12);
+    top: 100%;
+    left: 0;
+    margin-top: 6px;
+    animation: animal-timepicker-in 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-timepicker__panel--up {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+
+.ai-timepicker__panel--right {
+    left: auto;
+    right: 0;
+}
+
+.ai-timepicker__columns {
+    display: flex;
+}
+
+.ai-timepicker__column {
+    flex: 1;
+    min-width: 0;
+    margin-right: 8px;
+}
+
+.ai-timepicker__column:last-child {
+    margin-right: 0;
+}
+
+.ai-timepicker__col-title {
+    display: block;
+    margin-bottom: 6px;
+    color: #a09080;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.ai-timepicker__list {
+    max-height: 232px;
+    height: 232px;
+}
+
+.ai-timepicker__option {
+    height: 32px;
+    margin-bottom: 4px;
+    border-radius: 16px;
+    color: #725d42;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 32px;
+    text-align: center;
+}
+
+.ai-timepicker__option--active {
+    background: #ffb400;
+    color: #fff;
+    font-weight: 700;
+}
+
+/* ---------- 底部 ---------- */
+.ai-timepicker__footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #f0e8d8;
+}
+
+.ai-timepicker__btn {
+    padding: 6px 14px;
+    margin-left: 6px;
+    border-radius: 10px;
+    color: #8a7b66;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.ai-timepicker__btn--hover {
+    background: rgba(114, 93, 66, 0.1);
+    color: #725d42;
+}
+
+.ai-timepicker__btn--primary {
+    background: rgba(114, 93, 66, 0.1);
+    border-radius: 12px;
+    padding: 6px 16px;
+}
+
+.ai-timepicker__btn--primary.ai-timepicker__btn--hover {
+    background: #8a7b66;
+    color: #fff;
+}
+
+@keyframes animal-timepicker-in {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

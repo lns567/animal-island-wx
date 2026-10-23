@@ -1,0 +1,23 @@
+<view
+    class="ai-countdown ai-countdown--{{size}} ai-countdown--{{variant}}{{bordered ? ' ai-countdown--bordered' : ''}} extClass"
+    style="{{extStyle}}"
+    aria-role="timer"
+    aria-label="{{prefix ? prefix + ' ' : ''}}{{readable}}"
+>
+    <text wx:if="{{prefix}}" class="ai-countdown__prefix">{{prefix}}</text>
+    <view class="ai-countdown__group">
+        <block wx:for="{{items}}" wx:key="index">
+            <view wx:if="{{item.kind === 'cell'}}" class="ai-countdown__unit">
+                <view class="ai-countdown__cell">
+                    <view
+                        class="ai-countdown__strip{{item.anim ? '' : ' ai-countdown__strip--instant'}}"
+                        style="transform: translateY(-{{item.pos * 5}}%)"
+                    >
+                        <text wx:for="{{faces}}" wx:for-item="face" wx:key="index" class="ai-countdown__face">{{face}}</text>
+                    </view>
+                </view>
+            </view>
+            <text wx:else class="ai-countdown__sep{{item.colon ? ' ai-countdown__sep--colon' : ''}}">{{item.text}}</text>
+        </block>
+    </view>
+</view>

@@ -1,0 +1,153 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-countdown —— 对应 Web 版 Countdown
+ * 20 面数字条纵向滚动，里程表式永远向下滚
+ * ============================================ */
+
+:host {
+    display: inline-block;
+}
+
+.ai-countdown {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-sizing: border-box;
+    max-width: 100%;
+    color: #794f27;
+    font-weight: 700;
+    border-radius: 20px;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-countdown--default {
+    padding: 12px 18px;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(61, 52, 40, 0.06);
+}
+
+.ai-countdown--island {
+    padding: 13px 20px;
+    background: rgb(247, 243, 223);
+    border: 2px dashed #d4c4a8;
+}
+
+.ai-countdown__prefix {
+    color: #725d42;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.ai-countdown__group {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ai-countdown__unit {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    box-sizing: border-box;
+    padding: 3px 8px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f8f0 100%);
+}
+
+.ai-countdown--island .ai-countdown__unit {
+    background: linear-gradient(180deg, #fffdf4 0%, #f8f8f0 100%);
+}
+
+.ai-countdown--bordered .ai-countdown__unit {
+    border: 1.5px solid #d4c9b4;
+}
+
+.ai-countdown--bordered.ai-countdown--island .ai-countdown__unit {
+    border-color: #d4c4a8;
+}
+
+/* ---------- 滚动数字位 ---------- */
+.ai-countdown__cell {
+    display: inline-block;
+    overflow: hidden;
+    height: 1.2em;
+}
+
+.ai-countdown__strip {
+    display: flex;
+    flex-direction: column;
+    /* 20 面 × 1.2em：显式锁死总高，5% 才严格等于一位数字的高度，
+       否则 text 的零星基线误差会累积到最后一位上（回绕后那一位会露半格） */
+    height: 24em;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+/* 回绕瞬移那一帧用：关掉过渡 */
+.ai-countdown__strip--instant {
+    transition: none;
+}
+
+.ai-countdown__face {
+    display: block;
+    flex-shrink: 0;
+    height: 1.2em;
+    color: #8b7355;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.ai-countdown__sep {
+    color: #8b7355;
+    font-weight: 700;
+    white-space: pre;
+}
+
+.ai-countdown__sep--colon {
+    position: relative;
+    top: -0.08em;
+    font-weight: 900;
+}
+
+/* ---------- Sizes ---------- */
+.ai-countdown--small {
+    min-height: 40px;
+    font-size: 13px;
+}
+
+.ai-countdown--small .ai-countdown__cell {
+    font-size: 20px;
+}
+
+.ai-countdown--small .ai-countdown__sep--colon {
+    font-size: 20px;
+}
+
+.ai-countdown--middle {
+    min-height: 48px;
+    font-size: 14px;
+}
+
+.ai-countdown--middle .ai-countdown__cell {
+    font-size: 26px;
+}
+
+.ai-countdown--middle .ai-countdown__sep--colon {
+    font-size: 26px;
+}
+
+.ai-countdown--large {
+    min-height: 56px;
+    font-size: 16px;
+}
+
+.ai-countdown--large .ai-countdown__cell {
+    font-size: 34px;
+}
+
+.ai-countdown--large .ai-countdown__sep--colon {
+    font-size: 34px;
+}

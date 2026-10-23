@@ -1,0 +1,18 @@
+<view
+    wx:if="{{shown}}"
+    class="ai-loading{{exiting ? ' ai-loading--exiting' : ''}} extClass"
+    style="{{rootStyle}}{{exiting ? 'transition-duration:' + fadeDuration + 's;' : ''}}{{extStyle}}"
+    aria-role="status"
+    aria-label="{{tip || '加载中'}}"
+>
+    <view class="ai-loading__snow" aria-hidden="true">
+        <view
+            wx:for="{{flakes}}"
+            wx:key="index"
+            class="ai-loading__flake"
+            style="{{item.style}}"
+        ></view>
+    </view>
+    <view class="ai-loading__vignette" aria-hidden="true"></view>
+    <view wx:if="{{tip}}" class="ai-loading__tip">{{tip}}</view>
+</view>

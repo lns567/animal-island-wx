@@ -1,0 +1,92 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-progress —— 对应 Web 版 Progress
+ * 描边岛屿：奶油轨道 + 2px 描边 + 薄荷竖向渐变填充
+ * ============================================ */
+
+:host {
+    display: block;
+    width: 100%;
+    vertical-align: middle;
+    line-height: 1;
+}
+
+.ai-progress {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-family: inherit;
+    font-size: var(--animal-font-size-base, 14px);
+    line-height: 1;
+}
+
+.ai-progress__row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.ai-progress__info {
+    min-width: 44px;
+    text-align: right;
+    font-weight: 700;
+    color: #725d42;
+    white-space: nowrap;
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+}
+
+/* ---------- Track ---------- */
+.ai-progress__track {
+    position: relative;
+    box-sizing: border-box;
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 80px;
+    background:
+        radial-gradient(circle, rgba(196, 184, 158, 0.1) 1.5px, transparent 1.5px) 7px 7px / 14px 14px,
+        #f8f8f0;
+    border: 2px solid #e2d6bd;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.ai-progress__track--small {
+    height: 14px;
+}
+
+.ai-progress__track--middle {
+    height: 24px;
+}
+
+.ai-progress__track--large {
+    height: 32px;
+}
+
+/* ---------- Fill ---------- */
+.ai-progress__fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #3dd4c6 0%, #19c8b9 60%, #14b6a8 100%);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.45);
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+/* 100% 完成态：整体提亮，读作「已抵达」 */
+.ai-progress__fill--done {
+    background: linear-gradient(180deg, #7fe0d5 0%, #3dd4c6 100%);
+}
+
+.ai-progress__fill--instant {
+    transition: none;
+}

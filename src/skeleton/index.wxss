@@ -1,0 +1,88 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-skeleton —— 对应 Web 版 Skeleton
+ * 浅灰基调 + 银白流光
+ * ============================================ */
+
+:host {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+}
+
+.ai-skeleton {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    background: #eae5db;
+    border-radius: 12px;
+    line-height: 1;
+    overflow: hidden;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+/* ---------- 银白流光 ---------- */
+.ai-skeleton--active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 250, 235, 0.18), rgba(255, 252, 242, 0.55), rgba(255, 250, 235, 0.18), transparent);
+    animation: animal-skeleton-shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes animal-skeleton-shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* ---------- Variants ---------- */
+.ai-skeleton--text {
+    border-radius: 12px;
+    height: 16px;
+}
+
+.ai-skeleton--circle {
+    border-radius: 50%;
+}
+
+.ai-skeleton--rect {
+    border-radius: 18px;
+}
+
+.ai-skeleton--paragraph {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 0;
+    background: none;
+    width: 100%;
+}
+
+.ai-skeleton__line {
+    position: relative;
+    height: 14px;
+    border-radius: 12px;
+    background: #dfd9ce;
+    overflow: hidden;
+}
+
+.ai-skeleton__line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 250, 235, 0.18), rgba(255, 252, 242, 0.55), rgba(255, 250, 235, 0.18), transparent);
+    animation: animal-skeleton-shimmer 1.6s ease-in-out infinite;
+}

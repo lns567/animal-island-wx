@@ -1,0 +1,11 @@
+<view
+    class="ai-backtop{{visible ? ' ai-backtop--visible' : ''}} extClass"
+    style="{{extStyle}}"
+    bindtap="handleTap"
+    hover-class="ai-backtop--hover"
+    hover-stay-time="100"
+    aria-role="button"
+    aria-label="返回顶部"
+>
+    <view class="ai-backtop__img"></view>
+</view>

@@ -1,0 +1,19 @@
+@import '../common/style/base.wxss';
+@import '../common/icons.wxss';
+
+:host {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 0;
+    flex: 0 0 auto;
+}
+
+.ai-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    flex: 0 0 auto;
+}

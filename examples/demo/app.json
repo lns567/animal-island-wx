@@ -1,0 +1,14 @@
+{
+    "pages": ["pages/index/index"],
+    "window": {
+        "navigationBarTitleText": "Animal Island UI",
+        "navigationBarBackgroundColor": "#f0e8d8",
+        "navigationBarTextStyle": "black",
+        "backgroundColor": "#f0e8d8",
+        "backgroundTextStyle": "dark"
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json"
+}
+
+

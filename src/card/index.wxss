@@ -1,0 +1,233 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-card —— 对应 Web 版 Card
+ * ============================================ */
+
+:host {
+    display: block;
+}
+
+.ai-card {
+    border-radius: 20px;
+    background-color: rgb(247, 243, 223);
+    padding: 16px 24px;
+    color: #725d42;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+/* ---------- Type: dashed ---------- */
+.ai-card--dashed {
+    background-color: rgb(250, 248, 242);
+    border: 2px dashed #e8dcc8;
+    box-shadow: none;
+}
+
+/* ---------- Hoverable（按下态） ---------- */
+.ai-card--hoverable {
+    transition: transform 0.15s ease;
+}
+
+.ai-card--hover {
+    transform: translateY(-2px);
+}
+
+/* dashed 只换边框色，不做位移 */
+.ai-card--dashed.ai-card--hover {
+    transform: none;
+    border-color: #d4c4a8;
+}
+
+/* ============================================
+ * Color variants
+ * ============================================ */
+.ai-card--app-pink {
+    background-color: #f8a6b2;
+    color: #fff;
+}
+
+.ai-card--purple {
+    background-color: #b77dee;
+    color: #fff;
+}
+
+.ai-card--app-blue {
+    background-color: #889df0;
+    color: #fff;
+}
+
+.ai-card--app-yellow {
+    background-color: #f7cd67;
+    color: #725d42;
+}
+
+.ai-card--app-orange {
+    background-color: #e59266;
+    color: #fff;
+}
+
+.ai-card--app-teal {
+    background-color: #82d5bb;
+    color: #fff;
+}
+
+.ai-card--app-green {
+    background-color: #8ac68a;
+    color: #fff;
+}
+
+.ai-card--app-red {
+    background-color: #fc736d;
+    color: #fff;
+}
+
+.ai-card--lime-green {
+    background-color: #d1da49;
+    color: #3d5a1a;
+}
+
+.ai-card--yellow-green {
+    background-color: #ecdf52;
+    color: #725d42;
+}
+
+.ai-card--brown {
+    background-color: #9a835a;
+    color: #fff;
+}
+
+.ai-card--warm-peach-pink {
+    background-color: #e18c6f;
+    color: #fff;
+}
+
+/* ============================================
+ * Pattern variants
+ * 每个色板只声明 5 个 CSS 变量，公共规则负责画点阵
+ * ============================================ */
+.ai-card--pattern-default,
+.ai-card--pattern-app-pink,
+.ai-card--pattern-purple,
+.ai-card--pattern-app-blue,
+.ai-card--pattern-app-yellow,
+.ai-card--pattern-app-orange,
+.ai-card--pattern-app-teal,
+.ai-card--pattern-app-green,
+.ai-card--pattern-app-red,
+.ai-card--pattern-lime-green,
+.ai-card--pattern-yellow-green,
+.ai-card--pattern-brown,
+.ai-card--pattern-warm-peach-pink {
+    background-image: radial-gradient(circle, var(--ai-pattern-dot) 1.5px, transparent 1.5px),
+        radial-gradient(circle, var(--ai-pattern-dot-fine) 1px, transparent 1px);
+    background-size: 28px 28px, 14px 14px;
+    background-position: 0 0, 7px 7px;
+    background-color: var(--ai-pattern-bg);
+    border: 1.5px solid var(--ai-pattern-border);
+    color: var(--ai-pattern-text);
+}
+
+.ai-card--pattern-default {
+    --ai-pattern-dot: rgba(196, 184, 158, 0.15);
+    --ai-pattern-dot-fine: rgba(196, 184, 158, 0.1);
+    --ai-pattern-bg: rgb(247, 243, 223);
+    --ai-pattern-border: #d4c4a8;
+    --ai-pattern-text: #725d42;
+}
+
+.ai-card--pattern-app-pink {
+    --ai-pattern-dot: rgba(248, 166, 178, 0.18);
+    --ai-pattern-dot-fine: rgba(255, 200, 210, 0.12);
+    --ai-pattern-bg: #fde4e8;
+    --ai-pattern-border: #f8a6b2;
+    --ai-pattern-text: #a85565;
+}
+
+.ai-card--pattern-purple {
+    --ai-pattern-dot: rgba(183, 125, 238, 0.18);
+    --ai-pattern-dot-fine: rgba(220, 180, 255, 0.12);
+    --ai-pattern-bg: #f0e8ff;
+    --ai-pattern-border: #b77dee;
+    --ai-pattern-text: #6a3a9a;
+}
+
+.ai-card--pattern-app-blue {
+    --ai-pattern-dot: rgba(136, 157, 240, 0.18);
+    --ai-pattern-dot-fine: rgba(180, 195, 255, 0.12);
+    --ai-pattern-bg: #e8edff;
+    --ai-pattern-border: #889df0;
+    --ai-pattern-text: #4a5a8a;
+}
+
+.ai-card--pattern-app-yellow {
+    --ai-pattern-dot: rgba(247, 205, 103, 0.18);
+    --ai-pattern-dot-fine: rgba(255, 230, 160, 0.12);
+    --ai-pattern-bg: #fff8e0;
+    --ai-pattern-border: #f7cd67;
+    --ai-pattern-text: #7a6528;
+}
+
+.ai-card--pattern-app-orange {
+    --ai-pattern-dot: rgba(229, 146, 102, 0.18);
+    --ai-pattern-dot-fine: rgba(255, 190, 150, 0.12);
+    --ai-pattern-bg: #fff0e8;
+    --ai-pattern-border: #e59266;
+    --ai-pattern-text: #8a4a2a;
+}
+
+.ai-card--pattern-app-teal {
+    --ai-pattern-dot: rgba(130, 213, 187, 0.18);
+    --ai-pattern-dot-fine: rgba(170, 235, 210, 0.12);
+    --ai-pattern-bg: #e8faf5;
+    --ai-pattern-border: #82d5bb;
+    --ai-pattern-text: #2a6b5a;
+}
+
+.ai-card--pattern-app-green {
+    --ai-pattern-dot: rgba(138, 198, 138, 0.18);
+    --ai-pattern-dot-fine: rgba(180, 220, 180, 0.12);
+    --ai-pattern-bg: #e8f5e8;
+    --ai-pattern-border: #8ac68a;
+    --ai-pattern-text: #3a6b3a;
+}
+
+.ai-card--pattern-app-red {
+    --ai-pattern-dot: rgba(252, 115, 109, 0.18);
+    --ai-pattern-dot-fine: rgba(255, 160, 155, 0.12);
+    --ai-pattern-bg: #ffe8e8;
+    --ai-pattern-border: #fc736d;
+    --ai-pattern-text: #9a3a3a;
+}
+
+.ai-card--pattern-lime-green {
+    --ai-pattern-dot: rgba(209, 218, 73, 0.18);
+    --ai-pattern-dot-fine: rgba(230, 240, 130, 0.12);
+    --ai-pattern-bg: #f5f8e0;
+    --ai-pattern-border: #d1da49;
+    --ai-pattern-text: #5a6b28;
+}
+
+.ai-card--pattern-yellow-green {
+    --ai-pattern-dot: rgba(236, 223, 82, 0.18);
+    --ai-pattern-dot-fine: rgba(255, 245, 140, 0.12);
+    --ai-pattern-bg: #fffde8;
+    --ai-pattern-border: #ecdf52;
+    --ai-pattern-text: #6a5a28;
+}
+
+.ai-card--pattern-brown {
+    --ai-pattern-dot: rgba(154, 131, 90, 0.18);
+    --ai-pattern-dot-fine: rgba(190, 165, 120, 0.12);
+    --ai-pattern-bg: #f5f0e0;
+    --ai-pattern-border: #9a835a;
+    --ai-pattern-text: #5a4a2a;
+}
+
+.ai-card--pattern-warm-peach-pink {
+    --ai-pattern-dot: rgba(225, 140, 111, 0.18);
+    --ai-pattern-dot-fine: rgba(255, 185, 160, 0.12);
+    --ai-pattern-bg: #fff0e8;
+    --ai-pattern-border: #e18c6f;
+    --ai-pattern-text: #8a4a2a;
+}

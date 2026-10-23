@@ -1,0 +1,78 @@
+<view class="ai-upload ai-upload--{{listType}} extClass{{disabled ? ' ai-upload--disabled' : ''}}" style="{{extStyle}}">
+    <block wx:if="{{listType === 'picture-card'}}">
+        <view class="ai-upload__cards">
+            <view
+                wx:for="{{fileList}}"
+                wx:key="uid"
+                class="ai-upload__card{{item.status === 'error' ? ' ai-upload__card--error' : ''}}"
+            >
+                <image
+                    wx:if="{{item.isImage}}"
+                    class="ai-upload__card-img"
+                    src="{{item.thumbUrl}}"
+                    mode="aspectFill"
+                    bindtap="handlePreview"
+                    data-uid="{{item.uid}}"
+                />
+                <view wx:else class="ai-upload__card-file" bindtap="handlePreview" data-uid="{{item.uid}}">{{item.name}}</view>
+
+                <view wx:if="{{item.status === 'uploading'}}" class="ai-upload__card-mask">
+                    <view class="ai-upload__ring">
+                        <text class="ai-upload__ring-text">{{item.percent}}%</text>
+                    </view>
+                </view>
+                <view wx:if="{{showUploadList}}" class="ai-upload__card-remove" catchtap="handleRemove" data-uid="{{item.uid}}">×</view>
+            </view>
+
+            <view
+                wx:if="{{!disabled}}"
+                class="ai-upload__add"
+                bindtap="handleChoose"
+                hover-class="ai-upload__add--hover"
+                aria-role="button"
+                aria-label="{{text}}"
+            >
+                <view class="ai-upload__plus"></view>
+                <text class="ai-upload__add-text">{{text}}</text>
+            </view>
+        </view>
+    </block>
+
+    <block wx:else>
+        <view
+            wx:if="{{!disabled}}"
+            class="ai-upload__trigger"
+            bindtap="handleChoose"
+            hover-class="ai-upload__trigger--hover"
+            aria-role="button"
+            aria-label="{{text}}"
+        >
+            <view class="ai-upload__arrow"></view>
+            <text class="ai-upload__trigger-text">{{text}}</text>
+        </view>
+
+        <view wx:if="{{showUploadList && fileList.length}}" class="ai-upload__list">
+            <view wx:for="{{fileList}}" wx:key="uid" class="ai-upload__row{{item.status === 'error' ? ' ai-upload__row--error' : ''}}">
+                <image
+                    wx:if="{{item.isImage && listType === 'picture'}}"
+                    class="ai-upload__thumb"
+                    src="{{item.thumbUrl}}"
+                    mode="aspectFill"
+                    bindtap="handlePreview"
+                    data-uid="{{item.uid}}"
+                />
+                <view class="ai-upload__meta">
+                    <text class="ai-upload__name">{{item.name}}</text>
+                    <view wx:if="{{item.status === 'uploading'}}" class="ai-upload__bar">
+                        <view class="ai-upload__bar-inner" style="width:{{item.percent}}%;"></view>
+                    </view>
+                    <text wx:elif="{{item.status === 'error'}}" class="ai-upload__err">{{item.error || '上传失败'}}</text>
+                    <text wx:else class="ai-upload__size">{{item.size}} B</text>
+                </view>
+                <view class="ai-upload__remove" catchtap="handleRemove" data-uid="{{item.uid}}">×</view>
+            </view>
+        </view>
+    </block>
+
+    <text wx:if="{{tip}}" class="ai-upload__tip">{{tip}}</text>
+</view>

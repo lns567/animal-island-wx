@@ -1,0 +1,3 @@
+<view class="ai-form ai-form--{{layout}} ai-form--{{size}}{{disabled ? ' ai-form--disabled' : ''}} extClass" style="{{extStyle}}">
+    <slot />
+</view>

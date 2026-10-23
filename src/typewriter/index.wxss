@@ -1,0 +1,31 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-typewriter —— 对应 Web 版 Typewriter
+ * 只负责逐字显示，不引入任何外层容器（对布局/字号零影响）
+ * ============================================ */
+
+.ai-typewriter {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.ai-typewriter__cursor {
+    display: inline-block;
+    margin-left: 1px;
+    color: var(--animal-text-color, #794f27);
+    font-weight: 700;
+    animation: animal-typewriter-blink 1s steps(1, end) infinite;
+}
+
+@keyframes animal-typewriter-blink {
+    0%,
+    49% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 0;
+    }
+}

@@ -1,0 +1,22 @@
+<block wx:if="{{loading}}">
+    <view
+        wx:if="{{isParagraph}}"
+        class="ai-skeleton ai-skeleton--paragraph{{active ? ' ai-skeleton--active' : ''}} extClass"
+        style="{{boxStyle}}"
+        aria-hidden="true"
+    >
+        <view
+            wx:for="{{lines}}"
+            wx:key="index"
+            class="ai-skeleton__line"
+            style="width:{{item.width}}"
+        ></view>
+    </view>
+    <view
+        wx:else
+        class="ai-skeleton ai-skeleton--{{variant}}{{active ? ' ai-skeleton--active' : ''}} extClass"
+        style="{{boxStyle}}"
+        aria-hidden="true"
+    ></view>
+</block>
+<slot wx:else />

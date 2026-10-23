@@ -1,0 +1,114 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-modal —— 对应 Web 版 Modal
+ * 奶油卡片 + 遮罩；game 变体用 mask-image 还原异形外框
+ * ============================================ */
+
+:host {
+    display: contents;
+}
+
+/* 关闭态也留在树里：靠 opacity / transform 过渡，退场动画才看得到 */
+.ai-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--animal-mask-bg, rgba(61, 52, 40, 0.45));
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.ai-modal--open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.ai-modal__dialog {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    max-width: calc(100% - 32px);
+    max-height: calc(100% - 64px);
+    transform: scale(0.92);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.ai-modal--open .ai-modal__dialog {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.ai-modal__inner {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 40px 35px 25px;
+    background: rgb(247, 243, 223);
+    color: rgb(128, 115, 89);
+    border-radius: 22px;
+    box-shadow: 0 18px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+/* ---------- game 变体：异形自然外框（blob → mask-image） ---------- */
+.ai-modal--game .ai-modal__inner {
+    padding: 48px;
+    border-radius: 0;
+    box-shadow: none;
+    -webkit-mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxwYXRoIHRyYW5zZm9ybT0ic2NhbGUoMTAwMCkiIGQ9Ik0wLjUwMSwwLjAwNSBMMC41MDEsMC4wMDUgTDAuNTIzLDAuMDA1IEwwLjU0OSwwLjAwNiBDMC43MDQsMC4wMSwwLjc5NiwwLjAxNywwLjgyNSwwLjAyNyBMMC44MjcsMC4wMjggQzAuODcyLDAuMDQ1LDAuOTM5LDAuMDQ0LDAuOTc4LDAuMTcgQzEsMC4yNTQsMSwwLjM2NSwwLjk5LDAuNTA1IEwwLjk4OCwwLjUxMyBDMC45NzksMC41NTgsMC45NzEsMC41OTgsMC45NjUsMC42MzMgQzAuOTU2LDAuNjg5LDAuOTc5LDAuNzcsMC45NjQsMC44NjUgQzAuOTUzLDAuOTI4LDAuOTIxLDAuOTY2LDAuODY5LDAuOTc5IEMwLjgyMSwwLjk4NiwwLjc3MywwLjk5MiwwLjcyNiwwLjk5NSBMMC43MTIsMC45OTYgTDAuNjk0LDAuOTk3IEMwLjY0OCwxLDAuNTg2LDEsMC41MDcsMSBMMC41MDEsMSBMMC40NjQsMSBDMC4zODUsMSwwLjMyNSwwLjk5OCwwLjI4MywwLjk5NSBDMC4yMzQsMC45OTIsMC4xODQsMC45ODcsMC4xMzMsMC45NzkgQzAuMDgxLDAuOTY2LDAuMDUsMC45MjgsMC4wMzksMC44NjUgQzAuMDIzLDAuNzcsMC4wNDcsMC42ODksMC4wMzcsMC42MzMgQzAuMDMxLDAuNTk1LDAuMDIzLDAuNTUyLDAuMDEzLDAuNTA1IEMtMC4wMDYsMC4zNjUsLTAuMDAyLDAuMjU0LDAuMDI0LDAuMTcgQzAuMDY0LDAuMDQ1LDAuMTMsMC4wNDUsMC4xNzQsMC4wMjggTDAuMTc1LDAuMDI4IEMwLjIwNCwwLjAxNywwLjMwMywwLjAwOSwwLjQ3NCwwLjAwNSBMMC41MDEsMC4wMDUiLz48L3N2Zz4=');
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxwYXRoIHRyYW5zZm9ybT0ic2NhbGUoMTAwMCkiIGQ9Ik0wLjUwMSwwLjAwNSBMMC41MDEsMC4wMDUgTDAuNTIzLDAuMDA1IEwwLjU0OSwwLjAwNiBDMC43MDQsMC4wMSwwLjc5NiwwLjAxNywwLjgyNSwwLjAyNyBMMC44MjcsMC4wMjggQzAuODcyLDAuMDQ1LDAuOTM5LDAuMDQ0LDAuOTc4LDAuMTcgQzEsMC4yNTQsMSwwLjM2NSwwLjk5LDAuNTA1IEwwLjk4OCwwLjUxMyBDMC45NzksMC41NTgsMC45NzEsMC41OTgsMC45NjUsMC42MzMgQzAuOTU2LDAuNjg5LDAuOTc5LDAuNzcsMC45NjQsMC44NjUgQzAuOTUzLDAuOTI4LDAuOTIxLDAuOTY2LDAuODY5LDAuOTc5IEMwLjgyMSwwLjk4NiwwLjc3MywwLjk5MiwwLjcyNiwwLjk5NSBMMC43MTIsMC45OTYgTDAuNjk0LDAuOTk3IEMwLjY0OCwxLDAuNTg2LDEsMC41MDcsMSBMMC41MDEsMSBMMC40NjQsMSBDMC4zODUsMSwwLjMyNSwwLjk5OCwwLjI4MywwLjk5NSBDMC4yMzQsMC45OTIsMC4xODQsMC45ODcsMC4xMzMsMC45NzkgQzAuMDgxLDAuOTY2LDAuMDUsMC45MjgsMC4wMzksMC44NjUgQzAuMDIzLDAuNzcsMC4wNDcsMC42ODksMC4wMzcsMC42MzMgQzAuMDMxLDAuNTk1LDAuMDIzLDAuNTUyLDAuMDEzLDAuNTA1IEMtMC4wMDYsMC4zNjUsLTAuMDAyLDAuMjU0LDAuMDI0LDAuMTcgQzAuMDY0LDAuMDQ1LDAuMTMsMC4wNDUsMC4xNzQsMC4wMjggTDAuMTc1LDAuMDI4IEMwLjIwNCwwLjAxNywwLjMwMywwLjAwOSwwLjQ3NCwwLjAwNSBMMC41MDEsMC4wMDUiLz48L3N2Zz4=');
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+}
+
+/* ---------- Header ---------- */
+.ai-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 15px;
+}
+
+.ai-modal__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: rgba(114, 93, 66, 1);
+}
+
+/* ---------- Body ---------- */
+.ai-modal__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    min-height: 0;
+    padding-bottom: 20px;
+    overflow-y: auto;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.6;
+    color: #8a7b66;
+}
+
+/* ---------- Footer ---------- */
+.ai-modal__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}

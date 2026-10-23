@@ -1,0 +1,70 @@
+/* ============================================
+ * animal-island-wx · 组件内基础重置
+ * 每个组件的 index.wxss 都会 @import 本文件；
+ * 小程序自定义组件样式隔离，页面级的 reset 进不来，所以必须自带。
+ * ============================================ */
+
+view,
+text,
+image,
+button,
+input,
+textarea,
+scroll-view {
+    box-sizing: border-box;
+}
+
+view {
+    display: block;
+}
+
+text {
+    display: inline;
+}
+
+/* 小程序原生 button 默认带背景/边框/圆角/字号，这里全部抹平，
+ * 具体外观由各组件自己的 class 决定（与 Web 版 reset 对应）。 */
+button {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-align: inherit;
+    overflow: visible;
+}
+
+/* 原生 button 的 1px 边框伪元素 */
+button::after {
+    border: none;
+}
+
+input,
+textarea {
+    width: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+}
+
+image {
+    display: block;
+}

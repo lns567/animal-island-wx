@@ -1,0 +1,19 @@
+<view
+    class="ai-progress extClass"
+    style="{{extStyle}}"
+    aria-role="progressbar"
+    aria-label="{{ariaLabel}}"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="{{value}}"
+>
+    <view class="ai-progress__row">
+        <view class="ai-progress__track ai-progress__track--{{size}}">
+            <view
+                class="ai-progress__fill{{done ? ' ai-progress__fill--done' : ''}}{{duration == 0 ? ' ai-progress__fill--instant' : ''}}"
+                style="width:{{value}}%;transition-duration:{{duration}}s"
+            ></view>
+        </view>
+        <view wx:if="{{showInfo}}" class="ai-progress__info">{{infoText || percentText}}</view>
+    </view>
+</view>

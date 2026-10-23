@@ -1,0 +1,213 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-notification —— 对应 Web 版 Notification
+ * 6 个停靠位置，4 种类型（色条 + 图标 + 背景染色）
+ * 注意：根节点 fixed 但不拦截触摸（pointer-events: none），只有卡片本身可点
+ * ============================================ */
+
+.ai-notification-root {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2000;
+    pointer-events: none;
+}
+
+.ai-notification-group {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    max-width: 320px;
+    pointer-events: none;
+}
+
+.ai-notification-group--top {
+    top: 24px;
+    left: 50%;
+    align-items: center;
+    transform: translateX(-50%);
+}
+
+.ai-notification-group--topLeft {
+    top: 24px;
+    left: 16px;
+    align-items: flex-start;
+}
+
+.ai-notification-group--topRight {
+    top: 24px;
+    right: 16px;
+    align-items: flex-end;
+}
+
+.ai-notification-group--bottom {
+    bottom: 24px;
+    left: 50%;
+    align-items: center;
+    flex-direction: column-reverse;
+    transform: translateX(-50%);
+}
+
+.ai-notification-group--bottomLeft {
+    bottom: 24px;
+    left: 16px;
+    align-items: flex-start;
+    flex-direction: column-reverse;
+}
+
+.ai-notification-group--bottomRight {
+    bottom: 24px;
+    right: 16px;
+    align-items: flex-end;
+    flex-direction: column-reverse;
+}
+
+/* ---------- 卡片 ---------- */
+.ai-notification {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    width: 320px;
+    max-width: 320px;
+    margin-bottom: 12px;
+    padding: 14px 16px;
+    background: rgb(247, 243, 223);
+    border: 2px solid #c4b89e;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(61, 52, 40, 0.14);
+    color: #725d42;
+    font-family: var(--animal-font-family, sans-serif);
+    pointer-events: auto;
+    animation: animal-notification-in 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-notification--closing {
+    animation: animal-notification-out 0.2s ease forwards;
+}
+
+/* ---------- 类型染色 ---------- */
+.ai-notification--success {
+    background: #f5fae9;
+    border-color: #6fba2c;
+    box-shadow: 0 6px 18px rgba(111, 186, 44, 0.18);
+}
+
+.ai-notification--success .ai-notification__icon {
+    background: #d8efc1;
+    color: #5a9e1e;
+}
+
+.ai-notification--info {
+    background: #ecf9f6;
+    border-color: #19c8b9;
+    box-shadow: 0 6px 18px rgba(25, 200, 185, 0.18);
+}
+
+.ai-notification--info .ai-notification__icon {
+    background: #c2ece6;
+    color: #11a89b;
+}
+
+.ai-notification--warning {
+    background: #fdf6d9;
+    border-color: #f5c31c;
+    box-shadow: 0 6px 18px rgba(245, 195, 28, 0.2);
+}
+
+.ai-notification--warning .ai-notification__icon {
+    background: #fbeaa1;
+    color: #b88a06;
+}
+
+.ai-notification--error {
+    background: #fde8e8;
+    border-color: #e05a5a;
+    box-shadow: 0 6px 18px rgba(224, 90, 90, 0.18);
+}
+
+.ai-notification--error .ai-notification__icon {
+    background: #f7c8c8;
+    color: #c94444;
+}
+
+/* ---------- 图标 ---------- */
+.ai-notification__icon {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    border-radius: 50%;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* ---------- 正文 ---------- */
+.ai-notification__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.ai-notification__title {
+    display: block;
+    color: #794f27;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    word-break: break-word;
+}
+
+.ai-notification__desc {
+    display: block;
+    margin-top: 4px;
+    color: #8a7b66;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.55;
+    word-break: break-word;
+}
+
+/* ---------- 关闭 ---------- */
+.ai-notification__close {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    margin-left: 8px;
+    border-radius: 50%;
+    color: rgba(114, 93, 66, 0.55);
+    font-size: 15px;
+    line-height: 22px;
+    text-align: center;
+}
+
+/* ---------- 动效 ---------- */
+@keyframes animal-notification-in {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes animal-notification-out {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}

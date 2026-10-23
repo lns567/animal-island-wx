@@ -1,0 +1,12 @@
+<view
+    class="{{cls}} extClass"
+    style="{{extStyle}}"
+    hover-class="{{hoverClass}}"
+    hover-start-time="10"
+    hover-stay-time="60"
+    bindtap="handleTap"
+    aria-role="{{ariaLabel ? 'group' : ''}}"
+    aria-label="{{ariaLabel}}"
+>
+    <slot></slot>
+</view>

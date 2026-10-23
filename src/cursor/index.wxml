@@ -1,0 +1,15 @@
+<view
+    class="ai-cursor ai-cursor--{{type}} extClass"
+    style="{{extStyle}}"
+    bindtouchstart="track"
+    bindtouchmove="track"
+    bindtouchend="release"
+    bindtouchcancel="release"
+>
+    <slot />
+    <view
+        wx:if="{{visible}}"
+        class="ai-cursor__pointer ai-cursor__pointer--{{type}}"
+        style="left:{{x}}px;top:{{y}}px;"
+    ></view>
+</view>

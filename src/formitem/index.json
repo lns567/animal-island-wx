@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "ai-input": "../input/index",
+        "ai-switch": "../switch/index"
+    }
+}

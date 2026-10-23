@@ -1,0 +1,131 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-table —— 对应 Web 版 Table
+ * 奶油底 + 虚线分隔行 + 悬停浅青
+ * ============================================ */
+
+:host {
+    display: block;
+}
+
+.ai-table-wrap {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 6px;
+    background: rgb(247, 243, 223);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* ---------- 行 ---------- */
+.ai-table__row {
+    display: flex;
+    align-items: stretch;
+    position: relative;
+    border-radius: 30px;
+    transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ai-table__row--header {
+    border-radius: 0;
+}
+
+.ai-table__row--striped {
+    background: rgba(248, 248, 240, 0.6);
+}
+
+.ai-table__row--hover {
+    background-color: #d6f0ea;
+}
+
+/* 行底虚线：用伪元素还原 Web 版的 repeating-linear-gradient */
+.ai-table__row::after {
+    content: '';
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 0;
+    height: 1px;
+    background-image: linear-gradient(
+        90deg,
+        rgb(240, 232, 216) 0,
+        rgb(240, 232, 216) 6px,
+        transparent 6px,
+        transparent 12px
+    );
+    background-size: 12px 1px;
+}
+
+.ai-table__row--hover::after {
+    opacity: 0;
+}
+
+/* ---------- 单元格 ---------- */
+.ai-table__cell {
+    flex: 1;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #725d42;
+    line-height: 1.6;
+    overflow-wrap: break-word;
+}
+
+.ai-table__cell--header {
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #725d42;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+/* ---------- 空状态 ---------- */
+.ai-table__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 60px 20px;
+    color: #9f927d;
+    font-size: 14px;
+    opacity: 0.75;
+}
+
+.ai-table__empty-text {
+    color: #9f927d;
+    font-size: 14px;
+}
+
+/* ---------- 加载遮罩 ---------- */
+.ai-table__loading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(247, 243, 223, 0.7);
+}
+
+.ai-table__spinner {
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box;
+    border: 4px solid rgba(25, 200, 185, 0.25);
+    border-top-color: #19c8b9;
+    border-radius: 50%;
+    animation: animal-table-spin 0.9s linear infinite;
+}
+
+@keyframes animal-table-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
