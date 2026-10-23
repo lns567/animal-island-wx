@@ -53,6 +53,14 @@ npm 从 2026-07 起收紧了两件事，让长令牌这条路彻底走不通：
 
 OIDC 没有令牌可泄露、没有过期时间、不绑具体人的设备，也是 npm 官方现在的推荐做法。
 
+## 踩过的坑
+
+**`setup-node` 必须用 v7 及以上。** v6 及更早会往环境里塞一个假的 `NODE_AUTH_TOKEN`（值就是字面量 `XXXXX-XXXXX-XXXXX-XXXXX`），同时把它写进 `.npmrc`。npm 认为「有 token 就不必走 OIDC」，于是拿着这个假 token 去请求，发布直接 E401/E404 —— 而日志里看不出任何异常，因为 token 被 GitHub 掩码了。v7.0.0 的 release note 里那句 _Remove dummy NODE_AUTH_TOKEN export_ 就是这个修复。
+
+workflow 里因此留了一道硬拦：只要 `NODE_AUTH_TOKEN` 非空就立刻失败，避免以后有人为了图省事又加回 `secrets.NPM_TOKEN`。
+
+另外，如果 README 的徽章、仓库描述和 `package.json` 里的版本三者不一致，发布出去会显得很不专业 —— 版本一致性检查只保证「标签 == `package.json`」，另外两处仍需人工同步。
+
 ## 出问题看这里
 
 | 报错                                   | 原因                                                                             |
