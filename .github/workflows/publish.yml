@@ -34,10 +34,10 @@ jobs:
 
     steps:
       - name: 检出代码
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: 准备 Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
@@ -53,6 +53,17 @@ jobs:
             npm install -g npm@11 --no-fund --no-audit
             echo "升级后: $(npm --version)"
           fi
+
+      # 可信发布要求「没有 token」才会走 OIDC。setup-node v6 及更早会塞一个
+      # 假的 NODE_AUTH_TOKEN（送进 .npmrc），npm 会拿它当真实凭证，发布直接 E401。
+      # v7 已移除该行为，这里再兜一道，避免以后有人手滑加回 secrets.NPM_TOKEN。
+      - name: 确认走 OIDC 而非长期 token
+        run: |
+          if [ -n "${NODE_AUTH_TOKEN:-}" ]; then
+            echo "::error::检测到 NODE_AUTH_TOKEN，它会让 npm 跳过 OIDC；请从 workflow 里移除"
+            exit 1
+          fi
+          echo "✅ 无残留 token，将使用 OIDC 换取短期发布凭证"
 
       - name: 安装依赖
         run: npm ci
