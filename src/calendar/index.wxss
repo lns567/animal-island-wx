@@ -1,0 +1,275 @@
+@import '../common/style/base.wxss';
+
+/* ============================================
+ * ai-calendar —— 对应 Web 版 Calendar
+ * 奶油卡片 + 青绿主色，尺寸全部由面板宽度推导
+ * （度量由 JS 算好后内联，这里只留与尺寸无关的样式）
+ * ============================================ */
+
+:host {
+    display: block;
+}
+
+.ai-calendar {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    font-family: var(--animal-font-family, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif);
+    /* 强调色固定为日期选择器的选中色（青绿），与 DatePicker 保持一致 */
+    --ai-cal-accent: #19c8b9;
+    --ai-cal-accent-soft: rgba(25, 200, 185, 0.14);
+    --ai-cal-accent-tint: #e6f9f6;
+}
+
+/* ---------- 头部 ---------- */
+
+.ai-calendar__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.ai-calendar__nav-group {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.ai-calendar__nav {
+    display: flex;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    color: #a0936e;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    border-radius: 10px;
+}
+
+.ai-calendar__nav--hover {
+    color: var(--ai-cal-accent);
+    background: rgba(114, 93, 66, 0.1);
+}
+
+.ai-calendar__month {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    color: #725d42;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    background: #fffbe7;
+    border-radius: 12px;
+}
+
+/* 迷你日历图标：小尺寸下用描边方块 + 加粗顶边就够了，省一个节点 */
+.ai-calendar__month-icon {
+    width: 13px;
+    height: 13px;
+    box-sizing: border-box;
+    border: 2px solid var(--ai-cal-accent);
+    border-top-width: 4px;
+    border-radius: 4px;
+}
+
+.ai-calendar__month-text {
+    white-space: nowrap;
+}
+
+.ai-calendar__today {
+    margin-right: 2px;
+    padding: 4px 12px;
+    color: #8a7b66;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 10px;
+}
+
+.ai-calendar__today--hover {
+    color: #725d42;
+    background: rgba(114, 93, 66, 0.1);
+}
+
+/* ---------- 面板 ---------- */
+
+.ai-calendar__body {
+    position: relative;
+    box-sizing: content-box;
+    /* 底部多留 2 行事项带的高度，最后一周的事项条才不会压到面板边缘 */
+    padding: 8px;
+    background: radial-gradient(circle, rgba(196, 184, 158, 0.15) 1.1px, transparent 1.1px) 0 0 / 28px 28px,
+        radial-gradient(circle, rgba(196, 184, 158, 0.1) 0.8px, transparent 0.8px) 7px 7px / 14px 14px, #fffdf7;
+    border: 1.5px solid #e8dcc8;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(61, 52, 40, 0.12);
+}
+
+.ai-calendar__week-row {
+    display: flex;
+    align-items: center;
+}
+
+.ai-calendar__week-cell {
+    flex: 1;
+    color: #a09080;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+
+.ai-calendar__grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ai-calendar__cell {
+    position: relative;
+    width: 14.2857%;
+    box-sizing: border-box;
+    padding: 5px 5px 0;
+    border-radius: 12px;
+}
+
+.ai-calendar__cell--hover {
+    background: #f4f0e4;
+}
+
+.ai-calendar__cell--selected,
+.ai-calendar__cell--selected.ai-calendar__cell--hover {
+    background: var(--ai-cal-accent-tint);
+}
+
+/* 日期数字：固定圆形，与事项叠加层解耦，悬停/选中直接换色 */
+.ai-calendar__day {
+    box-sizing: border-box;
+    color: #725d42;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.ai-calendar__cell--outside .ai-calendar__day {
+    color: #c4b89e;
+    font-weight: 400;
+}
+
+.ai-calendar__cell--today .ai-calendar__day {
+    color: var(--ai-cal-accent);
+    font-weight: 700;
+    box-shadow: inset 0 0 0 1.5px var(--ai-cal-accent);
+}
+
+.ai-calendar__cell--selected .ai-calendar__day {
+    color: #ffffff;
+    font-weight: 700;
+    background: var(--ai-cal-accent);
+    box-shadow: none;
+}
+
+/* 事项折叠提示：超过 2 条时展示 +N。
+   放在日期圆的右侧而不是下方——小屏下一格只有 ~48px 宽、两行事项就把下方占满了，
+   放下面会被事项条盖住 */
+.ai-calendar__more {
+    position: absolute;
+    top: 5px;
+    right: 4px;
+    padding: 0 4px;
+    color: var(--ai-cal-accent);
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    background: var(--ai-cal-accent-soft);
+    border-radius: 6px;
+}
+
+/* ---------- 事项叠加层 ---------- */
+
+/* 覆盖整个日期区，左右各让出 8px 内边距，列宽 = 表格 7 等分列宽。
+   top / left / width / height 都由组件算好后内联下发 */
+.ai-calendar__events {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    bottom: 0;
+    left: 8px;
+    pointer-events: none;
+}
+
+.ai-calendar__event {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0 6px;
+    overflow: hidden;
+    font-weight: 600;
+    white-space: nowrap;
+    /* 窄列放不下时收成省略号，而不是硬切掉半个字 */
+    text-overflow: ellipsis;
+    border: 1px solid var(--ai-cal-accent-soft);
+    border-radius: 10px;
+    background: var(--ai-cal-accent-soft);
+}
+
+/* 跨天条：接缝处只留 1px，视觉上连成一条 */
+.ai-calendar__event--span {
+    margin-right: 1px;
+    margin-left: 1px;
+    border-radius: 6px;
+}
+
+/* 整周条的两端贴齐网格边缘 */
+.ai-calendar__event--start {
+    margin-left: 0;
+}
+
+.ai-calendar__event--end {
+    margin-right: 0;
+}
+
+.ai-calendar__event-time {
+    margin-right: 4px;
+    color: #9f927d;
+    font-variant-numeric: tabular-nums;
+}
+
+.ai-calendar__event-title {
+    font-weight: 600;
+}
+
+/* 事项配色：一件一色 */
+.ai-calendar__event--teal {
+    color: #b04a1f;
+    background: #ffe4cc;
+    border-color: rgba(244, 150, 40, 0.5);
+}
+
+.ai-calendar__event--amber {
+    color: #8a6a08;
+    background: #fff3d1;
+    border-color: rgba(255, 193, 7, 0.5);
+}
+
+.ai-calendar__event--coral {
+    color: #a44b32;
+    background: #ffe7de;
+    border-color: rgba(255, 138, 101, 0.5);
+}
+
+.ai-calendar__event--green {
+    color: #4a7a1d;
+    background: #eaf6db;
+    border-color: rgba(111, 186, 44, 0.5);
+}
+
+.ai-calendar__event--purple {
+    color: #6849b8;
+    background: #f0eafb;
+    border-color: rgba(155, 127, 224, 0.5);
+}

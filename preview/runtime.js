@@ -21,7 +21,9 @@
 
     window.__MP_ERRORS__ = [];
     window.addEventListener('error', (event) => {
-        window.__MP_ERRORS__.push(String(event.message || event.error));
+        // 带上调用栈，预览页排查时才知道是哪个组件/哪一行炸的
+        const stack = event.error && event.error.stack ? ` @ ${String(event.error.stack).split('\n')[1] || ''}` : '';
+        window.__MP_ERRORS__.push(String(event.message || event.error) + stack);
     });
     window.addEventListener('unhandledrejection', (event) => {
         window.__MP_ERRORS__.push('unhandled: ' + String(event.reason && event.reason.message ? event.reason.message : event.reason));
@@ -108,6 +110,11 @@
     /* ============================================================
      * 二、wx / Component 运行时垫片
      * ============================================================ */
+    /*
+     * 真机上 wx 是全局对象。组件代码通过 new Function 的参数拿到它，
+     * 但页面方法是用 restoreMethod 在全局作用域还原的（见下），
+     * 那里只能查全局，所以这里补一个 window.wx。
+     */
     const wx = {
         getWindowInfo() {
             return { windowWidth: window.innerWidth, windowHeight: window.innerHeight, pixelRatio: window.devicePixelRatio || 1 };
@@ -116,10 +123,41 @@
             return this.getWindowInfo();
         },
         showToast() {},
+        showModal(options) {
+            // 预览里不弹原生弹窗，直接当成「用户点了确定」，方便冒烟
+            if (options && typeof options.success === 'function') options.success({ confirm: true, cancel: false });
+        },
         nextTick(fn) {
             Promise.resolve().then(fn);
         },
+        setClipboardData(options) {
+            if (options && typeof options.success === 'function') options.success();
+            if (options && typeof options.complete === 'function') options.complete();
+        },
+        pageScrollTo(options) {
+            window.scrollTo({ top: (options && options.scrollTop) || 0, behavior: 'smooth' });
+            if (options && typeof options.success === 'function') options.success();
+        },
+        previewImage() {},
+        vibrateShort() {},
+        chooseMedia(options) {
+            if (options && typeof options.fail === 'function') options.fail({ errMsg: 'preview: chooseMedia 不可用' });
+        },
+        chooseMessageFile(options) {
+            if (options && typeof options.fail === 'function') options.fail({ errMsg: 'preview: chooseMessageFile 不可用' });
+        },
+        uploadFile(options) {
+            if (options && typeof options.fail === 'function') options.fail({ errMsg: 'preview: uploadFile 不可用' });
+            return { onProgressUpdate() {}, abort() {} };
+        },
+        getStorageSync() {
+            return '';
+        },
+        setStorageSync() {},
     };
+
+    // 真机上 wx 是全局对象，页面方法（在全局作用域还原）只能查全局
+    window.wx = wx;
 
     /** 每个标签名对应一个定义（Component({...}) 捕获而来） */
     const registry = {};
@@ -345,6 +383,12 @@
         __ready() {
             const lifetimes = this.__definition.lifetimes || {};
             if (lifetimes.ready) lifetimes.ready.call(this);
+        }
+
+        __detached() {
+            const definition = this.__definition || {};
+            const detached = (definition.lifetimes && definition.lifetimes.detached) || definition.detached;
+            if (typeof detached === 'function') detached.call(this);
         }
     }
 
@@ -593,11 +637,15 @@
     /* ============================================================
      * 五、组件挂载
      * ============================================================ */
+    /** 当前存活的自定义组件实例：重渲染前统一走 detached，否则定时器会越积越多 */
+    const liveInstances = new Set();
+
     function mountComponent(tag, element, props) {
         const definition = registry[tag];
         if (!definition) return;
         const instance = new MPInstance(tag, definition, element);
         element.__instance = instance;
+        liveInstances.add(instance);
         instance.__applyProps(props);
         instance.__attached();
         instance.__render();
@@ -605,9 +653,35 @@
         instance.__scheduleRender();
     }
 
+    /** 重渲染会清空页面 DOM，等价于真机上的组件销毁，必须补一次 detached */
+    function teardownComponents() {
+        for (const instance of liveInstances) {
+            try {
+                instance.__detached();
+            } catch (error) {
+                window.__MP_ERRORS__.push(`detached: ${error && error.message}`);
+            }
+        }
+        liveInstances.clear();
+    }
+
     /* ============================================================
      * 六、启动
      * ============================================================ */
+    /**
+     * 页面方法在 payload 里是源码字符串（JSON 传不了函数），这里还原成函数。
+     * 方法简写 `onLoad() {}` 不是合法表达式，所以包一层对象字面量再取出来。
+     */
+    function restoreMethod(source, name) {
+        if (typeof source === 'function') return source;
+        try {
+            return new Function(`return ({ ${source} })[${JSON.stringify(name)}];`)();
+        } catch (error) {
+            (window.__MP_ERRORS__ = window.__MP_ERRORS__ || []).push(`页面方法 ${name} 还原失败：${error.message}`);
+            return function noop() {};
+        }
+    }
+
     function boot() {
         // 1. 逐个执行组件 JS（真实编译产物）
         for (const tag of COMPONENT_NAMES) {
@@ -636,10 +710,12 @@
             __handlers: {},
         };
         for (const key of Object.keys(MP.page.methods || {})) {
-            pageInstance.__handlers[key] = MP.page.methods[key].bind(pageInstance);
+            pageInstance.__handlers[key] = restoreMethod(MP.page.methods[key], key).bind(pageInstance);
         }
 
         function rerender() {
+            // 先销毁上一轮实例再建新的：组件内部的定时器/监听会随 detached 一起清掉
+            teardownComponents();
             const scope = Object.create(null);
             Object.assign(scope, pageInstance.data);
             const tree = parseWxml(MP.page.wxml);
@@ -650,7 +726,27 @@
         }
 
         rerender();
+
+        /*
+         * 页面生命周期：小程序里 onLoad 在首次渲染后、onShow 之前执行，
+         * 且 onLoad 里 setData 是常见写法（比如按当前日期生成演示数据）。
+         * 之前没调 onLoad，导致「页面数据里算出来的初始值」在预览里永远是空的。
+         * 注意页面方法在运行时里挂在 __handlers 上，不是实例属性。
+         */
+        for (const name of ['onLoad', 'onShow']) {
+            const handler = pageInstance.__handlers[name];
+            if (typeof handler !== 'function') continue;
+            try {
+                handler(name === 'onLoad' ? {} : undefined);
+            } catch (error) {
+                (window.__MP_ERRORS__ = window.__MP_ERRORS__ || []).push(`${name}: ${error && error.message}`);
+            }
+        }
+        rerender();
+
         window.__MP_READY__ = true;
+        // 调试钩子：在控制台里可以直接看页面实例的 data / 方法
+        window.__MP_PAGE__ = pageInstance;
         document.documentElement.setAttribute('data-preview-ready', '1');
     }
 

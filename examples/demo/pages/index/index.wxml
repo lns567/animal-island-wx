@@ -596,9 +596,53 @@
         <text class="hint">命令式调用：this.selectComponent('#notice').success({...})</text>
     </view>
 
+    <!-- ================= Calendar / CountUp ================= -->
+    <view class="section">
+        <ai-title class="title-item" content="Calendar 月历" variant="tab" size="small" color="app-teal" />
+        <ai-calendar
+            class="t-calendar"
+            value="{{calendarValue}}"
+            events="{{calendarEvents}}"
+            bind:change="onCalendarChange"
+            bind:panelChange="onCalendarPanel"
+        />
+        <text class="hint">当前选中 {{calendarValue}}；跨天事项按周切片，同一格超过 2 条折叠成 +N</text>
+    </view>
+
+    <view class="section">
+        <ai-title class="title-item" content="CountUp 数字滚动" variant="tab" size="small" color="app-orange" />
+        <view class="row">
+            <ai-countup
+                id="demoCountup"
+                class="t-countup"
+                start="{{0}}"
+                end="{{score}}"
+                duration="{{2}}"
+                is-counting="{{counting}}"
+                prefix="¥"
+                bordered="{{true}}"
+                celebrate="{{true}}"
+                celebrate-text="全场最佳"
+                bind:complete="onCountDone"
+            />
+            <ai-countup
+                variant="island"
+                size="small"
+                end="{{1280}}"
+                is-counting="{{countingSmall}}"
+                thousands-separator=","
+                suffix="分"
+            />
+        </view>
+        <view class="row section-gap">
+            <ai-button type="primary" size="small" content="重新播放" bind:click="onReplayCount" />
+        </view>
+        <text class="hint">easeOutCubic 缓动；小程序没有 rAF，按 ~30fps 定时器推进，文案不变就不 setData</text>
+    </view>
+
     <view class="footer">
         <ai-divider type="wave-yellow" />
-        <text class="footer__text">animal-island-wx · 41 组件</text>
+        <text class="footer__text">animal-island-wx · 43 组件</text>
         <ai-footer text="animal-island-wx · MIT License" />
     </view>
 

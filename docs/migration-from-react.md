@@ -338,6 +338,9 @@ Web 版 hover 时飘带会轻微放大，小程序版没有（触摸屏没有 ho
 13. **`relations` + `selectAllComponents` 双保险**：`ai-form` 用 `relations: descendant` 收集字段，但同时也会 `selectAllComponents('.ai-form-item')` 兜底，因为 slot 内容的 linked 时机和 DOM 顺序不一定一致。
 14. **`setData` 之后 `this.data` 已是新值**，但视图渲染是异步的；量尺寸要等 `createSelectorQuery` 回调。
 15. **WXSS 里没有 `cursor` / `:hover` / `scroll-snap`**：滚动吸附得自己算（`ai-timepicker` 只做预置 `scroll-top`，不做吸附）。
+16. **别用 `__` 开头命名实例字段**：`preview/runtime.js` 内部有 `__ready` / `__render` / `__attached` 等方法，`this.__ready = true` 会把它覆盖成布尔值，然后运行时调 `instance.__ready()` 直接抛错。自定义字段请起有业务含义的名字。
+17. **页面方法是序列化成源码再还原的**：预览页整份数据走 `JSON.stringify`，函数会被静默丢掉，所以 `build-preview.mjs` 把 `Page({})` 上的方法转成字符串，运行时用 `({ ... })` 包一层还原。加了页面方法后如果「点了没反应」，先确认它在 `page.methods` 里。
+18. **重渲染前必须 `detached`**：预览模式下 `page.innerHTML = ''` 等价于组件销毁，运行时会统一调 `detached()`。少这一步，`ai-countdown` / `ai-countup` 这类定时器组件会在每次重渲染后多跑一份，表现为「数字跳得飞快」或 `complete` 事件触发多次。
 
 ## 七、怎么确认迁移结果是对的
 

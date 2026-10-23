@@ -945,3 +945,105 @@ this.selectComponent('#notice').success({ message: '保存成功', description: 
 ```
 
 > 没有 portal，所以必须在页面里放一个组件占位；`pointer-events` 只在卡片上开启，不会挡住页面其它交互。
+
+---
+
+# 第 16 批新增（2 个，对齐 upstream v2.3.0）
+
+## ai-countup
+
+数字滚动计分。数字块、前后缀、结束时的弹跳 + 光环 + 星芒。
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `start` | number | `0` | 起始值 |
+| `end` | number | `0` | 目标值 |
+| `duration` | number | `2` | 动画时长（秒），`0` 直接到位 |
+| `is-counting` | boolean | `false` | 是否计数；改回 `false` 暂停并保留当前值，再改 `true` 从暂停处继续 |
+| `decimal-places` | number | `-1` | 小数位数，`-1` 取 `start`/`end` 中较大的 |
+| `decimal-separator` | string | `.` | 小数点符号 |
+| `thousands-separator` | string | `''` | 千分位符号，如 `,` |
+| `easing` | string | `easeOutCubic` | `linear` / `easeInCubic` / `easeOutCubic` / `easeInOutCubic` / `easeOutExpo` |
+| `update-interval` | number | `0` | 取值间隔（秒），`0` 表示按 ~30fps 连续取值 |
+| `prefix` / `suffix` | string | `''` | 数字前后缀，如 `¥` / `分` |
+| `size` | `small` \| `middle` \| `large` | `middle` | 尺寸 |
+| `variant` | `default` \| `island` | `default` | 皮肤 |
+| `bordered` | boolean | `false` | 数字块描边 |
+| `celebrate` | boolean | `false` | 结束后播庆祝动效 |
+| `celebrate-text` | string | `''` | 庆祝贴纸文案，留空不弹贴纸 |
+| `repeat` / `repeat-delay` | boolean / number | `false` / `0` | 结束后自动重播 / 重播前等待秒数 |
+
+实例方法：`reset(newStartAt?)` 从起始值（或指定值）重播，`freeze()` 立刻跳到终值。
+
+事件：`update`（`detail.value`，每帧触发）、`complete`（`detail.elapsed`，秒）。
+
+```html
+<ai-countup
+    id="score"
+    start="{{0}}"
+    end="{{2680}}"
+    is-counting="{{counting}}"
+    prefix="¥"
+    thousands-separator=","
+    celebrate="{{true}}"
+    celebrate-text="全场最佳"
+    bind:complete="onDone"
+/>
+```
+
+```js
+onReplay() {
+    this.selectComponent('#score').reset(0);
+}
+```
+
+> 小程序没有 `requestAnimationFrame`，动画由 `setTimeout` 循环 + 时间轴量化驱动（默认 33ms 一跳）。
+> 每帧只在「格式化后的文案真的变了」时 `setData`，长时长动画不会白跑几十次渲染。
+> Web 版的 `formatter` 与 render prop 传不了函数，未移植；`onComplete` 的 `shouldRepeat` 返回值改成 `repeat` 属性。
+
+## ai-calendar
+
+月历 + 事项。6×7 固定网格，跨天事项自动按周切片成连续事项条。
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `value` | string | `''` | 受控选中日期 `YYYY-MM-DD` |
+| `default-value` | string | `''` | 非受控初始选中日期，不传默认今天 |
+| `panel-value` | string | `''` | 受控面板月份 `YYYY-MM` 或 `YYYY-MM-DD` |
+| `default-panel-value` | string | `''` | 非受控初始面板月份 |
+| `events` | array | `[]` | 事项列表，见下 |
+| `show-event-time` | boolean | `true` | 事项条上是否展示起始时间 |
+| `width` | number | `0` | 面板宽度（px），不传则按容器宽度自动缩放 |
+| `aria-label` | string | `日历` | 无障碍标签 |
+
+`events` 单项：
+
+| 字段 | 类型 | 说明 |
+| --- | --- | --- |
+| `title` | string | 事项文案 |
+| `start` | string | `YYYY-MM-DD` 或 `YYYY-MM-DD HH:mm` |
+| `end` | string | 结束日期，省略时等同 `start`；跨天会渲染成连续条 |
+| `color` | `teal` \| `amber` \| `coral` \| `green` \| `purple` | 配色，默认 `teal` |
+| `show-time` | boolean | 是否在这条事项上展示时间，`false` 可单独关掉 |
+
+事件：`change`（`detail.date`）、`panelChange`（`detail.month`，翻月/翻年/点补位格时触发）。
+
+实例方法：`goToMonth('YYYY-MM')`、`selectDate('YYYY-MM-DD')`。
+
+```html
+<ai-calendar value="{{date}}" events="{{events}}" bind:change="onPick" bind:panelChange="onPanel" />
+```
+
+```js
+events: [
+    { title: '钓鱼大赛', start: '2026-11-02 09:30', end: '2026-11-04', color: 'teal' },
+    { title: '生日会', start: '2026-11-05 18:00', color: 'coral' },
+]
+```
+
+> **布局**：同一天最多平铺 2 条事项，放不下的折叠成 `+N`；跨天事项按自然周切成不超过 7 列的片段，
+> 续接片段不重复展示起始时间。算法与 Web 版逐行一致。
+> **尺寸**：所有行高/字号由面板宽度推导（基准 750px，缩放系数 0.6~2），不需要 size 档位。
+> **改动事项请整体换新数组**：小程序不会深度监听数组内对象的就地修改。
+> **未移植**：`draggableEvents` / `onEventCreate`（Web 版走鼠标拖拽，小程序里 `touchmove` 会和页面滚动抢手势）、
+> 键盘无障碍（roving tabindex / 方向键，小程序没有 Tab 焦点模型）。

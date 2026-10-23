@@ -1,0 +1,80 @@
+<view class="ai-calendar extClass" style="{{width > 0 ? 'width:' + width + 'px;' : ''}}" aria-role="grid" aria-label="{{ariaLabel}}">
+    <view class="ai-calendar__header">
+        <view class="ai-calendar__nav-group">
+            <view
+                class="ai-calendar__nav"
+                bindtap="prevYear"
+                hover-class="ai-calendar__nav--hover"
+                aria-role="button"
+                aria-label="上一年"
+            >«</view>
+            <view
+                class="ai-calendar__nav"
+                bindtap="prevMonth"
+                hover-class="ai-calendar__nav--hover"
+                aria-role="button"
+                aria-label="上个月"
+            >‹</view>
+        </view>
+        <view class="ai-calendar__month">
+            <view class="ai-calendar__month-icon"></view>
+            <text class="ai-calendar__month-text">{{monthLabel}}</text>
+        </view>
+        <view class="ai-calendar__nav-group">
+            <view class="ai-calendar__today" bindtap="goToday" hover-class="ai-calendar__today--hover" aria-role="button">今天</view>
+            <view
+                class="ai-calendar__nav"
+                bindtap="nextMonth"
+                hover-class="ai-calendar__nav--hover"
+                aria-role="button"
+                aria-label="下个月"
+            >›</view>
+            <view
+                class="ai-calendar__nav"
+                bindtap="nextYear"
+                hover-class="ai-calendar__nav--hover"
+                aria-role="button"
+                aria-label="下一年"
+            >»</view>
+        </view>
+    </view>
+
+    <view class="ai-calendar__body" style="{{gridStyle}}">
+        <view class="ai-calendar__week-row" style="height:{{metrics.header}}px;">
+            <view class="ai-calendar__week-cell" wx:for="{{weekdays}}" wx:key="*this">{{item}}</view>
+        </view>
+
+        <view class="ai-calendar__grid">
+            <view
+                wx:for="{{cells}}"
+                wx:key="key"
+                class="ai-calendar__cell{{item.outside ? ' ai-calendar__cell--outside' : ''}}{{item.selected ? ' ai-calendar__cell--selected' : ''}}{{item.today ? ' ai-calendar__cell--today' : ''}}"
+                style="height:{{metrics.cellHeight}}px;"
+                data-key="{{item.key}}"
+                bindtap="handleCellTap"
+                hover-class="ai-calendar__cell--hover"
+                aria-role="gridcell"
+                aria-label="{{item.label}}"
+                aria-selected="{{item.selected}}"
+            >
+                <view
+                    class="ai-calendar__day"
+                    style="width:{{metrics.numberSize}}px;height:{{metrics.numberSize}}px;line-height:{{metrics.numberSize}}px;font-size:{{metrics.numberFont}}px;"
+                >{{item.day}}</view>
+                <view wx:if="{{item.extra > 0}}" class="ai-calendar__more">+{{item.extra}}</view>
+            </view>
+        </view>
+
+        <view wx:if="{{segments.length > 0}}" class="ai-calendar__events" aria-hidden="{{true}}">
+            <view
+                wx:for="{{segments}}"
+                wx:key="key"
+                class="ai-calendar__event ai-calendar__event--{{item.color}}{{item.span ? ' ai-calendar__event--span' : ''}}{{item.startEdge ? ' ai-calendar__event--start' : ''}}{{item.endEdge ? ' ai-calendar__event--end' : ''}}"
+                style="{{item.style}}"
+            >
+                <text wx:if="{{item.time}}" class="ai-calendar__event-time">{{item.time}}</text>
+                <text class="ai-calendar__event-title">{{item.title}}</text>
+            </view>
+        </view>
+    </view>
+</view>

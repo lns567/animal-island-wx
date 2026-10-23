@@ -31,6 +31,8 @@
         "ai-time": "/miniprogram_npm/animal-island-wx/time/index",
         "ai-carousel": "/miniprogram_npm/animal-island-wx/carousel/index",
         "ai-background": "/miniprogram_npm/animal-island-wx/background/index",
+        "ai-calendar": "/miniprogram_npm/animal-island-wx/calendar/index",
+        "ai-countup": "/miniprogram_npm/animal-island-wx/countup/index",
         "ai-codeblock": "/miniprogram_npm/animal-island-wx/codeblock/index",
         "ai-typewriter": "/miniprogram_npm/animal-island-wx/typewriter/index",
         "ai-cursor": "/miniprogram_npm/animal-island-wx/cursor/index",

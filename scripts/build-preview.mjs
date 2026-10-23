@@ -85,7 +85,16 @@ const page = {
     wxml: read(join(pageDir, 'index.wxml')).replace(/(src=")\/assets\//g, '$1../examples/demo/assets/'),
     wxss: rpxToCss(inlineWxss(join(pageDir, 'index.wxss'))),
     data: pageDefinition.data || {},
-    methods: Object.fromEntries(Object.entries(pageDefinition).filter(([, value]) => typeof value === 'function')),
+    /*
+     * 页面方法必须转成源码字符串再序列化：整个 payload 走的是 JSON.stringify，
+     * 函数会被静默丢掉，导致预览里页面事件处理器全部失效（之前就是这样）。
+     * 运行时再用 ({ ... }) 包一层还原成函数。
+     */
+    methods: Object.fromEntries(
+        Object.entries(pageDefinition)
+            .filter(([, value]) => typeof value === 'function')
+            .map(([name, fn]) => [name, String(fn)])
+    ),
 };
 
 const appWxss = rpxToCss(inlineWxss(join(root, 'examples', 'demo', 'app.wxss')));

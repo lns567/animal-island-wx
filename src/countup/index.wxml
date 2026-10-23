@@ -1,0 +1,23 @@
+<view class="{{cls}} extClass" aria-role="status">
+    <view class="ai-countup__plate-wrap">
+        <view wx:if="{{celebrating}}" class="ai-countup__effects">
+            <view class="ai-countup__ring ai-countup__ring--1"></view>
+            <view class="ai-countup__ring ai-countup__ring--2"></view>
+            <view class="ai-countup__sparkles">
+                <view class="ai-countup__sparkle ai-countup__sparkle--1"></view>
+                <view class="ai-countup__sparkle ai-countup__sparkle--2"></view>
+                <view class="ai-countup__sparkle ai-countup__sparkle--3"></view>
+                <view class="ai-countup__sparkle ai-countup__sparkle--4"></view>
+            </view>
+            <view wx:if="{{celebrateText}}" class="ai-countup__badge-wrap">
+                <text class="ai-countup__badge">{{celebrateText}}</text>
+            </view>
+        </view>
+        <view class="ai-countup__plate" aria-hidden="{{true}}">
+            <text wx:if="{{prefix}}" class="ai-countup__affix">{{prefix}}</text>
+            <text class="ai-countup__number">{{display}}</text>
+            <text wx:if="{{suffix}}" class="ai-countup__affix">{{suffix}}</text>
+        </view>
+    </view>
+    <text class="ai-countup__sr-only">{{readable}}</text>
+</view>

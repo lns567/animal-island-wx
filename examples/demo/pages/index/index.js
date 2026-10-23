@@ -107,6 +107,13 @@ Page({
         selectValue: 'island',
         timeValue: '08:30:00',
         dateValue: '2026-10-23',
+        // ---- Calendar ----
+        calendarValue: '',
+        calendarEvents: [],
+        // ---- CountUp ----
+        score: 2680,
+        counting: false,
+        countingSmall: false,
         bioText: '',
         formInitial: { nick: '岛民', email: '', notify: true },
         nickRules: [
@@ -117,6 +124,32 @@ Page({
             { required: true, message: '请输入邮箱' },
             { type: 'email', message: '邮箱格式不对' },
         ],
+    },
+
+    onLoad() {
+        // 事项按「相对今天」生成，任何时候打开 demo 都能看到当月有内容
+        const day = (offset) => {
+            const date = new Date();
+            date.setDate(date.getDate() + offset);
+            const pad = (n) => String(n).padStart(2, '0');
+            return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+        };
+        this.setData({
+            calendarValue: day(0),
+            calendarEvents: [
+                // 跨天事项：会自动按周切片成连续的事项条
+                { title: '钓鱼大赛', start: `${day(-2)} 09:30`, end: day(1), color: 'teal' },
+                { title: '露营地布置', start: day(-5), end: day(-4), color: 'green' },
+                { title: '博物馆捐赠', start: day(3), color: 'amber' },
+                { title: '生日会', start: `${day(0)} 18:00`, color: 'coral' },
+                { title: '流星雨观测', start: day(6), color: 'purple' },
+                // 同一天多条：超过 2 条会折叠成 +N
+                { title: '大扫除', start: day(0), color: 'teal' },
+                { title: '种树', start: day(0), color: 'amber' },
+            ],
+            counting: true,
+            countingSmall: true,
+        });
     },
 
     onCheckboxChange(event) {
@@ -303,5 +336,24 @@ Page({
     onNotifyError() {
         const notice = this.selectComponent('#notice');
         if (notice) notice.error({ message: '连接失败', description: '请检查网络后重试', position: 'bottom' });
+    },
+
+    onCalendarChange(event) {
+        this.setData({ calendarValue: event.detail.date });
+    },
+
+    onCalendarPanel(event) {
+        // 面板翻月：真实项目里可以在这里按需拉取该月事项
+        console.log('panel ->', event.detail.month);
+    },
+
+    onReplayCount() {
+        const counter = this.selectComponent('#demoCountup');
+        if (counter) counter.reset(0);
+        this.setData({ counting: true, countingSmall: true });
+    },
+
+    onCountDone(event) {
+        wx.showToast({ title: `计数完成 ${event.detail.elapsed.toFixed(1)}s`, icon: 'none' });
     },
 });

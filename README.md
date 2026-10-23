@@ -2,12 +2,12 @@
 
 [![CI](https://github.com/lns567/animal-island-wx/actions/workflows/ci.yml/badge.svg)](https://github.com/lns567/animal-island-wx/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![组件](https://img.shields.io/badge/%E7%BB%84%E4%BB%B6-41-1f6feb.svg)](#组件一览)
+[![组件](https://img.shields.io/badge/%E7%BB%84%E4%BB%B6-43-1f6feb.svg)](#组件一览)
 [![基础库](https://img.shields.io/badge/%E5%9F%BA%E7%A1%80%E5%BA%93-%E2%89%A52.20.1-07c160.svg)](#已知限制)
 
 [animal-island-ui](https://github.com/guokaigdg/animal-island-ui) 的**微信小程序原生组件库**——原项目是 React 18 + Less Modules 的 Web 组件库，这里把它的视觉语言（暖米色纸面、圆润描边、手绘 3D 按钮、飘带标题）用 WXML / WXSS / TypeScript 重新实现了一遍，可以直接在原生小程序、Taro、uni-app 的小程序端里用。
 
-> 41 个组件全部对齐 Web 版，不是「挑几个好做的」。移植过程中遇到的小程序限制（没有 `:hover`、没有 portal、读不到 slot 里的 DOM、样式隔离、automator 选不中自定义组件内部节点）都写在 [迁移指南](docs/migration-from-react.md) 里，附带各自的降级做法。
+> 43 个组件，完整覆盖上游 v2.3.0 的 40 个组件目录（不是「挑几个好做的」）。移植过程中遇到的小程序限制（没有 `:hover`、没有 portal、读不到 slot 里的 DOM、样式隔离、automator 选不中自定义组件内部节点）都写在 [迁移指南](docs/migration-from-react.md) 里，附带各自的降级做法。
 
 - 无运行时依赖：图标以 base64 内联进 WXSS，字体用系统字体栈，不需要 `naive-icons`、不需要网络请求。
 - 与 Web 版共享同一套 CSS 变量（`--animal-*`），颜色/圆角/阴影/动效改一处即可全局生效。
@@ -140,6 +140,8 @@ Page({
 | Rate | `ai-rate` | 星级评分，弹跳 + 六点扩散动画 | [文档](docs/components.md#ai-rate) |
 | Pagination | `ai-pagination` | 分页，orange / teal 两套配色 | [文档](docs/components.md#ai-pagination) |
 | Countdown | `ai-countdown` | 倒计时，20 面数字条里程表式滚动 | [文档](docs/components.md#ai-countdown) |
+| CountUp | `ai-countup` | 数字滚动计分，5 种缓动 + 千分位 + 结束庆祝 | [文档](docs/components.md#ai-countup) |
+| Calendar | `ai-calendar` | 月历 + 事项，跨天条按周切片、每格 2 行折叠 +N | [文档](docs/components.md#ai-calendar) |
 | Image | `ai-image` | 相框图片，default / bordered / stamp 邮票齿孔 | [文档](docs/components.md#ai-image) |
 | Table | `ai-table` | 表格，斑马纹、空状态、加载中 | [文档](docs/components.md#ai-table) |
 | Footer | `ai-footer` | 版权栏 | [文档](docs/components.md#ai-footer) |
@@ -160,7 +162,7 @@ Page({
 | Notification | `ai-notification` | 通知提醒，6 方位 × 4 类型，可队列 | [文档](docs/components.md#ai-notification) |
 | Icon | `ai-icon` | 31 个内置图标，跟随字号缩放 | [文档](docs/components.md#ai-icon) |
 
-Web 版 38 个组件目录已全部移植（`Form` 拆成 `ai-form` + `ai-form-item`，另有自带的 `ai-icon`），共 **41 个组件**。少数能力在小程序里换了做法（Cursor 的真实光标、Upload 的拖拽、DatePicker 的范围选择、Form 的异步 validator 等），逐条列在[差异](#和-web-版的差异)与 `docs/migration-from-react.md` 里。
+上游 v2.3.0 的 40 个组件目录已全部移植（`Form` 拆成 `ai-form` + `ai-form-item`，`AvatarGroup` 独立成 `ai-avatar-group`，另有自带的 `ai-icon`），共 **43 个组件**。少数能力在小程序里换了做法（Cursor 的真实光标、Upload 的拖拽、DatePicker 的范围选择、Form 的异步 validator 等），逐条列在[差异](#和-web-版的差异)与 `docs/migration-from-react.md` 里。
 
 ## 主题定制
 
@@ -216,7 +218,7 @@ npm install
 npm run build          # 编译 TS + 同步产物到 examples/demo/miniprogram_npm
 ```
 
-然后用微信开发者工具「导入项目」选择 `examples/demo`（AppID 用测试号即可）。`app.json` 已配置 `"style": "v2"`，示例页把 41 个组件都摆了一遍。
+然后用微信开发者工具「导入项目」选择 `examples/demo`（AppID 用测试号即可）。`app.json` 已配置 `"style": "v2"`，示例页把 43 个组件都摆了一遍。
 
 ### 不登录也能看效果
 
