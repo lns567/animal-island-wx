@@ -8,16 +8,32 @@
         "wechat",
         "component",
         "ui",
+        "wxml",
+        "taro",
+        "uni-app",
         "animal-island"
     ],
     "license": "MIT",
+    "author": "lns567",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lns567/animal-island-wx.git"
+    },
+    "homepage": "https://github.com/lns567/animal-island-wx#readme",
+    "bugs": {
+        "url": "https://github.com/lns567/animal-island-wx/issues"
+    },
     "main": "miniprogram_dist/index.js",
     "miniprogram": "miniprogram_dist",
     "files": [
         "miniprogram_dist",
         "README.md",
-        "LICENSE"
+        "LICENSE",
+        "THIRD-PARTY-NOTICES.md"
     ],
+    "engines": {
+        "node": ">=18"
+    },
     "scripts": {
         "build": "node scripts/build.mjs",
         "icons": "node scripts/gen-icons.mjs",

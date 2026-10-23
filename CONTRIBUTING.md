@@ -45,4 +45,4 @@ npm run preview    # 生成单文件浏览器预览（不用登录开发者工�
 
 ## License
 
-提交即表示同意以 [MIT](LICENSE) 协议发布。上游 animal-island-ui 与 naive-icons 均为 MIT，署名信息在 `LICENSE` 末尾。
+提交即表示同意以 [MIT](LICENSE) 协议发布。上游 animal-island-ui 与 naive-icons 均为 MIT，署名与授权细节见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)。

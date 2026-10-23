@@ -267,4 +267,4 @@ vendor/icons/                       图标源文件（naive-icons, MIT）
 
 ## License
 
-MIT。视觉与 API 源自 [animal-island-ui](https://github.com/guokaigdg/animal-island-ui)（MIT, Copyright © 2026 guokaigdg），图标源自 [naive-icons](https://github.com/guokaigdg/naive-icons)（MIT），详见 [LICENSE](LICENSE)。
+MIT。视觉与 API 源自 [animal-island-ui](https://github.com/guokaigdg/animal-island-ui)（MIT, Copyright © 2026 guokaigdg），图标源自 [naive-icons](https://github.com/guokaigdg/naive-icons)（MIT），详见 [LICENSE](LICENSE) 与 [三方声明](THIRD-PARTY-NOTICES.md)。
