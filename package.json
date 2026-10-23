@@ -1,7 +1,7 @@
 {
     "name": "animal-island-wx",
-    "version": "0.1.0",
-    "description": "Animal Island UI 的微信小程序原生组件库（WXML/WXSS/TS），移植自动物岛风格的 animal-island-ui",
+    "version": "0.2.0",
+    "description": "Animal Island UI 的微信小程序原生组件库：WXML / WXSS / TypeScript，43 个组件，运行时零依赖（移植自 animal-island-ui）",
     "keywords": [
         "weapp",
         "miniprogram",

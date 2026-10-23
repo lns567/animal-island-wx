@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/lns567/animal-island-wx/actions/workflows/ci.yml/badge.svg)](https://github.com/lns567/animal-island-wx/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![npm](https://img.shields.io/npm/v/animal-island-wx?color=cb3837)](https://www.npmjs.com/package/animal-island-wx)
 [![组件](https://img.shields.io/badge/%E7%BB%84%E4%BB%B6-43-1f6feb.svg)](#组件一览)
 [![基础库](https://img.shields.io/badge/%E5%9F%BA%E7%A1%80%E5%BA%93-%E2%89%A52.20.1-07c160.svg)](#已知限制)
 
@@ -33,7 +34,7 @@
 npm i animal-island-wx
 ```
 
-> 还没发 npm？把本仓库 `miniprogram_dist/` 整个目录拷进项目的自定义组件目录也能用，用法一致。
+> 不想走 npm？把本仓库 `miniprogram_dist/` 整个目录拷进项目的自定义组件目录也能用，用法一致（跳过下一步）。
 
 ### 2. 构建 npm
 
